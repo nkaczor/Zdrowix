@@ -1,0 +1,6 @@
+front/node-modules
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db
+.reduxrc
