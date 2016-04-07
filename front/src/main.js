@@ -6,9 +6,9 @@ import makeRoutes from './routes'
 import Root from './containers/Root'
 import configureStore from './redux/configureStore'
 
-const browserHistory = useRouterHistory(createBrowserHistory)({
+require("./styles/core.scss");
 
-})
+const browserHistory = useRouterHistory(createBrowserHistory)({})
 
 const initialState = window.__INITIAL_STATE__
 const store = configureStore(initialState, browserHistory)

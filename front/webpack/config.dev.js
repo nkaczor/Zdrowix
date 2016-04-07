@@ -12,25 +12,20 @@ module.exports = merge(common, {
   module: {
     loaders: [
       {
-        test: /\.sass$/,
-        include: /styles/,
+        test: /\.scss$/,
         loaders: [
           'style',
-          'css?minimize',
+          'css?sourceMap&-minimize&modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]',
           'postcss',
-          'resolve-url',
-          'sass?sourceMap,indentedSyntax',
+          'sass?sourceMap'
         ],
       },
       {
-        test: /\.scss$/,
-        include: /styles/,
+        test: /\.css$/,
         loaders: [
           'style',
-          'css?minimize',
-          'postcss',
-          'resolve-url',
-          'sass?sourceMap',
+          'css?sourceMap&-minimize&modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]',
+          'postcss'
         ],
       },
     ],
