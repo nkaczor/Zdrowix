@@ -1,0 +1,32 @@
+.side-bar{
+  top: 50px;
+  color: white;
+  position: fixed;
+  height: 100%;
+  border-bottom: solid 1px rgba(255,255,255,.1);
+  background-color: #343642;
+  width: 260px;
+
+  .user-information{
+    padding: 0px 10px;
+    .avatar, .user-text, .settings{
+      padding: 20px 10px;
+      display:table-cell;
+
+    }
+    .avatar, .user-text{
+      vertical-align: top;
+    }
+    .settings{
+      vertical-align: middle;
+    }
+    .name{
+      font-size: 13px;
+      font-weight: bold;
+    }
+    .address{
+      font-size: 11px;
+      color: rgba(255,255,255,.8);
+    }
+  }
+}

@@ -1,13 +1,11 @@
-import React, { PropTypes } from 'react';
+import React, { PropTypes, Component } from 'react';
 import { connect } from 'react-redux';
 
 import style from './home_view.scss';
 
-export class HomeView extends React.Component<void, Props, void> {
+export class HomeView extends Component {
   static propTypes = {
-    counter: PropTypes.number.isRequired,
-    doubleAsync: PropTypes.func.isRequired,
-    increment: PropTypes.func.isRequired
+
   };
 
   render () {

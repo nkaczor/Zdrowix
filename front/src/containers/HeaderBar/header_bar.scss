@@ -1,7 +1,24 @@
 .header-bar{
+  top: 0px;
   color: white;
   position: fixed;
-  height: 80px;
-  background-color: #343642;
+  height: 50px;
+  border-bottom: solid 1px rgba(255,255,255,.1);
+  background-color: #3E414F;
   width: 100%;
+  header{
+
+    height: 100%;
+    padding: 10px;
+    width: 260px;
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-size: 22px;
+    cursor: pointer;
+    &:hover{
+      letter-spacing: 5px;
+      font-weight: bold;
+    }
+  }
 }

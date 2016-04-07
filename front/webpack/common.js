@@ -18,9 +18,6 @@ module.exports = {
       {
         test: /\.(jpg|png|svg|woff)$/,
         loader: 'file',
-        query: {
-          name: 'assets/[hash].[ext]',
-        },
       },
       {
         test: /\.json$/,
