@@ -1,10 +1,4 @@
 .side-bar{
-  a:link, a:visited{
-    color: rgba(255,255,255,.75);
-  }
-  a:hover{
-    color:white;
-  }
   top: 50px;
   color: white;
   position: fixed;
@@ -13,39 +7,92 @@
   background-color: #343642;
   width: 260px;
 
+  a:link, a:visited{
+    color: rgba(255,255,255,.75);
+  }
+  a:hover{
+    color:white;
+  }
+
   .user-information{
     padding: 0px 10px;
     .avatar, .user-text, .settings{
       padding: 20px 15px;
       display:table-cell;
-
     }
+
     .avatar, .user-text{
       vertical-align: top;
     }
+
     .settings{
       vertical-align: middle;
       padding-left: 20px;
+
       svg{
         width: 18px;
       }
     }
+
     .name{
       font-weight: bold;
     }
+
     .address{
       font-size: 11px;
       color: rgba(255,255,255,.8);
     }
   }
-  .nav-element{
-    display: block;
-    padding: 14px 20px;
-  }
-  .active-nav-element{
-    background-color: #962D3E;
-    &:link{
-    color: white;
+  .navigation{
+    header{
+      padding: 10px 10px;
+      font-size: 11px;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.5);
+    }
+    .nav-element{
+      display: block;
+      padding: 10px 20px;
+
+      .icon{
+        padding-right: 20px;
+        svg{
+          height: 15px;
+          margin-bottom: -2px;
+        }
+      }
+      .right-arrow{
+        float: right;
+
+        svg{
+          width: 10px;
+        }
+
+        path{
+          fill: rgba(255,255,255,.75);
+        }
+      }
+      &:hover {
+        background-color: darken(#343642,2%);
+
+        .right-arrow path{
+          fill:white;
+        }
+      }
+    }
+    .active-nav-element{
+
+      &, &:hover{
+        background-color: #962D3E;
+      }
+
+      &:link{
+      color: white;
+      }
+
+      .right-arrow{
+        display: none;
+      }
     }
   }
 }

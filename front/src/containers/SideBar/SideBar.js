@@ -7,8 +7,11 @@ import style from './side_bar.scss';
 import {Avatar} from '../../components';
 import avatar from '../../../assets/avatar.jpg';
 import settingsIcon from '../../../assets/icons/cogwheel.svg';
-
+import rightArrow from '../../../assets/icons/right_arrow.svg';
+import homeIcon from '../../../assets/icons/home.svg';
 export class SideBar extends Component {
+
+
   static propTypes = {
 
   };
@@ -19,7 +22,9 @@ export class SideBar extends Component {
         activeClassName = { style['active-nav-element'] }
         to = { element.path }
       >
+        <SVG src={element.icon} className={style['icon']}/>
         { element.label }
+        <SVG src={rightArrow} className={style['right-arrow']}/>
       </Link>
     )
   }
@@ -29,23 +34,27 @@ export class SideBar extends Component {
       header: 'Main',
       elements: [{
         label: 'Home',
-        path: '/'
+        path: '/',
+        icon: require('../../../assets/icons/home.svg')
       }, {
         label: 'My Page',
-        path: '/page'
+        path: '/page',
+        icon: require('../../../assets/icons/profile.svg')
       }]
     }, {
       header: 'Tools',
       elements: [{
         label: 'Search',
-        path: '/search'
+        path: '/search',
+        icon: require('../../../assets/icons/find.svg')
       }, {
-        label: 'Find',
-        path: '/find'
+        label: 'Visits',
+        path: '/visits',
+        icon: require('../../../assets/icons/enroll.svg')
       }]
     }];
     return(
-      <div>
+      <div className={style['navigation']}>
         {nav.map(section =>
           <div>
             <header>{section.header}</header>
@@ -66,7 +75,7 @@ export class SideBar extends Component {
         <Avatar src={avatar} className={style['avatar']}/>
         <div className={style['user-text']}>
           <div className={style['name']}>Natalia Kaczor</div>
-          <div className={style['address']}>Poznań, PL</div>
+          <div className={style['address']}>Patient</div>
         </div>
         <div className={style['settings']}>
           <SVG src={settingsIcon}/>
