@@ -16,8 +16,12 @@ module.exports = {
         loader: 'babel',
       },
       {
-        test: /\.(jpg|png|svg|woff)$/,
+        test: /\.(jpg|png|woff)$/,
         loader: 'file',
+      },
+      {
+        test: /\.svg$/,
+        loader: 'svg-inline'
       },
       {
         test: /\.json$/,

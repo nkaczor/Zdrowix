@@ -13,11 +13,16 @@
     margin: 0;
     padding: 0;
     height: 100%;
+    font-size: 13px;
   }
 
   *,
   *:before,
   *:after {
     box-sizing: inherit;
+  }
+
+  a:visited, a:hover, a:link{
+    text-decoration: none;
   }
 }

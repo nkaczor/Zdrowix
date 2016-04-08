@@ -6,8 +6,37 @@
   border-bottom: solid 1px rgba(255,255,255,.1);
   background-color: #3E414F;
   width: 100%;
-  header{
 
+  & > * {
+    display: inline-block;
+  }
+
+  .header-bar-right{
+    margin-right: 20px;
+    padding: 0 5px;
+    float: right;
+    width: auto;
+    font-size: 13px;
+    &:hover{
+      background-color: #343642;
+    }
+  }
+
+  .avatar, .arrow-down, .nickname{
+    height: 100%;
+    padding: 0 10px;
+    display: table-cell;
+    vertical-align: middle;
+  }
+
+  .arrow-down {
+    padding: 16px 10px;
+    & > svg{
+    height: 10px;
+    }
+  }
+
+  header{
     height: 100%;
     padding: 10px;
     width: 260px;
@@ -16,6 +45,7 @@
     letter-spacing: 2px;
     font-size: 22px;
     cursor: pointer;
+
     &:hover{
       letter-spacing: 5px;
       font-weight: bold;

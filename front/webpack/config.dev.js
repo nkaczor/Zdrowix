@@ -28,6 +28,7 @@ module.exports = merge(common, {
           'postcss'
         ],
       },
+
     ],
   },
   plugins: [
