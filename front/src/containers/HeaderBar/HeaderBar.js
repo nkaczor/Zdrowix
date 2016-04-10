@@ -1,5 +1,6 @@
 import React, { PropTypes, Component } from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router';
 import SVG from 'svg-inline-react';
 
 import {Avatar} from '../../components';
@@ -14,28 +15,53 @@ export class HeaderBar extends Component {
    super(props);
    this.state = {showMenu: false};
    this.toggleMenu = this.toggleMenu.bind(this);
+   this.onClose = this.onClose.bind(this);
+  }
+
+  onClose(e)
+  {
+    this.setState({showMenu: false});
+  }
+
+  componentDidMount()
+  {
+     document.addEventListener('click', this.onClose);
+  }
+
+  componentWillUnmount()
+  {
+    document.removeEventListener('click', this.onClose);
   }
 
   renderDropdownMenu(){
     return(
       <div className={style['dropdown-menu']}>
-dsdasdas
+        <ul>
+          <li><Link to='/'>Option 1</Link></li>
+          <li><Link to='/'>Option 2</Link></li>
+          <li><Link to='/'>Option 3</Link></li>
+        </ul>
       </div>
     )
   }
-  toggleMenu(){
+  toggleMenu(e){
+    e.stopPropagation();
+    e.nativeEvent.stopImmediatePropagation();
+
+    let { showMenu } = this.state;
     this.setState({
-      showMenu: !this.state.showMenu
+      showMenu: !showMenu
     })
+
   }
   render() {
     return (
       <div className={ style['header-bar'] }>
         <header>Zdrowix</header>
-        <div className={ style['header-bar-right'] }>
+        <div className={ style['header-bar-right'] }  onClick={ this.toggleMenu }>
           <Avatar src={ avatar } size="30px" className={ style['avatar'] }/>
           <span className={ style['nickname'] }>Natalia</span>
-          <SVG src={arrowDownIcon} className={ style['arrow-down'] } onClick={ this.toggleMenu }/>
+          <SVG src={arrowDownIcon} className={ style['arrow-down'] }/>
           { this.state.showMenu ? this.renderDropdownMenu() : "" }
         </div>
 

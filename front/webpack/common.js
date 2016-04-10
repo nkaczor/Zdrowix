@@ -30,6 +30,7 @@ module.exports = {
     ],
   },
   output: {
+    publicPath: '/',
     filename: '[hash].js',
     path: path.resolve('./build'),
   },

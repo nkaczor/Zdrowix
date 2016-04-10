@@ -1,19 +1,28 @@
-import React, { PropTypes } from 'react';
+import React, { PropTypes, Component } from 'react';
 import { HeaderBar, SideBar } from '../../containers';
 
 import style from './core_layout.scss';
 
-function CoreLayout ({ children }) {
-  return (
-    <div className={style['page-container']}>
-      <HeaderBar/>
-      <SideBar/>
-      <h1>Core Layout</h1>
-      <div className='view-container'>
-        {children}
+export class CoreLayout extends Component {
+  static propTypes = {
+
+  };
+
+  render () {
+
+    return (
+      <div className={style['page-container']}>
+        <HeaderBar />
+        <SideBar />
+        <h1>Core Layout</h1>
+        <div className={style['view-container-wrapper']}>
+          <div className={style['view-container']}>dfsdfsfsdfsfsdf
+            {this.props.children}
+          </div>
+        </div>
       </div>
-    </div>
-  )
+    )
+  }
 }
 
 CoreLayout.propTypes = {

@@ -45,5 +45,6 @@ module.exports = merge(common, {
     hot: true,
     inline: true,
     port: process.env.npm_package_config_port,
+    historyApiFallback: true
   }
 })

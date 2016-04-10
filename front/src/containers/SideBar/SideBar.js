@@ -11,20 +11,29 @@ import rightArrow from '../../../assets/icons/right_arrow.svg';
 import homeIcon from '../../../assets/icons/home.svg';
 export class SideBar extends Component {
 
+  constructor(props) {
+   super(props);
+   this.state = {showMenu: false};
+   }
 
   static propTypes = {
 
   };
+  updateView(){
+    this.forceUpdate();
+  }
   renderNavElement(element){
     return(
       <Link
+        key = { element.label }
         className = { style['nav-element'] }
         activeClassName = { style['active-nav-element'] }
         to = { element.path }
+        onClick= { this.updateView.bind(this) }
       >
-        <SVG src={element.icon} className={style['icon']}/>
+        <SVG src={ element.icon } className={ style['icon'] }/>
         { element.label }
-        <SVG src={rightArrow} className={style['right-arrow']}/>
+        <SVG src={ rightArrow } className={ style['right-arrow'] }/>
       </Link>
     )
   }
@@ -34,11 +43,11 @@ export class SideBar extends Component {
       header: 'Main',
       elements: [{
         label: 'Home',
-        path: '/',
+        path: '/home/dssd',
         icon: require('../../../assets/icons/home.svg')
       }, {
         label: 'My Page',
-        path: '/page',
+        path: '/my-page',
         icon: require('../../../assets/icons/profile.svg')
       }]
     }, {
@@ -56,7 +65,7 @@ export class SideBar extends Component {
     return(
       <div className={style['navigation']}>
         {nav.map(section =>
-          <div>
+          <div key = { section.header }>
             <header>{section.header}</header>
             <nav>
               {section.elements.map(element => this.renderNavElement(element))}

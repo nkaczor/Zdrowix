@@ -1,2 +1,1 @@
-import HeaderBar from './HeaderBar';
-export { HeaderBar };
+export HeaderBar from './HeaderBar';

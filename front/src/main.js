@@ -1,17 +1,15 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import createBrowserHistory from 'history/lib/createBrowserHistory'
-import { useRouterHistory } from 'react-router'
 import makeRoutes from './routes'
 import Root from './containers/Root'
 import configureStore from './redux/configureStore'
 
 require("./styles/core.scss");
 
-const browserHistory = useRouterHistory(createBrowserHistory)({})
+//const browserHistory = createBrowserHistory()
 
 const initialState = window.__INITIAL_STATE__
-const store = configureStore(initialState, browserHistory)
+const store = configureStore(initialState)
 
 
 // Now that we have the Redux store, we can create our routes. We provide
@@ -22,6 +20,6 @@ const routes = makeRoutes(store)
 // Now that redux and react-router have been configured, we can render the
 // React application to the DOM!
 ReactDOM.render(
-  <Root history={browserHistory} routes={routes} store={store} />,
+  <Root routes={routes} store={store} />,
   document.getElementById('root')
 )
