@@ -1,22 +1,24 @@
 import React, { PropTypes, Component } from 'react';
-import { connect } from 'react-redux';
-
+import classnames from 'classnames';
 import style from './button.scss';
 
-class Avatar extends Component {
+class Button extends Component {
   static propTypes = {
-
+    color: PropTypes.oneOf(['red', 'blue', 'green']),
+    size: PropTypes.oneOf(['small', 'big']),
   };
 
   render () {
-
-
+    let btnStyle = classnames(style['button'], style[this.props.color], style[this.props.size]);
     return (
-      <div className={this.props.className}>
-        <img src={this.props.src} className={style['avatar-img']} style={circleStyle}/>
-      </div>
+      <a
+        className={ btnStyle }
+        onClick={ this.props.handleClick }
+      >
+        { this.props.label }
+      </a>
     )
   }
 }
 
-export default Avatar
+export default Button;

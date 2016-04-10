@@ -25,11 +25,11 @@ export class SideBar extends Component {
   renderNavElement(element){
     return(
       <Link
-        key = { element.label }
-        className = { style['nav-element'] }
-        activeClassName = { style['active-nav-element'] }
-        to = { element.path }
-        onClick= { this.updateView.bind(this) }
+        key={ element.label }
+        className={ style['nav-element'] }
+        activeClassName={ style['active-nav-element'] }
+        to={ element.path }
+        onClick={ this.updateView.bind(this) }
       >
         <SVG src={ element.icon } className={ style['icon'] }/>
         { element.label }

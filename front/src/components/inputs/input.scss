@@ -1,0 +1,26 @@
+.input-container{
+  padding:0 5px;
+
+  input{
+    display: block;
+    width: 100%;
+    padding: 10px;
+    border-radius: 3px;
+    border: 1px solid #ddd;
+  }
+  .error-message{
+    visibility: hidden;
+    color: #BD2634;
+    font-size: 11px;
+    padding: 3px;
+  }
+
+  &.error {
+    input{
+      border: 1px solid #BD2634;
+    }
+    .error-message{
+      visibility: visible;
+    }
+  }
+}

@@ -7,6 +7,12 @@
   background-color: #3E414F;
   width: 100%;
 
+  &:after {
+    content: "";
+    clear: both;
+    display: block;
+  }
+
   & > * {
     display: inline-block;
   }
@@ -58,6 +64,7 @@
   }
 
   .dropdown-menu{
+    background-color: white;
     top: 50px;
     right: 20px;
     left:0px;

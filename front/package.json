@@ -17,7 +17,6 @@
     "build": "npm run clean && webpack --config webpack/config.build.js",
     "dev": "npm run clean && webpack-dev-server --config webpack/config.dev.js",
     "test": "jest",
-    "flow": "flow check --color always --show-all-errors",
     "lint": "npm run lint:js && npm run lint:sass",
     "lint:js": "eslint src/scripts/**/*",
     "lint:sass": "sass-lint -v src/styles/**/*"
@@ -39,7 +38,6 @@
     "express": "^4.13.4",
     "extract-text-webpack-plugin": "^1.0.0",
     "file-loader": "^0.8.0",
-    "flow-bin": "^0.22.0",
     "html-webpack-plugin": "^2.15.0",
     "jest-cli": "^0.10.0",
     "json-loader": "^0.5.0",
