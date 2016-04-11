@@ -2,7 +2,7 @@ import React, { PropTypes, Component } from 'react';
 import { connect } from 'react-redux';
 
 import style from './home_view.scss';
-import { Button, TextInput, PasswordInput, Label } from '../../components';
+import { Button, TextInput, PasswordInput, ImageInput, Label } from '../../components';
 
 export class HomeView extends Component {
   static propTypes = {
@@ -20,9 +20,14 @@ export class HomeView extends Component {
           <Button label="Click me" size="big"/>
         </div>
         <div className="row">
-          <Label className="col-xs-2" htmlFor="text">Text:</Label>
+          <Label className="col-xs-2" htmlFor="text">Two inputs</Label>
           <TextInput id="text" className="col-xs-5" error="Invalid message."/>
           <PasswordInput className="col-xs-5"/>
+        </div>
+        <br/>
+        <div className='row'>
+          <Label className="col-xs-2" htmlFor="text">Upload your photo</Label>
+          <ImageInput className="col-xs-5"/>
         </div>
 
       </div>
