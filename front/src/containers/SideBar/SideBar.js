@@ -43,11 +43,11 @@ export class SideBar extends Component {
       header: 'Main',
       elements: [{
         label: 'Home',
-        path: '/home/dssd',
+        path: '/panel/home',
         icon: require('../../../assets/icons/home.svg')
       }, {
         label: 'My Page',
-        path: '/my-page',
+        path: '/panel/my-page',
         icon: require('../../../assets/icons/profile.svg')
       }]
     }, {
@@ -63,15 +63,15 @@ export class SideBar extends Component {
       }]
     }];
     return(
-      <div className={style['navigation']}>
-        {nav.map(section =>
+      <div className={ style['navigation'] }>
+        { nav.map(section =>
           <div key = { section.header }>
-            <header>{section.header}</header>
+            <header>{ section.header }</header>
             <nav>
-              {section.elements.map(element => this.renderNavElement(element))}
+              { section.elements.map(element => this.renderNavElement(element)) }
             </nav>
           </div>
-        )}
+        ) }
       </div>
 
     )
@@ -80,8 +80,8 @@ export class SideBar extends Component {
   }
   renderUserInformation(){
     return(
-      <div className={style['user-information']}>
-        <Avatar src={avatar} className={style['avatar']}/>
+      <div className={ style['user-information'] }>
+        <Avatar src={ avatar } className={ style['avatar'] }/>
         <div className={style['user-text']}>
           <div className={style['name']}>Natalia Kaczor</div>
           <div className={style['address']}>Patient</div>

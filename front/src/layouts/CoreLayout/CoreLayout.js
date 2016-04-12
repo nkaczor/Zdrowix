@@ -14,9 +14,8 @@ export class CoreLayout extends Component {
       <div className={style['page-container']}>
         <HeaderBar />
         <SideBar />
-        <h1>Core Layout</h1>
         <div className={style['view-container-wrapper']}>
-          <div className={style['view-container']}>dfsdfsfsdfsfsdf
+          <div className={style['view-container']}>
             {this.props.children}
           </div>
         </div>

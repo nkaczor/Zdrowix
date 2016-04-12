@@ -2,7 +2,6 @@
   background-color: #979C9C;
   font-size: 13px;
   border: none;
-  border-radius: 3px;
   color: white;
   padding: 7px 12px;
   text-align: center;
@@ -12,6 +11,14 @@
 
   &:hover {
     background-color: darken(#979C9C, 5%);
+  }
+}
+
+.dark-cyan {
+  background-color: #235B66;
+
+  &:hover {
+    background-color: darken(#235B66, 5%);
   }
 }
 
@@ -42,6 +49,10 @@
 .big {
   padding: 9px 13px;
   font-size: 16px;
+}
+.inherit{
+  width: 100%;
+  padding:15px 0;
 }
 
 .small {

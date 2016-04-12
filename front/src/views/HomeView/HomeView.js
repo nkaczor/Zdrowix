@@ -14,7 +14,7 @@ export class HomeView extends Component {
     return (
       <div className={style.home}>
         <div className={style['button-container']}>
-          <Button label="Click me" color="red" size="small"/>
+          <Button label="Click me" color="red" size="small" handleClick={x => console.log(x)}/>
           <Button label="Click me" color="blue"/>
           <Button label="Click me" color="green"/>
           <Button label="Click me" size="big"/>
@@ -26,8 +26,8 @@ export class HomeView extends Component {
         </div>
         <br/>
         <div className='row'>
-          <Label className="col-xs-2" htmlFor="text">Upload your photo</Label>
-          <ImageInput className="col-xs-5"/>
+          <Label className="col-xs-2" htmlFor="upload">Upload your photo</Label>
+          <ImageInput id="upload" className="col-xs-5"/>
         </div>
 
       </div>

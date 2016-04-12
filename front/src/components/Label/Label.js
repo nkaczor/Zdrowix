@@ -3,9 +3,6 @@ import classnames from 'classnames';
 import style from './label.scss';
 
 class Label extends Component {
-  static propTypes = {
-    color: PropTypes.oneOf(['red', 'blue']),
-  };
 
   render () {
     let { className, htmlFor } = this.props;
