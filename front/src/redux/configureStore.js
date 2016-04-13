@@ -1,10 +1,9 @@
-import { applyMiddleware, compose, createStore } from 'redux';
+import { applyMiddleware, createStore } from 'redux';
 import thunk from 'redux-thunk';
 import rootReducer from './rootReducer';
-export default function configureStore (initialState = {}, history) {
+export default function configureStore(initialState = {}) {
   // Compose final middleware and use devtools in debug environment
   let middleware = applyMiddleware(thunk);
-
 
   // Create final store and subscribe router in debug env ie. for devtools
   const store = middleware(createStore)(rootReducer, initialState);
@@ -14,7 +13,7 @@ export default function configureStore (initialState = {}, history) {
       const nextRootReducer = require('./rootReducer').default;
 
       store.replaceReducer(nextRootReducer);
-    })
+    });
   }
   return store;
 }

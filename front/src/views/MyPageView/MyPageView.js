@@ -8,17 +8,20 @@ export class MyPageView extends Component {
 
   };
 
-  render () {
+  render() {
     return (
-      <div className={style.home}>
+      <div className={ style.home }>
         my page
 
       </div>
-    )
+    );
   }
 }
 
-const mapStateToProps = (state) => ({
-  counter: state.counter
-})
-export default connect(mapStateToProps)(MyPageView)
+const mapStateToProps = (state) => {
+  ({
+    counter: state.counter
+  });
+};
+
+export default connect(mapStateToProps)(MyPageView);

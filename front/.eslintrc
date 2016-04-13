@@ -1,6 +1,7 @@
 {
   "env": {
-    "browser": true
+    "browser": true,
+    "node": true
   },
   "extends": [
     "eslint:recommended",
@@ -12,17 +13,17 @@
   ],
   "root": true,
   "rules": {
-    "comma-dangle": [2, "always"],
+    "no-unused-vars": 1,
+    "comma-dangle": [2, "only-multiline"],
     "no-console": 1,
     "no-constant-condition": 0,
     "no-inner-declarations": [2, "both"],
-    "no-extra-parens": 2,
+    "no-extra-parens": [2, "functions"],
     "no-unexpected-multiline": 0,
     "array-callback-return": 2,
     "block-scoped-var": 2,
     "curly": 2,
     "dot-location": [2, "property"],
-    "dot-notation": 2,
     "eqeqeq": [2, "allow-null"],
     "no-caller": 2,
     "no-eq-null": 2,
@@ -43,7 +44,6 @@
     "no-new-func": 2,
     "no-new-wrappers": 2,
     "no-octal-escape": 2,
-    "no-process-env": 2,
     "no-return-assign": [2, "always"],
     "no-script-url": 2,
     "no-self-compare": 2,
@@ -90,9 +90,9 @@
     "keyword-spacing": [2, {
       "overrides": {
         "catch": { "after": false },
-        "for": { "after": false },
+        "for": { "after": true },
         "function": { "after": false },
-        "if": { "after": false },
+        "if": { "after": true },
         "super": { "after": false },
         "switch": { "after": false },
         "this": { "after": false },
@@ -100,13 +100,13 @@
       }
     }],
     "max-depth": [1, 5],
-    "max-len": [1, 80, 2, { "ignoreUrls": true }],
+    "max-len": [1, 100, 2, { "ignoreUrls": true, "ignoreComments": true }],
     "max-params": [1, 5],
     "new-parens": 2,
     "newline-after-var": [2, "always"],
     "no-array-constructor": 2,
     "no-bitwise": 2,
-    "no-multiple-empty-lines": [2, { "max": 3 }],
+    "no-multiple-empty-lines": [2, { "max": 1 }],
     "no-new-object": 2,
     "no-spaced-func": 2,
     "no-trailing-spaces": 2,
@@ -121,8 +121,8 @@
     "operator-linebreak": [2, "after"],
     "padded-blocks": [2, "never"],
     "quote-props": [2, "as-needed"],
-    "quotes": [2, "backtick"],
-    "semi": [2, "never"],
+    "quotes": [2, "single", "avoid-escape"],
+    "semi": [2, "always"],
     "semi-spacing": [2, {
       "before": false,
       "after": true
@@ -149,9 +149,7 @@
     "no-confusing-arrow": 2,
     "no-useless-constructor": 2,
     "no-var": 2,
-    "object-shorthand": 2,
     "prefer-arrow-callback": 2,
-    "prefer-const": 2,
     "prefer-rest-params": 2,
     "prefer-template": 2,
     "template-curly-spacing": [2, "always"],

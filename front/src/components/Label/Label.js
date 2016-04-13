@@ -3,18 +3,23 @@ import classnames from 'classnames';
 import style from './label.scss';
 
 class Label extends Component {
+  static propTypes= {
+    htmlFor: PropTypes.string,
+    className: PropTypes.string,
+    children: PropTypes.required,
+  }
+  render() {
+    let { className, htmlFor, children } = this.props;
+    let labelStyle = classnames(style['label'], className);
 
-  render () {
-    let { className, htmlFor } = this.props;
-    let labelStyle = classnames(style['label'], this.props.className);
     return (
       <label
         htmlFor={ htmlFor }
         className={ labelStyle }
       >
-        { this.props.children }
+        { children }
       </label>
-    )
+    );
   }
 }
 

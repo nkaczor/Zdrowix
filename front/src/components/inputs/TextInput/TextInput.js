@@ -4,11 +4,14 @@ import style from '../input.scss';
 
 class TextInput extends Component {
   static propTypes = {
-
+    className: PropTypes.string,
+    error: PropTypes.string,
+    value: PropTypes.string,
+    placeholder: PropTypes.string
   };
 
-  render () {
-    let { className, id, error, value, placeholder } = this.props;
+  render() {
+    let { className, error, value, placeholder } = this.props;
 
     let inputContainerStyle = classnames(style['input-container'], className, {
       [style['error']]: error
@@ -17,15 +20,15 @@ class TextInput extends Component {
     return (
       <div className={ inputContainerStyle }>
         <input
-          id={ id }
           type="text"
           value={ value }
-          placeholder={ placeholder } />
+          placeholder={ placeholder }
+        />
         <div className={ style['error-message'] }>
-          {error}
+          { error }
         </div>
       </div>
-  )
+  );
   }
 }
 

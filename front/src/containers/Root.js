@@ -1,6 +1,6 @@
-import React, { PropTypes } from 'react'
-import { Provider } from 'react-redux'
-import { Router, browserHistory } from 'react-router'
+import React, { PropTypes } from 'react';
+import { Provider } from 'react-redux';
+import { Router, browserHistory } from 'react-router';
 
 export default class Root extends React.Component {
   static propTypes = {
@@ -8,21 +8,21 @@ export default class Root extends React.Component {
     store: PropTypes.object.isRequired
   };
 
-  getContent () {
+  getContent() {
     return (
       <Router history={ browserHistory }>
-        {this.props.routes}
+        { this.props.routes }
       </Router>
-    )
+    );
   }
 
-  render () {
+  render() {
     return (
-      <Provider store={this.props.store}>
-        <div style={{ height: '100%', width: '100%' }}>
-          {this.getContent()}
+      <Provider store={ this.props.store }>
+        <div style={ { height: '100%', width: '100%' } }>
+          { this.getContent() }
         </div>
       </Provider>
-    )
+    );
   }
 }
