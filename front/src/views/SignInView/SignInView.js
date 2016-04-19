@@ -10,7 +10,7 @@ import {
 
 export class HomeView extends Component {
   static propTypes = {
-
+    user: PropTypes.object
   };
 
   render() {
@@ -27,12 +27,20 @@ export class HomeView extends Component {
           />
         </div>
         <div className={ style['sign-up-hint'] }>
-          Not registered yet?
+          Not registered yet? Create an account! <br />
+          I'm
           <Link
             to=""
             className={ style['sign-up-link'] }
           >
-           Create an account!
+           Patient
+          </Link>
+          I'm
+          <Link
+            to=""
+            className={ style['sign-up-link'] }
+          >
+          Doctor
           </Link>
         </div>
       </div>
@@ -41,11 +49,9 @@ export class HomeView extends Component {
 }
 
 const mapStateToProps = (state) => {
-  return (
-  {
-    counter: state.counter,
-  }
-);
+  return {
+    counter: state.counter
+  };
 };
 
 export default connect(mapStateToProps)(HomeView);

@@ -65,9 +65,9 @@ export class HomeView extends Component {
 }
 
 const mapStateToProps = (state) => {
-  ({
-    counter: state.counter,
-  });
+  return {
+    counter: state.counter
+  };
 };
 
 export default connect(mapStateToProps)(HomeView);

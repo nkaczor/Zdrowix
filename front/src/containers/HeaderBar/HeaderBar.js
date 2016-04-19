@@ -81,9 +81,9 @@ export class HeaderBar extends Component {
 }
 
 const mapStateToProps = (state) => {
-  ({
+  return {
     counter: state.counter
-  });
+  };
 };
 
 export default connect(mapStateToProps)(HeaderBar);

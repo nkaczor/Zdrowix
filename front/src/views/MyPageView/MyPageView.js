@@ -5,7 +5,6 @@ import style from './my_page_view.scss';
 
 export class MyPageView extends Component {
   static propTypes = {
-
   };
 
   render() {
@@ -19,9 +18,9 @@ export class MyPageView extends Component {
 }
 
 const mapStateToProps = (state) => {
-  ({
+  return {
     counter: state.counter
-  });
+  };
 };
 
 export default connect(mapStateToProps)(MyPageView);

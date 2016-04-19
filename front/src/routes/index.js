@@ -1,11 +1,11 @@
 import React from 'react';
-import { Route, IndexRoute } from 'react-router';
+import { Route } from 'react-router';
 
 import { LoginLayout, CoreLayout } from '../layouts';
 import { SignInView, MyPageView, HomeView } from '../views';
 
-export default (store) => {
-  (
+let makeRoutes = () => {
+  return (
     <Route path="/">
       <Route path="panel"
         component={ CoreLayout }
@@ -21,8 +21,12 @@ export default (store) => {
         <Route path="sign-in"
           component={ SignInView }
         />
-        <Route path="sign-up" />
+        <Route path="patient/sign-up" />
+        <Route path="doctor/sign-up" />
+
       </Route>
     </Route>
 );
 };
+
+export default makeRoutes;

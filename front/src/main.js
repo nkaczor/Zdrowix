@@ -16,9 +16,9 @@ const store = configureStore(initialState);
 // hooks such as `onEnter`.
 
 const routes = makeRoutes(store);
-
 // Now that redux and react-router have been configured, we can render the
 // React application to the DOM!
+
 ReactDOM.render(
   <Root routes={ routes }
     store={ store }
