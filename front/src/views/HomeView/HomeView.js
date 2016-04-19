@@ -9,33 +9,65 @@ export class HomeView extends Component {
 
   };
 
-  render () {
-
+  render() {
     return (
-      <div className={style.home}>
-        <div className={style['button-container']}>
-          <Button label="Click me" color="red" size="small"/>
-          <Button label="Click me" color="blue"/>
-          <Button label="Click me" color="green"/>
-          <Button label="Click me" size="big"/>
+      <div className={ style.home }>
+        <div className={ style['button-container'] }>
+          <Button
+            label="Click me"
+            color="red"
+            size="small"
+            handleClick={ (x) => {
+              console.log(x);
+            }
+            }
+          />
+          <Button
+            label="Click me"
+            color="blue"
+          />
+          <Button
+            label="Click me"
+            color="green"
+          />
+          <Button
+            label="Click me"
+            size="big"
+          />
         </div>
         <div className="row">
-          <Label className="col-xs-2" htmlFor="text">Two inputs</Label>
-          <TextInput id="text" className="col-xs-5" error="Invalid message."/>
-          <PasswordInput className="col-xs-5"/>
+          <Label
+            className="col-xs-2"
+            htmlFor="text"
+          >
+            Two inputs
+          </Label>
+          <TextInput
+            className="col-xs-5"
+            error="Invalid message."
+          />
+          <PasswordInput className="col-xs-5" />
         </div>
-        <br/>
-        <div className='row'>
-          <Label className="col-xs-2" htmlFor="text">Upload your photo</Label>
-          <ImageInput className="col-xs-5"/>
+        <br />
+        <div className="row">
+          <Label
+            className="col-xs-2"
+            htmlFor="upload"
+          >
+            Upload your photo
+          </Label>
+          <ImageInput className="col-xs-5" />
         </div>
 
       </div>
-    )
+    );
   }
 }
 
-const mapStateToProps = (state) => ({
-  counter: state.counter
-})
-export default connect(mapStateToProps)(HomeView)
+const mapStateToProps = (state) => {
+  return {
+    counter: state.counter
+  };
+};
+
+export default connect(mapStateToProps)(HomeView);

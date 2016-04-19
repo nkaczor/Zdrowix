@@ -5,20 +5,22 @@ import style from './my_page_view.scss';
 
 export class MyPageView extends Component {
   static propTypes = {
-
   };
 
-  render () {
+  render() {
     return (
-      <div className={style.home}>
+      <div className={ style.home }>
         my page
 
       </div>
-    )
+    );
   }
 }
 
-const mapStateToProps = (state) => ({
-  counter: state.counter
-})
-export default connect(mapStateToProps)(MyPageView)
+const mapStateToProps = (state) => {
+  return {
+    counter: state.counter
+  };
+};
+
+export default connect(mapStateToProps)(MyPageView);

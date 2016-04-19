@@ -1,0 +1,19 @@
+.page-container{
+  width: 100%;
+  height: 100%;
+  background-color: #348899;
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .view-container{
+    box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+    padding: 20px 30px;
+    width: 600px;
+    background-color: white;
+    input{
+      padding: 15px;
+    }
+  }
+}

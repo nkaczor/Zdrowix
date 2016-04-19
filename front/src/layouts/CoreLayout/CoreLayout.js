@@ -5,30 +5,22 @@ import style from './core_layout.scss';
 
 export class CoreLayout extends Component {
   static propTypes = {
-
+    children: PropTypes.element
   };
 
-
-
-  render () {
-
+  render() {
     return (
-      <div className={style['page-container']}>
+      <div className={ style['page-container'] }>
         <HeaderBar />
         <SideBar />
-        <h1>Core Layout</h1>
         <div className={ style['view-container-wrapper'] }>
-          <div className={ style['view-container'] }>Core
+          <div className={ style['view-container'] }>
             { this.props.children }
           </div>
         </div>
       </div>
-    )
+    );
   }
 }
 
-CoreLayout.propTypes = {
-  children: PropTypes.element
-}
-
-export default CoreLayout
+export default CoreLayout;

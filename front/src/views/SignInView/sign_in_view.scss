@@ -1,0 +1,23 @@
+.sign-in-view{
+  h1{
+    text-align: center;
+    letter-spacing: 1px;
+    color: #235B66;
+  }
+  .form-container{
+    & > * {
+      margin-top: 10px;
+    }
+  }
+  .sign-up-hint{
+    padding: 20px;
+    text-align: center;
+    color: #aaa;
+    font-weight: 100;
+    .sign-up-link{
+      margin:0 5px;
+      color: #348899;
+      font-weight: bold;
+    }
+  }
+}

@@ -1,2 +1,1 @@
-import MyPageView from './MyPageView';
-export default MyPageView;
+export MyPageView from './MyPageView';
