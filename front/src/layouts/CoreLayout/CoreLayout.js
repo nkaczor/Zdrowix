@@ -8,6 +8,8 @@ export class CoreLayout extends Component {
 
   };
 
+
+
   render () {
 
     return (
@@ -15,9 +17,9 @@ export class CoreLayout extends Component {
         <HeaderBar />
         <SideBar />
         <h1>Core Layout</h1>
-        <div className={style['view-container-wrapper']}>
-          <div className={style['view-container']}>dfsdfsfsdfsfsdf
-            {this.props.children}
+        <div className={ style['view-container-wrapper'] }>
+          <div className={ style['view-container'] }>Core
+            { this.props.children }
           </div>
         </div>
       </div>
