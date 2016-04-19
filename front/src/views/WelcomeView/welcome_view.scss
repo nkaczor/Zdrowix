@@ -1,0 +1,54 @@
+$background-color: #E0E4CC;
+$image-height: 490px;
+
+.no-padding {
+   padding: 0 !important;
+   margin: 0 !important;
+}
+
+
+.image-box {
+    width: 100%;
+    height: $image-height;
+    overflow: hidden;
+    //background-size: 100% 100%;
+    background-size: cover;
+    background-position: center;
+}
+
+
+.text-box{
+    width: 530px;
+    //border :2px solid black;
+    position: absolute;
+    top: 1/4*$image-height;
+    left: 70px;
+}
+
+.text{
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+  color: rgba(0,0,0,.6);
+  letter-spacing: -1px;
+}
+
+.title-heading{
+ @extend .text;
+ font-size: 45px;
+ font-weight: 300;
+}
+
+.title-content{
+  @extend .text;
+  font-size: 25px;
+  font-weight: 300;
+  line-height: 1.5em;
+}
+
+.button-box{
+  position: relative;
+  top: 30px;
+}
+
+
