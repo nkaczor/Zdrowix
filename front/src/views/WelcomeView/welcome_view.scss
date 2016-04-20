@@ -1,15 +1,89 @@
 $background-color: #E0E4CC;
 $image-height: 490px;
+$option-box-width: 300px;
+$icon-size: 90px;
 
 .no-padding {
    padding: 0 !important;
    margin: 0 !important;
 }
 
-
 .image-box {
     width: 100%;
     height: $image-height;
+    overflow: hidden;
+    //background-size: 100% 100%;
+    background-size: cover;
+    background-position: center;
+}
+
+.svg-icon{
+  display: inline-block;
+	width: 2em;
+	height: 2em;
+	fill: currentColor;
+}
+
+.icon{
+  width: $icon-size;
+  height: $icon-size;
+  position: absolute;
+  margin: 0 auto;
+  top: -$icon-size/2;
+  right: $option-box-width/2;
+  transform: translateX(-35%);
+  border-radius: $icon-size/2;;
+}
+
+.patient-icon{
+   @extend .icon;
+    background-color: orange;
+}
+
+.doctor-icon{
+   @extend .icon;
+    background-color: green;
+}
+
+.patient-image {
+  margin: 0 auto;
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.doctor-image {
+  margin: 0 auto;
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.option-box{
+  width: $option-box-width;
+  height: 170px;
+  background-color: #2D2D2D;
+  margin: auto auto;
+  padding-top: 39px;
+  text-align: center;
+}
+
+.option-container{
+  //border: 2px solid black;
+  position: relative;
+  top: 145px;
+  width: 900px;
+  height: 250px;
+  margin: auto auto;
+}
+
+
+.background-image {
+    width: 100%;
+    //height: calc(100vh-$image-height);
+    //height: calc(100vh - 509px);
+    height: 448px;
+    //height: $image-height;
     overflow: hidden;
     //background-size: 100% 100%;
     background-size: cover;
@@ -23,6 +97,18 @@ $image-height: 490px;
     position: absolute;
     top: 1/4*$image-height;
     left: 70px;
+}
+
+.button-container{
+  top:10px;
+  position: relative;
+}
+
+.registration-text{
+  font-size: 18px;
+  font-weight: 300;
+  font-family: sans-serif;
+  color: rgba(255,255,255,.9);
 }
 
 .text{
@@ -50,5 +136,3 @@ $image-height: 490px;
   position: relative;
   top: 30px;
 }
-
-
