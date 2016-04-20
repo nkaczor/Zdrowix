@@ -2,13 +2,23 @@ import React, { PropTypes, Component } from 'react';
 import { connect } from 'react-redux';
 
 import style from './home_view.scss';
-import { Button, TextInput, PasswordInput, ImageInput, Label } from '../../components';
+import { Button, TextInput,
+         PasswordInput, ImageInput,
+         Label, Checkbox } from '../../components';
 
 export class HomeView extends Component {
   static propTypes = {
 
   };
-
+  constructor(props) {
+    super(props);
+    this.state = { checkboxStatus: true };
+  }
+  handleCheckboxChange() {
+    this.setState({
+      checkboxStatus: !this.state.checkboxStatus
+    });
+  }
   render() {
     return (
       <div className={ style.home }>
@@ -58,7 +68,11 @@ export class HomeView extends Component {
           </Label>
           <ImageInput className="col-xs-5" />
         </div>
-
+        <Checkbox
+          label="Male"
+          checked={ this.state.checkboxStatus }
+          onChange={ this.handleCheckboxChange.bind(this) }
+        />
       </div>
     );
   }

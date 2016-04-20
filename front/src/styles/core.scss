@@ -7,6 +7,12 @@
     box-sizing: border-box;
   }
 
+  #root{
+    height: 100%;
+    width: 100%;
+    position: absolute;
+  }
+
   html,
   body {
     font-family: Roboto,Helvetica Neue,Helvetica,Arial,sans-serif;

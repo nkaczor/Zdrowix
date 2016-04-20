@@ -6,7 +6,7 @@ class Button extends Component {
   static propTypes = {
     color: PropTypes.oneOf([ 'red', 'blue', 'green', 'dark-cyan' ]),
     size: PropTypes.oneOf([ 'small', 'big', 'inherit' ]),
-    handleClick: PropTypes.func,
+    onClick: PropTypes.func,
     label: PropTypes.string,
   };
 
@@ -19,7 +19,7 @@ class Button extends Component {
     return (
       <a
         className={ btnStyle }
-        onClick={ this.props.handleClick }
+        onClick={ this.props.onClick }
       >
         { this.props.label }
       </a>
