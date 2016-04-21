@@ -14,6 +14,7 @@ export class WelcomeView extends Component {
 
 // let box = classnames(style['fill'], imageStyle);
   render() {
+
     let leftImageStyle = { backgroundImage: 'url('+leftimage+')' };
     let rightImageStyle = { backgroundImage: 'url('+rightimage+')' };
     let backgroundImageStyle = { backgroundImage: 'url('+backgroundimage+')' };
