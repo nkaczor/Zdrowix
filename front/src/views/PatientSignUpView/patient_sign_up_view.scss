@@ -5,44 +5,41 @@
     text-align: center;
     margin: 0 auto;
 
-      .registration-icon{
-        position: relative;
-      	width: 3em;
-      	height: 3em;
-        display: inline-block;
-      	fill: currentColor;
-        top: 3px;
-        margin-right: 10px;
+    .registration-icon{
+      position: relative;
+      width: 3em;
+      height: 3em;
+      display: inline-block;
+      fill: currentColor;
+      top: 3px;
+      margin-right: 10px;
       }
-
       .registration-title{
         position: relative;
         top: -6px;
         display: inline-block;
         margin: 0;
         padding: 0px;
-      }
-    }
-
+       }
+  }
   .user-input-container{
+    position: relative;
+    margin-top: 30px;
+
+    .simple-input-box{
       position: relative;
-      margin-top: 30px;
 
-        .simple-input-box{
+      .input-label{
+        margin: 0;
+        padding: 0px;
+        font-size: 18px;
+      }
+        .input-container{
           position: relative;
-
-            .input-label{
-              margin: 0;
-              padding: 0px;
-              font-size: 18px;
-            }
-
-            .input-container{
-              position: relative;
-              margin: 5px 5px 5px 10px;
-            }
+          margin: 5px 5px 5px 10px;
         }
     }
+  }
 }
 
 

@@ -1,32 +1,31 @@
 import React, { Component } from 'react';
 
 import style from './patient_sign_up_view.scss';
-import { Button, TextInput } from '../../components';
+import { Button, TextInput, PasswordInput } from '../../components';
 import Svg from 'svg-inline-react';
 import registrationIcon from '../../../assets/icons/user-tie.svg';
 
-class Input extends React.Component {
-  render() {
+export class PatientSignUpView extends Component {
+
+  renderInputWithLabel(inputType, label) {
     return (
       <div className={ style['simple-input-box'] }>
         <h3 className={ style['input-label'] }>
-            { this.props.text }:
+            { label }:
         </h3>
         <div className={ style['input-container'] }>
           <div className="row">
-            {
-              // jbc to ten row + col-xs mi sie tu nie podoba trzeba to zmienic
-              // ale inaczej wylazi poza input-container plus jest na 100% szerokosci
+          { (() => {
+            switch(inputType) {
+              case 'text': return <TextInput className="col-xs-12" />;
+              case 'password': return <PasswordInput className="col-xs-12" />;
             }
-            <TextInput className="col-xs-12" />
+          })() }
           </div>
         </div>
       </div>
     );
   }
-}
-
-export class PatientSignUpView extends Component {
 
   render() {
     let buttonStyle = { marginTop: '30px' };
@@ -45,18 +44,14 @@ export class PatientSignUpView extends Component {
 
         <div className={ style['user-input-container'] }>
 
-          <Input text="Username" />
-          <Input text="First Name" />
-          <Input text="Last Name" />
-          <Input text="E-mail Address" />
-          <Input text="Password" />
-          <Input text="Repeat password" />
+          { this.renderInputWithLabel('text', 'Username') }
+          { this.renderInputWithLabel('text', 'First Name') }
+          { this.renderInputWithLabel('text', 'Last Name') }
+          { this.renderInputWithLabel('text', 'E-mail Address') }
+          { this.renderInputWithLabel('password', 'Password') }
+          { this.renderInputWithLabel('password', 'Confirm password') }
 
           <div style={ buttonStyle }>
-              {
-                // dlaczego jak dodam te style do Button
-                // to mi ten styl ignoruje? a jak jest tu to nie?
-              }
             <Button label="Register"
               color="blue"
               size="inherit"
