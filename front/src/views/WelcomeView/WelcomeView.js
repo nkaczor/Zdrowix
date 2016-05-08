@@ -13,7 +13,7 @@ import doctoricon from '../../../assets/icons/lab.svg';
 export class WelcomeView extends Component {
 
   static contextTypes= {
-    router: PropTypes.func.isRequired
+    router: PropTypes.object.isRequired
   }
   goTo(url) {
     this.context.router.push(url);

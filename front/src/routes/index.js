@@ -1,15 +1,12 @@
 import React from 'react';
 import { Route, IndexRoute } from 'react-router';
 
-
-import WelcomeView from '../views/WelcomeView'
 import { LoginLayout, CoreLayout } from '../layouts';
-import { SignInView, MyPageView, HomeView } from '../views';
-
+import { SignInView, MyPageView, HomeView, WelcomeView } from '../views';
 let makeRoutes = () => {
   return (
     <Route path="/">
-      <IndexRoute component={WelcomeView}/>
+      <IndexRoute component={ WelcomeView } />
       <Route path="panel"
         component={ CoreLayout }
       >
