@@ -22,7 +22,12 @@ export class DoctorSignUpView extends Component {
           <TextInput placeholder="Your last name" />
           <TextInput placeholder="Your birthday" />
           <ImageInput />
-          <Select items={ items } />
+          <Select
+            placeholder="Your specialization"
+            size="inherit"
+            items={ items }
+            error="This field is required"
+          />
           <PasswordInput placeholder="Your password" />
           <PasswordInput placeholder="Repeat password" />
 

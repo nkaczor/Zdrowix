@@ -7,28 +7,47 @@ class Select extends Component {
     htmlFor: PropTypes.string,
     className: PropTypes.string,
     items: PropTypes.array,
+    error: PropTypes.string,
+    placeholder: PropTypes.string,
+    size: PropTypes.oneOf([ 'small', 'big', 'inherit' ]),
   }
   render() {
-    let { className, htmlFor } = this.props;
-    let selectStyle = classnames(style['select'], className);
+    let { className, htmlFor, items, placeholder, error } = this.props;
+    const selectStyle = classnames(
+      style['select'],
+      style[this.props.size],
+      className, {
+        [style['error']]: error
+      });
 
     return (
-      <select
-        htmlFor={ htmlFor }
-        className={ selectStyle }
-      >
-    { this.props.items.map((element) => {
-      return (
-        <option
-          value={ element.id }
-          key={ element.id }
+      <div className={ selectStyle }>
+        <select
+          htmlFor={ htmlFor }
         >
-        { element.label }
-        </option>
-        );
-    })
-    }
-      </select>
+          <option value=""
+            disabled
+            selected
+          >
+          { placeholder }
+          </option>
+
+      { items.map((element) => {
+        return (
+          <option
+            value={ element.id }
+            key={ element.id }
+          >
+          { element.label }
+          </option>
+          );
+      })
+      }
+        </select>
+        <div className={ style['error-message'] }>
+          { error }
+        </div>
+      </div>
     );
   }
 }

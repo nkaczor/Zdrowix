@@ -1,3 +1,53 @@
 .select{
-  padding-top: 8px;
+margin: 10px 0;
+//padding-bottom: 8px;
+
+select{
+  padding: 10px;
+  border: 0px solid #ddd;
+  background-color: #f2f2f2;
+  color: #A9A9A9;
+
+  option:first-of-type{
+    display: none;
+  }
+
 }
+
+&.error {
+  input{
+    border: 1px solid #BD2634;
+  }
+  .error-message{
+    visibility: visible;
+    color: #BD2634;
+
+  }
+}
+
+}
+
+
+.error-message{
+  visibility: hidden;
+  font-size: 11px;
+  padding: 3px;
+}
+
+
+.big select{
+  padding: 9px 13px;
+  font-size: 16px;
+}
+
+.inherit select{
+  width: 100%;
+  padding-top: 15px;
+  padding-bottom: 15px;
+}
+
+.small select{
+  padding: 4px 8px;
+  font-size: 12px;
+}
+
