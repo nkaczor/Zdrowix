@@ -31,6 +31,7 @@ var UserSchema = new Schema({
     type: Schema.ObjectId,
   },
   password: {
+    select: false,
     type: String,
     required: true
   }
