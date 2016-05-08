@@ -11,6 +11,12 @@ class Select extends Component {
     placeholder: PropTypes.string,
     size: PropTypes.oneOf([ 'small', 'big', 'inherit' ]),
   }
+
+  clickHandler() {
+    console.log('rututu');
+  }
+
+
   render() {
     let { className, htmlFor, items, placeholder, error } = this.props;
     const selectStyle = classnames(
@@ -24,6 +30,7 @@ class Select extends Component {
       <div className={ selectStyle }>
         <select
           htmlFor={ htmlFor }
+          onClick={ this.clickHandler }
         >
           <option value=""
             disabled
