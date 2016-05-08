@@ -3,10 +3,8 @@ import { Route, IndexRoute } from 'react-router';
 
 
 import WelcomeView from '../views/WelcomeView'
-import { PatientSignUpView } from '../views/PatientSignUpView'
-
 import { LoginLayout, CoreLayout } from '../layouts';
-import { SignInView, MyPageView, HomeView } from '../views';
+import {PatientSignUpView, DoctorSignUpView, SignInView, MyPageView, HomeView } from '../views';
 
 let makeRoutes = () => {
   return (
@@ -31,7 +29,9 @@ let makeRoutes = () => {
         <Route path="patient/sign-up"
           component={ PatientSignUpView }
           />
-        <Route path="doctor/sign-up" />
+        <Route path="doctor/sign-up"
+          component={ DoctorSignUpView }
+          />
 
       </Route>
     </Route>

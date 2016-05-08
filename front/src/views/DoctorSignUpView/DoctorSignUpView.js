@@ -1,13 +1,16 @@
 import React, { Component } from 'react';
 
-import style from './patient_sign_up_view.scss';
-import { Button, TextInput, PasswordInput, ImageInput } from '../../components';
+import style from './doctor_sign_up_view.scss';
+import { Select, Button, TextInput, PasswordInput, ImageInput } from '../../components';
 
 import Svg from 'svg-inline-react';
 import registrationIcon from '../../../assets/icons/user-tie.svg';
-export class PatientSignUpView extends Component {
+import { Link } from 'react-router';
+export class DoctorSignUpView extends Component {
 
   render() {
+    let items = [ { label: 'jeden', id: 1 }, { label: 'dwa', id: 2 } ];
+
     return (
       <div id="name"
         className={ style['sign-up-view'] }
@@ -19,6 +22,7 @@ export class PatientSignUpView extends Component {
           <TextInput placeholder="Your last name" />
           <TextInput placeholder="Your birthday" />
           <ImageInput />
+          <Select items={ items } />
           <PasswordInput placeholder="Your password" />
           <PasswordInput placeholder="Repeat password" />
 
@@ -33,4 +37,4 @@ export class PatientSignUpView extends Component {
   }
 }
 
-export default PatientSignUpView;
+export default DoctorSignUpView;
