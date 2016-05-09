@@ -3,6 +3,13 @@ import { Route, IndexRoute } from 'react-router';
 
 import { LoginLayout, CoreLayout } from '../layouts';
 import { SignInView, MyPageView, HomeView, WelcomeView } from '../views';
+import {
+  PatientSignUpView,
+  DoctorSignUpView,
+  SignInView,
+  MyPageView,
+  HomeView,
+  WelcomeView } from '../views';
 
 let redirectIfUserIsNotLogged = (nextState, replace) => {
   if (!localStorage.user) {
@@ -31,8 +38,12 @@ let makeRoutes = () => {
         <Route path="sign-in"
           component={ SignInView }
         />
-        <Route path="patient/sign-up" />
-        <Route path="doctor/sign-up" />
+        <Route path="patient/sign-up"
+          component={ PatientSignUpView }
+          />
+        <Route path="doctor/sign-up"
+          component={ DoctorSignUpView }
+          />
 
       </Route>
     </Route>

@@ -1,0 +1,1 @@
+export PatientSignUpView from './PatientSignUpView';
