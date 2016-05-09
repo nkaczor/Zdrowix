@@ -7,11 +7,12 @@ class PasswordInput extends Component {
     className: PropTypes.string,
     error: PropTypes.string,
     value: PropTypes.string,
-    placeholder: PropTypes.string
+    placeholder: PropTypes.string,
+    onChange: PropTypes.func
   };
 
   render() {
-    let { className, error, value, placeholder } = this.props;
+    let { className, error, value, placeholder, onChange } = this.props;
 
     let inputContainerStyle = classnames(style['input-container'], className, {
       [style['error']]: error
@@ -23,6 +24,7 @@ class PasswordInput extends Component {
           type="password"
           value={ value }
           placeholder={ placeholder }
+          onChange={ onChange }
         />
         <div className={ style['error-message'] }>
           { error }

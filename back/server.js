@@ -15,6 +15,8 @@ var userRouter = require('./app/routes/userRouter')
 
 
 // get our request parameters
+
+
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
@@ -23,6 +25,12 @@ app.use(morgan('dev'));
 
 // Use the passport package in our application
 app.use(passport.initialize());
+
+app.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization");
+  next();
+});
 
 
 // connect to database
@@ -61,13 +69,14 @@ apiRoutes.post('/authenticate', function(req, res) {
       res.send({success: false, msg: 'Authentication failed. User not found.'});
     } else {
       // check if password matches
-      user.comparePassword(req.body.password, function (err, isMatch) {
+      user.comparePassword(req.body.password, User, function (err, isMatch) {
         if (isMatch && !err) {
           // if user is found and password is right create a token
           var token = jwt.encode(user, config.secret);
           // return the information including token as JSON
           res.json({success: true, token: 'JWT ' + token});
         } else {
+          console.log(err);
           res.send({success: false, msg: 'Authentication failed. Wrong password.'});
         }
       });

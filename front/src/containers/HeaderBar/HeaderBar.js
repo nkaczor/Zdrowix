@@ -8,6 +8,7 @@ import { Avatar } from '../../components';
 import avatar from '../../../assets/avatar.jpg';
 import arrowDownIcon from '../../../assets/icons/down_arrow.svg';
 import style from './header_bar.scss';
+import * as userActions from '../../redux/modules/user';
 
 export class HeaderBar extends Component {
 
@@ -18,8 +19,11 @@ export class HeaderBar extends Component {
     this.onClose = this.onClose.bind(this);
   }
 
+
   componentDidMount() {
     document.addEventListener('click', this.onClose);
+    console.log(userActions);
+    this.props.dispatch(userActions.fetchUserInfo());
   }
 
   componentWillUnmount() {
@@ -80,9 +84,9 @@ export class HeaderBar extends Component {
   }
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = state => {
   return {
-    counter: state.counter
+    user: state.user
   };
 };
 

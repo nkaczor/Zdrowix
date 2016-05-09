@@ -1,7 +1,10 @@
 import React, { PropTypes, Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router';
+
+import * as userActions from '../../redux/modules/user';
 import style from './sign_in_view.scss';
+
 import {
   Button,
   TextInput,
@@ -10,20 +13,58 @@ import {
 
 export class HomeView extends Component {
   static propTypes = {
-    user: PropTypes.object
+    user: PropTypes.object,
+    dispatch: PropTypes.func
   };
 
+  constructor(props) {
+    super(props);
+    this.state = {
+      form: {
+        email: '',
+        password: ''
+      }
+    };
+  }
+
+  handleValueChange(field, e) {
+    let form = Object.assign({}, this.state.form);
+
+    form[field] = e.target.value;
+    this.setState({
+      form
+    });
+  }
+
+  handleSignIn() {
+    let { email, password } = this.state.form;
+
+    this.props.dispatch(userActions.fetchToken(email, password));
+    this.context.router.pushState('/panel/home');
+  }
+
   render() {
+    let { form } = this.state;
+
     return (
       <div className={ style['sign-in-view'] }>
         <h1>Sign in</h1>
         <div className={ style['form-container'] }>
-          <TextInput placeholder="Your login" />
-          <PasswordInput placeholder="Your password" />
+          <TextInput
+            placeholder="Your login"
+            value={ form.email }
+            onChange={ this.handleValueChange.bind(this, 'email') }
+          />
+          <PasswordInput
+            placeholder="Your password"
+            value={ form.password }
+            onChange={ this.handleValueChange.bind(this, 'password') }
+          />
           <Button
             label="LOGIN"
             color="dark-cyan"
             size="inherit"
+            onClick={ this.handleSignIn.bind(this) }
           />
         </div>
         <div className={ style['sign-up-hint'] }>
