@@ -2,7 +2,7 @@ var express = require('express');
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 var passport	= require('passport');
-var jwt         = require('jwt-simple');
+var jwt = require('jwt-simple');
 
 var config = require('../../config/database');
 var User = require('../models/user.js');
@@ -15,7 +15,7 @@ userRouter.get('/', passport.authenticate('jwt', { session: false}), function(re
   if (token) {
     var decoded = jwt.decode(token, config.secret);
     User.findOne({
-      email: decoded.email
+      email: decoded
     }, function(err, user) {
         if (err) throw err;
         if (!user) {

@@ -4,7 +4,17 @@ import localStore from 'store';
 export default function userReducer(state = {}, action = {}) {
   switch(action.type) {
     case RECEIVE_USER_INFO:
-      return action.user;
+      state = Object.assign({}, state);
+      state.userInfo = action.user;
+      return state;
+    case SIGN_IN:
+      state = Object.assign({}, state);
+      state.token = action.token;
+      return state;
+    case SIGN_OUT:
+      state = Object.assign({}, state);
+      state.token = '';
+      return state;
     default:
       return state;
   }
@@ -43,6 +53,12 @@ export function signOut() {
   };
 }
 
+function saveToken(token) {
+  localStore.set('user', {
+    token
+  });
+}
+
 export function fetchToken(email, password) {
   let url = '/api/authenticate';
   let body = JSON.stringify({
@@ -51,30 +67,28 @@ export function fetchToken(email, password) {
   });
 
   return dispatch =>
-    fetchDataWithError(url, 'POST', body)
+    fetchData(url, 'POST', body)
     .then(data => {
-      // store the key so that on next start of the app
-      // you don't have to login again
-      localStore.set('user', {
-        username: email,
-        token: data.token,
-      });
-
-      dispatch(signIn(data.token));
-    })
-    .catch(error => {
-      return error.response;
+      if (data.token) {
+        saveToken(data.token);
+        dispatch(signIn(data.token));
+      }
     });
 }
 
-export function fetchUserInfo() {
+export function fetchUserInfo(token, saveToLocalStore) {
   return function(dispatch) {
     dispatch(requestUserInfo());
 
-    return fetchData('/api/user')
-      .then(response => response.json())
-      .then(json =>
-        dispatch(receiveUserInfo(json))
+    return fetchData('/api/user', 'GET', {}, token)
+      .then(data => {
+        if (data.success) {
+          dispatch(receiveUserInfo(data.user));
+          if (saveToLocalStore) {
+            dispatch(signIn(token));
+          }
+        }
+      }
       );
   };
 }

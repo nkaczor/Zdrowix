@@ -12,6 +12,9 @@ import {
 } from '../../components';
 
 export class HomeView extends Component {
+  static contextTypes= {
+    router: PropTypes.object.isRequired
+  }
   static propTypes = {
     user: PropTypes.object,
     dispatch: PropTypes.func
@@ -39,8 +42,10 @@ export class HomeView extends Component {
   handleSignIn() {
     let { email, password } = this.state.form;
 
-    this.props.dispatch(userActions.fetchToken(email, password));
-    this.context.router.pushState('/panel/home');
+    this.props.dispatch(userActions.fetchToken(email, password))
+    .then(() =>
+        this.context.router.push('/panel/home')
+    );
   }
 
   render() {

@@ -14,8 +14,6 @@ var specialtyRouter = require('./app/routes/specialtyRouter')
 var userRouter = require('./app/routes/userRouter')
 
 
-// get our request parameters
-
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
@@ -23,7 +21,6 @@ app.use(bodyParser.json());
 // log to console
 app.use(morgan('dev'));
 
-// Use the passport package in our application
 app.use(passport.initialize());
 
 app.use(function(req, res, next) {
@@ -33,16 +30,12 @@ app.use(function(req, res, next) {
 });
 
 
-// connect to database
 mongoose.connect(config.database);
 
-// pass passport for configuration
 require('./config/passport')(passport);
 
-// bundle our routes
 var apiRoutes = express.Router();
 
-// create a new user account (POST http://localhost:8080/api/signup)
 apiRoutes.post('/signup', function(req, res) {
   if (!req.body.email || !req.body.password) {
     res.json({success: false, msg: 'Please pass email and password.'});
@@ -71,9 +64,7 @@ apiRoutes.post('/authenticate', function(req, res) {
       // check if password matches
       user.comparePassword(req.body.password, User, function (err, isMatch) {
         if (isMatch && !err) {
-          // if user is found and password is right create a token
-          var token = jwt.encode(user, config.secret);
-          // return the information including token as JSON
+          var token = jwt.encode(user.email, config.secret);
           res.json({success: true, token: 'JWT ' + token});
         } else {
           console.log(err);
@@ -83,9 +74,9 @@ apiRoutes.post('/authenticate', function(req, res) {
     }
   });
 });
+
 apiRoutes.use('/specialty', specialtyRouter);
 apiRoutes.use('/user', userRouter);
-// connect the api routes under /api/*
 app.use('/api', apiRoutes);
 
 

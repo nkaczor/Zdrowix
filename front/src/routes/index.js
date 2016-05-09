@@ -3,12 +3,20 @@ import { Route, IndexRoute } from 'react-router';
 
 import { LoginLayout, CoreLayout } from '../layouts';
 import { SignInView, MyPageView, HomeView, WelcomeView } from '../views';
+
+let redirectIfUserIsNotLogged = (nextState, replace) => {
+  if (!localStorage.user) {
+    replace({ pathname: '/sign-in', state: { nextPathname: nextState.location.pathname }});
+  }
+};
+
 let makeRoutes = () => {
   return (
     <Route path="/">
       <IndexRoute component={ WelcomeView } />
       <Route path="panel"
         component={ CoreLayout }
+        onEnter={ redirectIfUserIsNotLogged }
       >
         <Route path="home"
           component={ HomeView }
