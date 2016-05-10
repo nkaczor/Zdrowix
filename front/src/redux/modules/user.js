@@ -76,6 +76,17 @@ export function fetchToken(email, password) {
     });
 }
 
+export function fetchSignUp(userData) {
+  let url = '/api/sign-up';
+  let body = JSON.stringify(userData);
+
+  return dispatch =>
+    fetchData(url, 'POST', body)
+    .then(data => {
+      console.log(data);
+    });
+}
+
 export function fetchUserInfo(token, saveToLocalStore) {
   return function(dispatch) {
     dispatch(requestUserInfo());

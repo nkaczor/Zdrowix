@@ -2,7 +2,6 @@ import React from 'react';
 import { Route, IndexRoute } from 'react-router';
 
 import { LoginLayout, CoreLayout } from '../layouts';
-import { SignInView, MyPageView, HomeView, WelcomeView } from '../views';
 import {
   PatientSignUpView,
   DoctorSignUpView,

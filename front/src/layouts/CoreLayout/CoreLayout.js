@@ -11,14 +11,18 @@ export class CoreLayout extends Component {
     dispatch: PropTypes.func,
     token: PropTypes.string
   };
+
   componentDidMount() {
-    this.
+    this.fetchToken();
   }
+
   componentWillUpdate() {
-    this.fetchToken()
+    this.fetchToken();
   }
-  fetchToken(){
+
+  fetchToken() {
     let { dispatch, token } = this.props;
+
     if (this.props.token) {
       dispatch(userActions.fetchUserInfo(token));
     }

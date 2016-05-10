@@ -10,12 +10,13 @@ class Select extends Component {
     error: PropTypes.string,
     placeholder: PropTypes.string,
     size: PropTypes.oneOf([ 'small', 'big', 'inherit' ]),
+    onChange: PropTypes.func
   }
 
-  clickHandler() {
-    console.log('rututu');
+  handleChange(e) {
+    this.props.onChange(e);
+    //your cide here
   }
-
 
   render() {
     let { className, htmlFor, items, placeholder, error } = this.props;
@@ -30,7 +31,7 @@ class Select extends Component {
       <div className={ selectStyle }>
         <select
           htmlFor={ htmlFor }
-          onClick={ this.clickHandler }
+          onChange={ this.handleChange.bind(this) }
         >
           <option value=""
             disabled
@@ -39,11 +40,11 @@ class Select extends Component {
           { placeholder }
           </option>
 
-      { items.map((element) => {
+      { items.map(element => {
         return (
           <option
-            value={ element.id }
-            key={ element.id }
+            value={ element.value }
+            key={ element.value }
           >
           { element.label }
           </option>

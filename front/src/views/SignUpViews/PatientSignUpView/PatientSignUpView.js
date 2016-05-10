@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 
 import style from './patient_sign_up_view.scss';
-import { Button, TextInput, PasswordInput, ImageInput } from '../../components';
+import { Button, TextInput, PasswordInput, ImageInput } from '../../../components';
 
 import Svg from 'svg-inline-react';
-import registrationIcon from '../../../assets/icons/user-tie.svg';
+import registrationIcon from '../../../../assets/icons/user-tie.svg';
+
 export class PatientSignUpView extends Component {
 
   render() {
@@ -23,7 +24,7 @@ export class PatientSignUpView extends Component {
           <PasswordInput placeholder="Repeat password" />
 
           <Button
-            label="LOGIN"
+            label="SIGN UP"
             color="dark-cyan"
             size="inherit"
           />

@@ -36,7 +36,7 @@ require('./config/passport')(passport);
 
 var apiRoutes = express.Router();
 
-apiRoutes.post('/signup', function(req, res) {
+apiRoutes.post('/sign-up', function(req, res) {
   if (!req.body.email || !req.body.password) {
     res.json({success: false, msg: 'Please pass email and password.'});
   } else {
