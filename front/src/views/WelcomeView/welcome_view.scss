@@ -2,137 +2,140 @@ $background-color: #E0E4CC;
 $image-height: 490px;
 $option-box-width: 300px;
 $icon-size: 90px;
-
-.no-padding {
-   padding: 0 !important;
-   margin: 0 !important;
-}
-
-.image-box {
-    width: 100%;
-    height: $image-height;
-    overflow: hidden;
-    //background-size: 100% 100%;
-    background-size: cover;
-    background-position: center;
-}
-
-.svg-icon{
-  display: inline-block;
-	width: 2em;
-	height: 2em;
-	fill: currentColor;
-}
-
-.icon{
-  width: $icon-size;
-  height: $icon-size;
-  position: absolute;
-  margin: 0 auto;
-  top: -$icon-size/2;
-  right: $option-box-width/2;
-  transform: translateX(-35%);
-  border-radius: $icon-size/2;;
-}
-
-.patient-icon{
-   @extend .icon;
-    background-color: orange;
-}
-
-.doctor-icon{
-   @extend .icon;
-    background-color: green;
-}
-
-.patient-image {
-  margin: 0 auto;
+.welcome-view{
+  height: 100%;
   position: relative;
-  top: 50%;
-  transform: translateY(-50%);
-}
 
-.doctor-image {
-  margin: 0 auto;
-  position: relative;
-  top: 50%;
-  transform: translateY(-50%);
-}
+  div.no-padding {
 
-.option-box{
-  width: $option-box-width;
-  height: 170px;
-  background-color: #2D2D2D;
-  margin: auto auto;
-  padding-top: 39px;
-  text-align: center;
-}
+     padding: 0;
+     margin: 0;
+  }
 
-.option-container{
-  //border: 2px solid black;
-  position: relative;
-  top: 145px;
-  width: 900px;
-  height: 250px;
-  margin: auto auto;
-}
+  .image-box {
+      width: 100%;
+      min-height: $image-height;
+      height: 100%;
+      background-size: cover;
+      background-position: center;
+  }
 
+  .svg-icon{
+    display: inline-block;
+  	width: 2em;
+  	height: 2em;
+  	fill: currentColor;
+  }
 
-.background-image {
-    width: 100%;
-    //height: calc(100vh-$image-height);
-    //height: calc(100vh - 509px);
-    height: 448px;
-    //height: $image-height;
-    overflow: hidden;
-    //background-size: 100% 100%;
-    background-size: cover;
-    background-position: center;
-}
-
-
-.text-box{
-    width: 530px;
-    //border :2px solid black;
+  .icon{
+    width: $icon-size;
+    height: $icon-size;
     position: absolute;
-    top: 1/4*$image-height;
-    left: 70px;
-}
+    margin: 0 auto;
+    top: -$icon-size/2;
+    right: $option-box-width/2;
+    transform: translateX(-35%);
+    border-radius: $icon-size/2;;
+  }
 
-.button-container{
-  top:10px;
-  position: relative;
-}
+  .patient-icon{
+     @extend .icon;
+      background-color: orange;
+  }
 
-.registration-text{
-  font-size: 18px;
-  font-weight: 300;
-  font-family: sans-serif;
-  color: rgba(255,255,255,.9);
-}
+  .doctor-icon{
+     @extend .icon;
+      background-color: green;
+  }
 
-.text{
-  margin: 0;
-  padding: 0;
-  font-family: sans-serif;
-  color: rgba(0,0,0,.6);
-  letter-spacing: -1px;
-}
+  .patient-image {
+    margin: 0 auto;
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+  }
 
-.title-heading{
- @extend .text;
- font-size: 45px;
- font-weight: 300;
-}
+  .doctor-image {
+    margin: 0 auto;
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+  }
 
-.title-content{
-  @extend .text;
-  font-size: 25px;
-  font-weight: 300;
-  line-height: 1.5em;
-}
+  .background-image {
+      width: 100%;
+      height: 50%;
+      min-height: 448px;
+      background-size: cover;
 
-.button-box{
-  position: relative;
-  top: 30px;
+      .option-container{
+        position: relative;
+        top: 145px;
+        width: 900px;
+        height: 250px;
+        margin: auto auto;
+
+        .option-box{
+          width: $option-box-width;
+          height: 170px;
+          background-color: #2D2D2D;
+          margin: auto auto;
+          padding-top: 39px;
+          text-align: center;
+        }
+      }
+  }
+
+  .text-box{
+      width: 530px;
+      //border :2px solid black;
+      position: absolute;
+      top: 1/4*$image-height;
+      left: 70px;
+  }
+
+  .button-container{
+    top:10px;
+    position: relative;
+  }
+
+  .registration-text{
+    font-size: 18px;
+    font-weight: 300;
+    font-family: sans-serif;
+    color: rgba(255,255,255,.9);
+  }
+
+  .text{
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif;
+    color: rgba(0,0,0,.6);
+    letter-spacing: -1px;
+  }
+
+  .title-heading{
+   @extend .text;
+   font-size: 45px;
+   font-weight: 300;
+  }
+
+  .title-content{
+    @extend .text;
+    font-size: 25px;
+    font-weight: 300;
+    line-height: 1.5em;
+    padding-top: 20px;
+  }
+
+  .button-box{
+    position: relative;
+    top: 30px;
+    margin-right: 80px;
+
+    a{
+      font-size: 16px;
+
+    }
+  }
 }

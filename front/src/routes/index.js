@@ -1,17 +1,29 @@
 import React from 'react';
 import { Route, IndexRoute } from 'react-router';
 
-
-import WelcomeView from '../views/WelcomeView'
 import { LoginLayout, CoreLayout } from '../layouts';
-import { SignInView, MyPageView, HomeView } from '../views';
+import {
+  SignUpConfirmationView,
+  PatientSignUpView,
+  DoctorSignUpView,
+  SignInView,
+  MyPageView,
+  HomeView,
+  WelcomeView } from '../views';
+
+let redirectIfUserIsNotLogged = (nextState, replace) => {
+  if (!localStorage.user) {
+    replace({ pathname: '/sign-in', state: { nextPathname: nextState.location.pathname }});
+  }
+};
 
 let makeRoutes = () => {
   return (
     <Route path="/">
-      <IndexRoute component={WelcomeView}/>
+      <IndexRoute component={ WelcomeView } />
       <Route path="panel"
         component={ CoreLayout }
+        onEnter={ redirectIfUserIsNotLogged }
       >
         <Route path="home"
           component={ HomeView }
@@ -26,8 +38,15 @@ let makeRoutes = () => {
         <Route path="sign-in"
           component={ SignInView }
         />
-        <Route path="patient/sign-up" />
-        <Route path="doctor/sign-up" />
+        <Route path="patient/sign-up"
+          component={ PatientSignUpView }
+        />
+        <Route path="doctor/sign-up"
+          component={ DoctorSignUpView }
+        />
+        <Route path="sign-up-confirmation"
+          component={ SignUpConfirmationView }
+        />
 
       </Route>
     </Route>

@@ -1,2 +1,1 @@
-import WelcomeView from './WelcomeView';
-export default WelcomeView;
+export WelcomeView from './WelcomeView';

@@ -24,7 +24,10 @@
     .avatar, .user-text{
       vertical-align: top;
     }
-
+    .user-text{
+      width: 120px;
+      padding: 20px 5px;
+    }
     .settings{
       vertical-align: middle;
       padding-left: 20px;
@@ -39,7 +42,8 @@
       margin: 3px 0;
     }
 
-    .address{
+    .account-type{
+      text-transform: capitalize;
       font-size: 11px;
       color: rgba(255,255,255,.8);
     }

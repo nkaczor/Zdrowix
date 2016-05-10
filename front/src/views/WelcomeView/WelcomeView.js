@@ -1,35 +1,40 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 
 import classnames from 'classnames';
 import style from './welcome_view.scss';
 import { Button } from '../../components';
-import leftimage from '../../../assets/leftimage.jpg';
-import rightimage from '../../../assets/rightimage.jpg';
-import backgroundimage from '../../../assets/background.jpg';
+import leftImage from '../../../assets/leftimage.jpg';
+import rightImage from '../../../assets/rightimage.jpg';
+import backgroundImage from '../../../assets/background.jpg';
 import Svg from 'svg-inline-react';
 import patienticon from '../../../assets/icons/aid-kit.svg';
 import doctoricon from '../../../assets/icons/lab.svg';
 
 export class WelcomeView extends Component {
 
-// let box = classnames(style['fill'], imageStyle);
+  static contextTypes= {
+    router: PropTypes.object.isRequired
+  }
+  goTo(url) {
+    this.context.router.push(url);
+  }
   render() {
-    let leftImageStyle = { backgroundImage: 'url('+leftimage+')' };
-    let rightImageStyle = { backgroundImage: 'url('+rightimage+')' };
-    let backgroundImageStyle = { backgroundImage: 'url('+backgroundimage+')' };
+    let leftImageStyle = { backgroundImage: `url(${ leftImage })` };
+    let rightImageStyle = { backgroundImage: `url(${ rightImage })` };
+    let backgroundImageStyle = { backgroundImage: `url(${ backgroundImage })` };
 
-    let container = classnames('col-xs-6', style['no-padding']);
+    let containerStyle = classnames('col-xs-6', style['no-padding']);
 
     return (
-      <div>
+      <div className={ style['welcome-view'] }>
         <div className="row">
-          <div className={ container }>
+          <div className={ containerStyle }>
             <div className={ style['image-box'] }
               style={ leftImageStyle }
             >
             </div>
           </div>
-          <div className={ container }>
+          <div className={ containerStyle }>
             <div className={ style['image-box'] }
               style={ rightImageStyle }
             >
@@ -38,13 +43,13 @@ export class WelcomeView extends Component {
                         Zdrowix
                 </h1>
                 <h3 className={ style['title-content'] }>
-                        Jedyne co musisz zrobić to zalogować się na swoje konto
-                        aby w pełni korzystać z naszej platformy.
+                  Please sign in <br />to discover what we prepared for you.
                 </h3>
                 <div className={ style['button-box'] }>
-                  <Button label="Zaloguj się"
+                  <Button label="SIGN IN"
                     color="red"
-                    size="big"
+                    size="inherit"
+                    onClick={ this.goTo.bind(this, '/sign-in') }
                   />
                 </div>
               </div>
@@ -67,12 +72,13 @@ export class WelcomeView extends Component {
                     </div>
                   </div>
                   <h2 className={ style['registration-text'] }>
-                  Zarejestruj się jako Pacjent
+                  Sign up as patient
                   </h2>
                   <div className={ style['button-container'] }>
-                    <Button label="Rejestruj się"
+                    <Button label="SIGN UP"
                       color="blue"
                       size="big"
+                      onClick={ this.goTo.bind(this, '/patient/sign-up') }
                     />
                   </div>
                 </div>
@@ -89,12 +95,13 @@ export class WelcomeView extends Component {
                     </div>
                   </div>
                   <h2 className={ style['registration-text'] }>
-                    Zarejestruj się jako Lekarz
+                    Sign up as doctor
                   </h2>
                   <div className={ style['button-container'] }>
-                    <Button label="Rejestruj się"
+                    <Button label="SIGN UP"
                       color="blue"
                       size="big"
+                      onClick={ this.goTo.bind(this, '/doctor/sign-up') }
                     />
                   </div>
                 </div>

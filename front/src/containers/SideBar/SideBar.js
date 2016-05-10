@@ -11,7 +11,7 @@ import rightArrow from '../../../assets/icons/right_arrow.svg';
 export class SideBar extends Component {
 
   static propTypes = {
-
+    userInfo: PropTypes.object
   };
 
   constructor(props) {
@@ -42,7 +42,7 @@ export class SideBar extends Component {
           className={ style['right-arrow'] }
         />
       </Link>
-    )
+    );
   }
   renderNav() {
     let nav = [ {
@@ -76,10 +76,10 @@ export class SideBar extends Component {
             <div key={ section.header }>
               <header>{ section.header }</header>
               <nav>
-                { section.elements.map((element) => {
+                { section.elements.map(element => {
                   return this.renderNavElement(element);
                 })
-              }
+                }
               </nav>
             </div>
           );
@@ -90,15 +90,21 @@ export class SideBar extends Component {
     );
   }
   renderUserInformation() {
+    let { userInfo } = this.props;
+
     return (
       <div className={ style['user-information'] }>
         <Avatar
-          src={ avatar }
+          src={ userInfo.avatar }
           className={ style['avatar'] }
         />
         <div className={ style['user-text'] }>
-          <div className={ style['name'] }>Natalia Kaczor</div>
-          <div className={ style['address'] }>Patient</div>
+          <div className={ style['name'] }>
+            { `${ userInfo.firstName || '' } ${ userInfo.lastName || '' }` }
+          </div>
+          <div className={ style['account-type'] }>
+            { `${ userInfo.type } ${ userInfo.specialty ? userInfo.specialty.name : '' }` }
+          </div>
         </div>
         <div className={ style['settings'] }>
           <Svg src={ settingsIcon } />
@@ -116,9 +122,9 @@ export class SideBar extends Component {
   }
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = state => {
   return {
-    counter: state.counter
+    userInfo: state.user.userInfo || {}
   };
 };
 

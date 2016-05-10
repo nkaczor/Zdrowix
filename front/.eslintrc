@@ -17,7 +17,6 @@
     "comma-dangle": [2, "only-multiline"],
     "no-console": 1,
     "no-constant-condition": 0,
-    "no-inner-declarations": [2, "both"],
     "no-extra-parens": [2, "functions"],
     "no-unexpected-multiline": 0,
     "array-callback-return": 2,
@@ -73,7 +72,6 @@
     "comma-style": 2,
     "computed-property-spacing": 2,
     "consistent-this": 2,
-    "func-style": [1, "expression"],
     "indent": [2, 2, {
       "SwitchCase": 1,
       "VariableDeclarator": {
@@ -133,11 +131,7 @@
     "space-infix-ops": 2,
     "space-unary-ops": 2,
     "spaced-comment": [2, "always"],
-
-
-
-    "arrow-body-style": [2, "always"],
-    "arrow-parens": [2, "always"],
+    "arrow-parens": [2, "as-needed"],
     "arrow-spacing": [2, {
       "before": true,
       "after": true
