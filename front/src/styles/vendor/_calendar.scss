@@ -170,9 +170,15 @@
 }
 
 .react-datepicker__input-container {
+  margin-top: 0px !important;
   position: relative;
   display: inline-block;
-  //border: solid 5px red;
+  width: 100%;
+  input{
+    border: 0px solid #ddd;
+    background-color: #f2f2f2;
+    width: 100%;
+  }
 }
 
 .react-datepicker__year-read-view {

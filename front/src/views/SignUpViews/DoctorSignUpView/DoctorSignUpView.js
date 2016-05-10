@@ -6,7 +6,6 @@ import { Select, Button, TextInput, PasswordInput, ImageInput } from '../../../c
 import * as userActions from '../../../redux/modules/user';
 import * as specialtyActions from '../../../redux/modules/specialty';
 import DatePicker from 'react-datepicker';
-import moment from 'moment';
 
 export class DoctorSignUpView extends Component {
 
@@ -29,7 +28,7 @@ export class DoctorSignUpView extends Component {
         firstName: '',
         lastName: '',
         specialty: '',
-        birthDate: moment()
+        birthDate: ''
       },
     };
   }
@@ -84,7 +83,7 @@ export class DoctorSignUpView extends Component {
 
     this.props.dispatch(userActions.fetchSignUp(userData))
     .then(() =>
-        this.context.router.push('/sign-in')
+        this.context.router.push('/sign-up-confirmation')
     );
   }
 
@@ -121,14 +120,14 @@ export class DoctorSignUpView extends Component {
           <DatePicker
             selected={ form.birthDate }
             onChange={ this.handleDateChange.bind(this) }
-
+            placeholderText="Your birthdate"
           />
+
           <ImageInput />
           <Select
             placeholder="Your specialization"
             size="inherit"
             items={ items }
-            error="This field is required"
             onChange={ this.handleSelectChange.bind(this) }
           />
           <PasswordInput

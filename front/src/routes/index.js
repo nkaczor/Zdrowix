@@ -3,6 +3,7 @@ import { Route, IndexRoute } from 'react-router';
 
 import { LoginLayout, CoreLayout } from '../layouts';
 import {
+  SignUpConfirmationView,
   PatientSignUpView,
   DoctorSignUpView,
   SignInView,
@@ -39,10 +40,13 @@ let makeRoutes = () => {
         />
         <Route path="patient/sign-up"
           component={ PatientSignUpView }
-          />
+        />
         <Route path="doctor/sign-up"
           component={ DoctorSignUpView }
-          />
+        />
+        <Route path="sign-up-confirmation"
+          component={ SignUpConfirmationView }
+        />
 
       </Route>
     </Route>
