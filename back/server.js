@@ -1,6 +1,7 @@
 var express     = require('express');
 var app         = express();
 var bodyParser  = require('body-parser');
+var busboyBodyParser = require('busboy-body-parser');
 var morgan      = require('morgan');
 var mongoose    = require('mongoose');
 var passport	= require('passport');
@@ -8,16 +9,16 @@ var config      = require('./config/database'); // get db config file
 var User        = require('./app/models/user'); // get the mongoose model
 var port        = process.env.PORT || 8080;
 var jwt         = require('jwt-simple');
-
+var fs = require('fs');
 
 var specialtyRouter = require('./app/routes/specialtyRouter')
 var userRouter = require('./app/routes/userRouter')
 
+var host = 'http://localhost:8080';
 
-
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
-
+app.use(busboyBodyParser());
 // log to console
 app.use(morgan('dev'));
 
@@ -28,7 +29,7 @@ app.use(function(req, res, next) {
   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization");
   next();
 });
-
+app.use(express.static('public'));
 
 mongoose.connect(config.database);
 
@@ -37,17 +38,24 @@ require('./config/passport')(passport);
 var apiRoutes = express.Router();
 
 apiRoutes.post('/sign-up', function(req, res) {
+
   if (!req.body.email || !req.body.password) {
     res.json({success: false, msg: 'Please pass email and password.'});
   } else {
-    var newUser = new User(req.body);
-    // save the user
-    newUser.save(function(err) {
-      if (err) {
-        console.log(err);
-        return res.json({success: false, msg: 'User already exists.'});
-      }
-      res.json({success: true, msg: 'Successful created new user.'});
+    var filename =  '/images/' + Date.now() + req.files.avatar.name;
+    var fullFileName = __dirname+ '/public'+ filename;
+    fs.writeFile(fullFileName, req.files.avatar.data, function (err) {
+      if (err) return console.log(err);
+      var user = Object.assign({}, req.body, {avatar: host + filename});
+      var newUser = new User(user);
+      // save the user
+      newUser.save(function(err) {
+        if (err) {
+          console.log(err);
+          return res.json({success: false, msg: 'User already exists.'});
+        }
+        res.json({success: true, msg: 'Successful created new user.'});
+      });
     });
   }
 });

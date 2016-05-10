@@ -11,6 +11,8 @@ class ImageInput extends Component {
   static propTypes = {
     className: PropTypes.string,
     error: PropTypes.string,
+    onUpload: PropTypes.func,
+    value: PropTypes.any
   };
 
   constructor(props) {
@@ -20,12 +22,13 @@ class ImageInput extends Component {
   }
 
   handleFile(e) {
+    this.props.onUpload(e.target.files[0]);
     const reader = new FileReader();
     const file = e.target.files[0];
 
     const fileName = e.target.value.split('\\').pop();
 
-    reader.onload = (upload) => {
+    reader.onload = upload => {
       this.setState({
         dataUri: upload.target.result,
         fileName,
@@ -61,6 +64,7 @@ class ImageInput extends Component {
           <div className={ imageInputStyle['fileUpload'] }>
 
             <input
+              value={ this.props.value }
               type="file"
               onChange={ this.handleFile }
               className={ imageInputStyle['upload'] }

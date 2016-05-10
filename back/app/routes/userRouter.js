@@ -23,7 +23,7 @@ userRouter.get('/', passport.authenticate('jwt', { session: false}), function(re
         } else {
           res.json({success: true, user: user})
         }
-      });
+      }).populate("specialty");
     }
    else {
     return res.status(403).send({success: false, msg: 'No token provided.'});

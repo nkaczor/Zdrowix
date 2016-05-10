@@ -22,6 +22,7 @@ export class DoctorSignUpView extends Component {
     super(props);
     this.state = {
       form: {
+        avatar: '',
         email: '',
         password: '',
         repeatPassword: '',
@@ -41,6 +42,15 @@ export class DoctorSignUpView extends Component {
     let form = Object.assign({}, this.state.form);
 
     form[field] = e.target.value;
+    this.setState({
+      form
+    });
+  }
+
+  handlePhotoChange(photo) {
+    let form = Object.assign({}, this.state.form);
+
+    form.avatar = photo;
     this.setState({
       form
     });
@@ -71,17 +81,18 @@ export class DoctorSignUpView extends Component {
       return;
     }
 
-    let userData = {
-      firstName: form.firstName,
-      lastName: form.lastName,
-      email: form.email,
-      password: form.password,
-      specialty: form.specialty,
-      birthDate: form.birthDate.toDate(),
-      type: 'doctor'
-    };
+    let data = new FormData();
 
-    this.props.dispatch(userActions.fetchSignUp(userData))
+    data.append('avatar', form.avatar);
+    data.append('firstName', form.firstName);
+    data.append('lastName', form.lastName);
+    data.append('email', form.email);
+    data.append('password', form.password);
+    data.append('specialty', form.specialty);
+    data.append('birthDate', form.birthDate.toDate());
+    data.append('type', 'doctor');
+
+    this.props.dispatch(userActions.fetchSignUp(data))
     .then(() =>
         this.context.router.push('/sign-up-confirmation')
     );
@@ -122,8 +133,9 @@ export class DoctorSignUpView extends Component {
             onChange={ this.handleDateChange.bind(this) }
             placeholderText="Your birthdate"
           />
-
-          <ImageInput />
+          <ImageInput
+            onUpload={ this.handlePhotoChange.bind(this) }
+          />
           <Select
             placeholder="Your specialization"
             size="inherit"

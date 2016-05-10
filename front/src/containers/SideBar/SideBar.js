@@ -95,14 +95,16 @@ export class SideBar extends Component {
     return (
       <div className={ style['user-information'] }>
         <Avatar
-          src={ avatar }
+          src={ userInfo.avatar }
           className={ style['avatar'] }
         />
         <div className={ style['user-text'] }>
           <div className={ style['name'] }>
             { `${ userInfo.firstName || '' } ${ userInfo.lastName || '' }` }
           </div>
-          <div className={ style['account-type'] }>{ userInfo.type }</div>
+          <div className={ style['account-type'] }>
+            { `${ userInfo.type } ${ userInfo.specialty ? userInfo.specialty.name : '' }` }
+          </div>
         </div>
         <div className={ style['settings'] }>
           <Svg src={ settingsIcon } />

@@ -21,7 +21,7 @@ export class SignUpConfirmationView extends Component {
 
         <div className={ style['wishes'] }>
         We are glad you decided to join us but we hope that you will never have to use our site
-        <br />
+          <br />
         Our team hopes you have a healthy day!
         </div>
 

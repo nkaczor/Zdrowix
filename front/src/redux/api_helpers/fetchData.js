@@ -1,9 +1,11 @@
 import { singleFetch, singleFetchWithError } from './singleFetch';
 
-function getInitFetch(method, body, token) {
+function getInitFetch(method, body, token, contentType) {
   const headers = new Headers();
 
-  headers.append('Content-Type', 'application/json');
+  if(contentType !== 'multipart/form-data'){
+    headers.append('Content-Type', contentType || 'application/json');
+  }
   headers.append('Authorization', token);
 
   const initFetch = {
@@ -19,14 +21,14 @@ function getInitFetch(method, body, token) {
   return initFetch;
 }
 
-export function fetchData(url, method = 'GET', body = {}, token) {
-  const initFetch = getInitFetch(method, body, token);
+export function fetchData(url, method = 'GET', body = {}, token, contentType) {
+  const initFetch = getInitFetch(method, body, token, contentType);
 
   return singleFetch(url, initFetch);
 }
 
-export function fetchDataWithError(url, method = 'GET', body = {}, token) {
-  const initFetch = getInitFetch(method, body, token);
+export function fetchDataWithError(url, method = 'GET', body = {}, token, contentType) {
+  const initFetch = getInitFetch(method, body, token, contentType);
 
   return singleFetchWithError(url, initFetch);
 }

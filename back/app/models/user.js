@@ -22,6 +22,9 @@ var UserSchema = new Schema({
     unique: true,
     required: true
   },
+  avatar:  {
+     type: String,
+  },
   type: {
     required: true,
     type: String,
@@ -29,6 +32,7 @@ var UserSchema = new Schema({
   },
   specialty: {
     type: Schema.ObjectId,
+    ref: 'Specialty'
   },
   password: {
     select: false,
