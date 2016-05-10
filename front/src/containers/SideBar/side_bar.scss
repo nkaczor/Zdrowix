@@ -24,7 +24,10 @@
     .avatar, .user-text{
       vertical-align: top;
     }
-
+    .user-text{
+      width: 120px;
+      padding: 20px 5px;
+    }
     .settings{
       vertical-align: middle;
       padding-left: 20px;

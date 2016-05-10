@@ -32,6 +32,7 @@ var UserSchema = new Schema({
   },
   specialty: {
     type: Schema.ObjectId,
+    ref: 'Specialty'
   },
   password: {
     select: false,

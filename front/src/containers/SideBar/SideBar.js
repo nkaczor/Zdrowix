@@ -102,7 +102,9 @@ export class SideBar extends Component {
           <div className={ style['name'] }>
             { `${ userInfo.firstName || '' } ${ userInfo.lastName || '' }` }
           </div>
-          <div className={ style['account-type'] }>{ userInfo.type }</div>
+          <div className={ style['account-type'] }>
+            { `${ userInfo.type } ${ userInfo.specialty ? userInfo.specialty.name : '' }` }
+          </div>
         </div>
         <div className={ style['settings'] }>
           <Svg src={ settingsIcon } />
