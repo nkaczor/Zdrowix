@@ -5,6 +5,8 @@ import style from './doctor_sign_up_view.scss';
 import { Select, Button, TextInput, PasswordInput, ImageInput } from '../../../components';
 import * as userActions from '../../../redux/modules/user';
 import * as specialtyActions from '../../../redux/modules/specialty';
+import DatePicker from 'react-datepicker';
+import moment from 'moment';
 
 export class DoctorSignUpView extends Component {
 
@@ -26,8 +28,9 @@ export class DoctorSignUpView extends Component {
         repeatPassword: '',
         firstName: '',
         lastName: '',
-        specialty: ''
-      }
+        specialty: '',
+        birthDate: moment()
+      },
     };
   }
 
@@ -53,6 +56,15 @@ export class DoctorSignUpView extends Component {
     });
   }
 
+  handleDateChange(date) {
+    let form = Object.assign({}, this.state.form);
+
+    form.birthDate = date;
+    this.setState({
+      form
+    });
+  }
+
   handleSignUp() {
     let { form } = this.state;
 
@@ -66,6 +78,7 @@ export class DoctorSignUpView extends Component {
       email: form.email,
       password: form.password,
       specialty: form.specialty,
+      birthDate: form.birthDate.toDate(),
       type: 'doctor'
     };
 
@@ -105,8 +118,10 @@ export class DoctorSignUpView extends Component {
             value={ form.lastName }
             onChange={ this.handleValueChange.bind(this, 'lastName') }
           />
-          <TextInput
-            placeholder="Your birthday"
+          <DatePicker
+            selected={ form.birthDate }
+            onChange={ this.handleDateChange.bind(this) }
+
           />
           <ImageInput />
           <Select
