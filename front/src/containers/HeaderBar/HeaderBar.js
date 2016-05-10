@@ -80,7 +80,7 @@ export class HeaderBar extends Component {
           onClick={ this.toggleMenu }
         >
           <Avatar
-            src={ avatar }
+            src={ userInfo.avatar }
             size="30px"
             className={ style['avatar'] }
           />

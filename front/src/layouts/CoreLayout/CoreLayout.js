@@ -16,8 +16,10 @@ export class CoreLayout extends Component {
     this.fetchToken();
   }
 
-  componentWillUpdate() {
-    this.fetchToken();
+  componentWillUpdate(nextProps) {
+    if (nextProps.token !== this.props.token) {
+      this.fetchToken();
+    }
   }
 
   fetchToken() {

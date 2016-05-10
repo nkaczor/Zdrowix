@@ -78,21 +78,23 @@ export function fetchToken(email, password) {
 
 export function fetchSignUp(userData) {
   let url = '/api/sign-up';
-  let body = JSON.stringify(userData);
+  let body = userData;
 
   return dispatch =>
-    fetchData(url, 'POST', body)
+    fetchData(url, 'POST', body, null, 'multipart/form-data')
     .then(data => {
       console.log(data);
     });
 }
 
 export function fetchUserInfo(token, saveToLocalStore) {
+  console.log(token);
   return function(dispatch) {
     dispatch(requestUserInfo());
 
     return fetchData('/api/user', 'GET', {}, token)
       .then(data => {
+        console.log(data);
         if (data.success) {
           dispatch(receiveUserInfo(data.user));
           if (saveToLocalStore) {

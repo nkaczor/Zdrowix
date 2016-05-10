@@ -95,7 +95,7 @@ export class SideBar extends Component {
     return (
       <div className={ style['user-information'] }>
         <Avatar
-          src={ avatar }
+          src={ userInfo.avatar }
           className={ style['avatar'] }
         />
         <div className={ style['user-text'] }>

@@ -21,6 +21,7 @@ export class DoctorSignUpView extends Component {
     super(props);
     this.state = {
       form: {
+        avatar: '',
         email: '',
         password: '',
         repeatPassword: '',
@@ -44,6 +45,15 @@ export class DoctorSignUpView extends Component {
     });
   }
 
+  handlePhotoChange(photo) {
+    let form = Object.assign({}, this.state.form);
+
+    form.avatar = photo;
+    this.setState({
+      form
+    });
+  }
+
   handleSelectChange(e) {
     let form = Object.assign({}, this.state.form);
 
@@ -60,16 +70,26 @@ export class DoctorSignUpView extends Component {
       return;
     }
 
-    let userData = {
-      firstName: form.firstName,
-      lastName: form.lastName,
-      email: form.email,
-      password: form.password,
-      specialty: form.specialty,
-      type: 'doctor'
-    };
+    let data = new FormData();
 
-    this.props.dispatch(userActions.fetchSignUp(userData))
+    data.append('avatar', form.avatar);
+    data.append('firstName', form.firstName);
+    data.append('lastName', form.lastName);
+    data.append('email', form.email);
+    data.append('password', form.password);
+    data.append('specialty', form.specialty);
+    data.append('type', 'doctor');
+
+    // let userData = {
+    //   firstName: form.firstName,
+    //   lastName: form.lastName,
+    //   email: form.email,
+    //   password: form.password,
+    //   specialty: form.specialty,
+    //   type: 'doctor'
+    // };
+    console.log(form.avatar);
+    this.props.dispatch(userActions.fetchSignUp(data))
     .then(() =>
         this.context.router.push('/sign-in')
     );
@@ -108,7 +128,9 @@ export class DoctorSignUpView extends Component {
           <TextInput
             placeholder="Your birthday"
           />
-          <ImageInput />
+          <ImageInput
+            onUpload={ this.handlePhotoChange.bind(this) }
+          />
           <Select
             placeholder="Your specialization"
             size="inherit"

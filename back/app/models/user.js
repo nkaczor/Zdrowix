@@ -22,6 +22,9 @@ var UserSchema = new Schema({
     unique: true,
     required: true
   },
+  avatar:  {
+     type: String,
+  },
   type: {
     required: true,
     type: String,
