@@ -1,0 +1,1 @@
+export SignUpConfirmationView from './SignUpConfirmationView';

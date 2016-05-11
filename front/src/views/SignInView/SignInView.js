@@ -56,7 +56,7 @@ export class HomeView extends Component {
         <h1>Sign in</h1>
         <div className={ style['form-container'] }>
           <TextInput
-            placeholder="Your login"
+            placeholder="Your email"
             value={ form.email }
             onChange={ this.handleValueChange.bind(this, 'email') }
           />

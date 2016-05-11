@@ -78,6 +78,7 @@ export class WelcomeView extends Component {
                     <Button label="SIGN UP"
                       color="blue"
                       size="big"
+                      onClick={ this.goTo.bind(this, '/patient/sign-up') }
                     />
                   </div>
                 </div>
@@ -100,6 +101,7 @@ export class WelcomeView extends Component {
                     <Button label="SIGN UP"
                       color="blue"
                       size="big"
+                      onClick={ this.goTo.bind(this, '/doctor/sign-up') }
                     />
                   </div>
                 </div>

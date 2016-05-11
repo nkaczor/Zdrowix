@@ -5,6 +5,7 @@ import style from './doctor_sign_up_view.scss';
 import { Select, Button, TextInput, PasswordInput, ImageInput } from '../../../components';
 import * as userActions from '../../../redux/modules/user';
 import * as specialtyActions from '../../../redux/modules/specialty';
+import DatePicker from 'react-datepicker';
 
 export class DoctorSignUpView extends Component {
 
@@ -27,8 +28,9 @@ export class DoctorSignUpView extends Component {
         repeatPassword: '',
         firstName: '',
         lastName: '',
-        specialty: ''
-      }
+        specialty: '',
+        birthDate: ''
+      },
     };
   }
 
@@ -63,6 +65,15 @@ export class DoctorSignUpView extends Component {
     });
   }
 
+  handleDateChange(date) {
+    let form = Object.assign({}, this.state.form);
+
+    form.birthDate = date;
+    this.setState({
+      form
+    });
+  }
+
   handleSignUp() {
     let { form } = this.state;
 
@@ -78,20 +89,12 @@ export class DoctorSignUpView extends Component {
     data.append('email', form.email);
     data.append('password', form.password);
     data.append('specialty', form.specialty);
+    data.append('birthDate', form.birthDate.toDate());
     data.append('type', 'doctor');
 
-    // let userData = {
-    //   firstName: form.firstName,
-    //   lastName: form.lastName,
-    //   email: form.email,
-    //   password: form.password,
-    //   specialty: form.specialty,
-    //   type: 'doctor'
-    // };
-    console.log(form.avatar);
     this.props.dispatch(userActions.fetchSignUp(data))
     .then(() =>
-        this.context.router.push('/sign-in')
+        this.context.router.push('/sign-up-confirmation')
     );
   }
 
@@ -125,8 +128,10 @@ export class DoctorSignUpView extends Component {
             value={ form.lastName }
             onChange={ this.handleValueChange.bind(this, 'lastName') }
           />
-          <TextInput
-            placeholder="Your birthday"
+          <DatePicker
+            selected={ form.birthDate }
+            onChange={ this.handleDateChange.bind(this) }
+            placeholderText="Your birthdate"
           />
           <ImageInput
             onUpload={ this.handlePhotoChange.bind(this) }
@@ -135,7 +140,6 @@ export class DoctorSignUpView extends Component {
             placeholder="Your specialization"
             size="inherit"
             items={ items }
-            error="This field is required"
             onChange={ this.handleSelectChange.bind(this) }
           />
           <PasswordInput
