@@ -1,6 +1,6 @@
 import React, { PropTypes, Component } from 'react';
 import { connect } from 'react-redux';
-
+import { Avatar, Header, Paper } from '../../components';
 import style from './my_page_view.scss';
 
 export class MyPageView extends Component {
@@ -10,7 +10,7 @@ export class MyPageView extends Component {
   render() {
     return (
       <div className={ style.home }>
-        my page
+        <Header>My Profile</Header>
 
       </div>
     );

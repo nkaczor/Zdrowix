@@ -107,7 +107,9 @@ export class SideBar extends Component {
           </div>
         </div>
         <div className={ style['settings'] }>
-          <Svg src={ settingsIcon } />
+          <Link to="/panel/settings">
+            <Svg src={ settingsIcon } />
+          </Link>
         </div>
       </div>
   );

@@ -6,3 +6,4 @@ export * from './SignUpViews/DoctorSignUpView';
 export * from './SignUpViews/PatientSignUpView';
 export * from './FindDoctorView';
 export * from './SignUpConfirmationView';
+export * from './SettingsView';

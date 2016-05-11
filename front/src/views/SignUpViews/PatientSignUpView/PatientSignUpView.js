@@ -107,9 +107,21 @@ export class PatientSignUpView extends Component {
       >
         <h1>Sign up</h1>
         <div className={ style['form-container'] }>
-          <TextInput placeholder="Your email" />
-          <TextInput placeholder="Your first name" />
-          <TextInput placeholder="Your last name" />
+          <TextInput
+            placeholder="Your email"
+            value={ form.email }
+            onChange={ this.handleValueChange.bind(this, 'email') }
+          />
+          <TextInput
+            placeholder="Your first name"
+            value={ form.firstName }
+            onChange={ this.handleValueChange.bind(this, 'firstName') }
+          />
+          <TextInput
+            placeholder="Your last name"
+            value={ form.lastName }
+            onChange={ this.handleValueChange.bind(this, 'lastName') }
+          />
           <DatePicker
             selected={ form.birthDate }
             onChange={ this.handleDateChange.bind(this) }
@@ -118,9 +130,16 @@ export class PatientSignUpView extends Component {
           <ImageInput
             onUpload={ this.handlePhotoChange.bind(this) }
           />
-          <PasswordInput placeholder="Your password" />
-          <PasswordInput placeholder="Repeat password" />
-
+          <PasswordInput
+            placeholder="Your password"
+            value={ form.password }
+            onChange={ this.handleValueChange.bind(this, 'password') }
+          />
+          <PasswordInput
+            placeholder="Repeat password"
+            value={ form.repeatPassword }
+            onChange={ this.handleValueChange.bind(this, 'repeatPassword') }
+          />
           <Button
             label="SIGN UP"
             color="dark-cyan"

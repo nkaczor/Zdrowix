@@ -76,14 +76,14 @@ export class HomeView extends Component {
           Not registered yet? Create an account! <br />
           I'm
           <Link
-            to=""
+            to="/patient/sign-up"
             className={ style['sign-up-link'] }
           >
            Patient
           </Link>
           I'm
           <Link
-            to=""
+            to="/doctor/sign-up"
             className={ style['sign-up-link'] }
           >
           Doctor

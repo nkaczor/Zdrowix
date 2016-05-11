@@ -5,3 +5,4 @@ export * from './Label';
 export * from './Checkbox';
 export * from './Select';
 export * from './Header';
+export * from './Paper';
