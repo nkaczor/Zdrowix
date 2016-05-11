@@ -5,6 +5,7 @@ import { LoginLayout, CoreLayout } from '../layouts';
 import {
   PatientSignUpView,
   DoctorSignUpView,
+  FindDoctorView,
   SignInView,
   MyPageView,
   HomeView,
@@ -29,6 +30,9 @@ let makeRoutes = () => {
         />
         <Route path="my-page"
           component={ MyPageView }
+        />
+      <Route path="find-doctor"
+          component={ FindDoctorView }
         />
 
       </Route>

@@ -11,8 +11,9 @@ var port        = process.env.PORT || 8080;
 var jwt         = require('jwt-simple');
 var fs = require('fs');
 
-var specialtyRouter = require('./app/routes/specialtyRouter')
-var userRouter = require('./app/routes/userRouter')
+var specialtyRouter = require('./app/routes/specialtyRouter');
+var userRouter = require('./app/routes/userRouter');
+var doctorRouter = require('./app/routes/doctorRouter');
 
 var host = 'http://localhost:8080';
 
@@ -85,6 +86,7 @@ apiRoutes.post('/authenticate', function(req, res) {
 
 apiRoutes.use('/specialty', specialtyRouter);
 apiRoutes.use('/user', userRouter);
+apiRoutes.use('/doctor', doctorRouter);
 app.use('/api', apiRoutes);
 
 
