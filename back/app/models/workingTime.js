@@ -22,12 +22,9 @@ var DaySchema = new Schema({
 
 var WorkingTimeSchema = new Schema({
   doctor: {
-    type: ObjectId,
+    type: Schema.ObjectId,
     required: true,
     unique: true,
-  },
-  lastChanged: {
-    type: Date
   },
   workingHours: [
     DaySchema

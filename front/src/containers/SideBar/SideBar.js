@@ -67,6 +67,13 @@ export class SideBar extends Component {
         path: '/visits',
         icon: require('../../../assets/icons/enroll.svg')
       } ]
+    }, {
+      header: 'Configuration',
+      elements: [ {
+        label: 'Work Schedule',
+        path: '/panel/work-schedule',
+        icon: require('../../../assets/icons/work-schedule.svg')
+      } ]
     } ];
 
     return (
