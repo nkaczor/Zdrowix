@@ -87,6 +87,28 @@ export function fetchSignUp(userData) {
     });
 }
 
+export function fetchUpdateUserData(token, userData) {
+  return function(dispatch) {
+    return fetchData('/api/user', 'PUT', userData, token, 'multipart/form-data')
+      .then(data => {
+        if (data.success) {
+          dispatch(fetchUserInfo(token));
+        }
+      });
+  };
+}
+
+export function fetchDeleteUserPhoto(token) {
+  return function(dispatch) {
+    return fetchData('/api/user/photo', 'DELETE', {}, token)
+      .then(data => {
+        if (data.success) {
+          dispatch(fetchUserInfo(token));
+        }
+      });
+  };
+}
+
 export function fetchUserInfo(token, saveToLocalStore) {
   console.log(token);
   return function(dispatch) {

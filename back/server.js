@@ -28,6 +28,7 @@ app.use(passport.initialize());
 app.use(function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization");
+  res.header("Access-Control-Allow-Methods", "POST, GET, PUT, DELETE, OPTIONS");
   next();
 });
 app.use(express.static('public'));
@@ -47,7 +48,7 @@ apiRoutes.post('/sign-up', function(req, res) {
     var fullFileName = __dirname+ '/public'+ filename;
     fs.writeFile(fullFileName, req.files.avatar.data, function (err) {
       if (err) return console.log(err);
-      var user = Object.assign({}, req.body, {avatar: host + filename});
+      var user = Object.assign({}, req.body, {bio: "", avatar: host + filename});
       var newUser = new User(user);
       // save the user
       newUser.save(function(err) {

@@ -38,6 +38,9 @@ var UserSchema = new Schema({
     select: false,
     type: String,
     required: true
+  },
+  bio: {
+    type: String
   }
 });
 

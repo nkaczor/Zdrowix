@@ -5,7 +5,7 @@ import Svg from 'svg-inline-react';
 import style from './side_bar.scss';
 
 import { Avatar } from '../../components';
-import avatar from '../../../assets/avatar.jpg';
+import defaultPhoto from '../../../assets/noImage.gif';
 import settingsIcon from '../../../assets/icons/cogwheel.svg';
 import rightArrow from '../../../assets/icons/right_arrow.svg';
 export class SideBar extends Component {
@@ -95,7 +95,7 @@ export class SideBar extends Component {
     return (
       <div className={ style['user-information'] }>
         <Avatar
-          src={ userInfo.avatar }
+          src={ userInfo.avatar || defaultPhoto }
           className={ style['avatar'] }
         />
         <div className={ style['user-text'] }>

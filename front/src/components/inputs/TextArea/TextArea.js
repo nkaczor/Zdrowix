@@ -2,19 +2,18 @@ import React, { PropTypes, Component } from 'react';
 import classnames from 'classnames';
 import style from '../input.scss';
 
-class TextInput extends Component {
+class TextArea extends Component {
   static propTypes = {
     className: PropTypes.string,
     error: PropTypes.string,
     value: PropTypes.string,
     placeholder: PropTypes.string,
     onChange: PropTypes.func,
-    disabled: PropTypes.bool
+    rows: PropTypes.string
   };
 
   render() {
-    let { className, error, value,
-      placeholder, onChange, disabled } = this.props;
+    let { className, error, value, placeholder, onChange, rows } = this.props;
 
     let inputContainerStyle = classnames(style['input-container'], className, {
       [style['error']]: error
@@ -22,12 +21,11 @@ class TextInput extends Component {
 
     return (
       <div className={ inputContainerStyle }>
-        <input
-          type="text"
+        <textarea
+          rows={ rows }
           value={ value }
           placeholder={ placeholder }
           onChange={ onChange }
-          disabled={ disabled }
         />
         <div className={ style['error-message'] }>
           { error }
@@ -37,4 +35,4 @@ class TextInput extends Component {
   }
 }
 
-export default TextInput;
+export default TextArea;

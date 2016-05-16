@@ -6,3 +6,4 @@ export * from './Checkbox';
 export * from './Select';
 export * from './Header';
 export * from './Paper';
+export * from './Calendar';

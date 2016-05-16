@@ -1,0 +1,61 @@
+.calendar {
+  width: 90%;
+  margin: 20px auto;
+
+  .labels {
+    width: 5%;
+    display: inline-block;
+
+    .hour-label{
+      height: 47px;
+      font-size: 15px;
+      font-weight: bold;
+
+    }
+  }
+
+  .days-container {
+    width: 95%;
+    display: inline-block;
+
+    .day-container {
+      display: inline-block;
+      width: 14.28%;
+
+      .day-label {
+        text-align: center;
+        text-transform: uppercase;
+      }
+
+      .block {
+
+        margin: 10px 5px;
+        padding: 10px;
+        border: 1px solid rgba(0,0,0,0.3);
+        background-color: rgba(0,0,0,0.1);
+        border-radius: 2px;
+        text-align: center;
+
+
+        span {
+          color: white;
+          font-size: 10px;
+          font-weight: bold;
+          visibility: hidden;
+        }
+
+      }
+      .visit{
+        background-color: #962D3E;
+      }
+      .free{
+        background-color: #2D9641;
+        cursor: pointer;
+        &:hover span {
+          visibility: visible;
+        }
+
+      }
+    }
+  }
+}

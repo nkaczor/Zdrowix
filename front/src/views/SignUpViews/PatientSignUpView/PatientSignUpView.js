@@ -1,4 +1,5 @@
 import React, { Component, PropTypes } from 'react';
+import DatePicker from 'react-datepicker';
 
 import style from './patient_sign_up_view.scss';
 import { Button, TextInput, PasswordInput, ImageInput } from '../../../components';
@@ -8,7 +9,6 @@ import registrationIcon from '../../../../assets/icons/user-tie.svg';
 
 import * as userActions from '../../../redux/modules/user';
 import * as specialtyActions from '../../../redux/modules/specialty';
-import DatePicker from 'react-datepicker';
 
 export class PatientSignUpView extends Component {
 
