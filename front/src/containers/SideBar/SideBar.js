@@ -59,8 +59,8 @@ export class SideBar extends Component {
     }, {
       header: 'Tools',
       elements: [ {
-        label: 'Search',
-        path: '/search',
+        label: 'Find Doctor',
+        path: '/panel/find-doctor',
         icon: require('../../../assets/icons/find.svg')
       }, {
         label: 'Visits',

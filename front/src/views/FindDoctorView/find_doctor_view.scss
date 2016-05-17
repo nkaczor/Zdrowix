@@ -1,0 +1,89 @@
+.find-doctor-view {
+
+  .filters{
+    width: 300px;
+    margin: 20px 40px 15px 40px;
+
+    select{
+      background-color: rgba(0,0,0,0.1);
+      border-radius: 0;
+      color: rgba(0,0,0,0.8);
+      height: 30px;
+    }
+  }
+
+  .doctors-container{
+    margin: 0 20px;
+
+    .doctor-wrapper{
+      display: inline-block;
+      width: 33%;
+      margin-bottom: 30px;
+    }
+    .doctor-container {
+      margin: 0 15px;
+      background-color: white;
+      border: solid 1px rgba(0,0,0,0.1);
+      border-radius: 3px;
+
+      .box-top{
+        padding: 20px;
+      }
+      .clear{
+          clear: both;
+      }
+      .box-bottom{
+        display: block;
+        border-top: solid 1px rgba(0,0,0,0.1);
+        padding: 20px;
+
+        &:after{
+          clear: both;
+        }
+      }
+      .action{
+        text-align: center;
+        width: 50%;
+        float: left;
+
+        p{
+          margin: 0 0 10px 0;
+          color: rgba(0,0,0,0.5);
+          font-size: 12px;
+
+          &:first-of-type{
+            color: black;
+            margin-bottom: 5px;
+            font-size: 18px;
+            font-weight: bolder;
+          }
+        }
+      }
+      .doctor-avatar{
+        width: 75px;
+        float: right;
+      }
+
+      .doctor-info{
+        float: left;
+
+        .name{
+          color: black;
+          font-weight: bolder;
+          font-size: 18px;
+        }
+
+        p{
+          margin-top:0;
+          color: rgba(0,0,0,0.4);
+          font-size: 14px;
+
+          label{
+            font-weight: bolder;
+          }
+        }
+
+      }
+    }
+  }
+}
