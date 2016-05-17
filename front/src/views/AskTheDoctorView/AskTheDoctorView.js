@@ -56,12 +56,14 @@ export class AskTheDoctorView extends Component {
                   </div>
                 </div>
 
-                <div className={ classnames('col-xs-2', style['avatar-container']) }>
-                  <Avatar
-                    className={ style['center'] }
-                    src={ defaultPhoto }
-                    size="80px"
-                  />
+                <div className={ classnames('col-xs-2') }>
+                  <div className={ style['avatar-container'] }>
+                    <Avatar
+                      className={ style['center'] }
+                      src={ defaultPhoto }
+                      size="50px"
+                    />
+                  </div>
                 </div>
                 <div className={ "col-xs-4" }>
                   <div className={ style['as-anonymous-text'] }>
