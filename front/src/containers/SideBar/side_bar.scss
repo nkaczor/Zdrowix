@@ -1,4 +1,4 @@
-.side-bar{
+.side-bar {
   top: 50px;
   color: white;
   position: fixed;
@@ -6,96 +6,92 @@
   border-bottom: solid 1px rgba(255,255,255,.1);
   background-color: #343642;
   width: 260px;
-
-  a:link, a:visited{
+  a:link,
+  a:visited {
     color: rgba(255,255,255,.75);
   }
-  a:hover{
-    color:white;
+  a:hover {
+    color: white;
   }
-
-  .user-information{
-    padding: 0px 10px;
-    .avatar, .user-text, .settings{
+  .user-information {
+    padding: 0 10px;
+    .avatar,
+    .settings,
+    .user-text {
       padding: 20px 15px;
-      display:table-cell;
+      display: table-cell;
     }
-
-    .avatar, .user-text{
+    .avatar,
+    .user-text {
       vertical-align: top;
     }
-    .user-text{
+    .user-text {
       width: 120px;
       padding: 20px 5px;
     }
-    .settings{
+    .settings {
       vertical-align: middle;
       padding-left: 20px;
-
-      svg{
+      svg {
         width: 18px;
+        &:hover {
+          stroke: #235B66;
+          stroke-width: 4;
+        }
       }
     }
-
-    .name{
+    .name {
       font-weight: bold;
       margin: 3px 0;
     }
-
-    .account-type{
+    .account-type {
       text-transform: capitalize;
       font-size: 11px;
       color: rgba(255,255,255,.8);
     }
   }
-  .navigation{
-    header{
-      padding: 10px 10px;
+  .navigation {
+    header {
+      padding: 10px;
       font-size: 11px;
       text-transform: uppercase;
       color: rgba(255,255,255,0.5);
     }
-    .nav-element{
+    .nav-element {
       display: block;
       padding: 10px 20px;
-
-      .icon{
+      .icon {
         padding-right: 20px;
-        svg{
+        svg {
           height: 15px;
           margin-bottom: -2px;
         }
       }
-      .right-arrow{
+      .right-arrow {
         float: right;
-
-        svg{
+        svg {
           width: 10px;
         }
-
-        path{
+        path {
           fill: rgba(255,255,255,.75);
         }
       }
       &:hover {
         background-color: darken(#343642,2%);
-
-        .right-arrow path{
-          fill:white;
+        .right-arrow path {
+          fill: white;
         }
       }
     }
-    .active-nav-element{
-
-      &, &:hover{
+    .active-nav-element {
+      &,
+      &:hover {
         background-color: #962D3E;
       }
-
-      &:link{
-      color: white;
+      &:link {
+        color: white;
       }
-
-      .right-arrow{
+      .right-arrow {
         display: none;
       }
     }

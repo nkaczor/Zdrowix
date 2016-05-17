@@ -8,11 +8,13 @@ class TextInput extends Component {
     error: PropTypes.string,
     value: PropTypes.string,
     placeholder: PropTypes.string,
-    onChange: PropTypes.func
+    onChange: PropTypes.func,
+    disabled: PropTypes.bool
   };
 
   render() {
-    let { className, error, value, placeholder, onChange } = this.props;
+    let { className, error, value,
+      placeholder, onChange, disabled } = this.props;
 
     let inputContainerStyle = classnames(style['input-container'], className, {
       [style['error']]: error
@@ -25,6 +27,7 @@ class TextInput extends Component {
           value={ value }
           placeholder={ placeholder }
           onChange={ onChange }
+          disabled={ disabled }
         />
         <div className={ style['error-message'] }>
           { error }

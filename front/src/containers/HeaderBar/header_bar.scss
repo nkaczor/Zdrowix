@@ -6,6 +6,7 @@
   border-bottom: solid 1px rgba(255,255,255,.1);
   background-color: #3E414F;
   width: 100%;
+  z-index: 5;
 
   &:after {
     content: "";

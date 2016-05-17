@@ -8,6 +8,10 @@ select{
   background-color: #f2f2f2;
   color: #A9A9A9;
 
+  &:focus{
+    outline-color: #348899;
+  }
+
   option:first-of-type{
     display: none;
   }

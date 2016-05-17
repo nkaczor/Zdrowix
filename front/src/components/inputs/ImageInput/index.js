@@ -1,2 +1,3 @@
 import ImageInput from './ImageInput';
-export { ImageInput };
+import SimpleImageInput from './SimpleImageInput';
+export { ImageInput, SimpleImageInput };

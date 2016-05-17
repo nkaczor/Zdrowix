@@ -1,7 +1,7 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
-var specialtySchema = new Schema({
+var SpecialtySchema = new Schema({
   name: {
     type: String,
     required: true
@@ -11,4 +11,4 @@ var specialtySchema = new Schema({
   }
 );
 
-module.exports = mongoose.model('Specialty', specialtySchema);
+module.exports = mongoose.model('Specialty', SpecialtySchema);

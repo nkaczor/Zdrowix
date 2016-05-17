@@ -5,7 +5,7 @@ import Svg from 'svg-inline-react';
 
 import { Avatar } from '../../components';
 import * as userActions from '../../redux/modules/user';
-import avatar from '../../../assets/avatar.jpg';
+import defaultPhoto from '../../../assets/noImage.gif';
 import arrowDownIcon from '../../../assets/icons/down_arrow.svg';
 import style from './header_bar.scss';
 
@@ -80,7 +80,7 @@ export class HeaderBar extends Component {
           onClick={ this.toggleMenu }
         >
           <Avatar
-            src={ userInfo.avatar }
+            src={ userInfo.avatar || defaultPhoto }
             size="30px"
             className={ style['avatar'] }
           />
