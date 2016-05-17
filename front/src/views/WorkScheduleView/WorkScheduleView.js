@@ -7,7 +7,7 @@ import style from './work_schedule_view.scss';
 import {
   Header,
   Paper, Label,
-  TextInput, Button } from '../../components';
+  TextInput, Button, TimeChooser } from '../../components';
 
 export class WorkScheduleView extends Component {
   static propTypes = {
@@ -19,7 +19,15 @@ export class WorkScheduleView extends Component {
     super(props);
 
     this.state = {
-
+      days: {
+        monday: this.createDayArray(),
+        tuesday: this.createDayArray(),
+        wednesday: this.createDayArray(),
+        thursday: this.createDayArray(),
+        friday: this.createDayArray(),
+        saturday: this.createDayArray(),
+        sunday: this.createDayArray(),
+      }
     };
   }
 
@@ -31,42 +39,41 @@ export class WorkScheduleView extends Component {
       form
     });
   }
+  handleHourClick(day, hour) {
+    let days = Object.assign({}, this.state.days);
+
+    days[day][hour] = !days[day][hour];
+    this.setState({
+      days
+    });
+  }
 
   handleSave() {
 
   }
-
+  createDayArray() {
+    return new Array(24).fill(false);
+  }
   render() {
-    let { form } = this.state;
+    let daysArray = [ 'monday',
+    'tuesday', 'wednesday',
+    'thursday', 'friday',
+    'saturday', 'sunday' ];
 
     return (
-      <div className={ style['settings-view'] }>
+      <div className={ style['work-schedule-view'] }>
         <Header>Work Schedule</Header>
-        <div className={ style['settings-content'] }>
+        <div className={ style['work-schedule-content'] }>
           <Paper>
             <div className={ style['paper-content'] }>
-              <Label htmlFor="email">Email:</Label>
-              <TextInput
-                value={ form.email }
-                onChange={ this.handleValueChange.bind(this, 'email') }
-                disabled
-              />
-              <div className={ classnames('row', style['two-inputs']) }>
-                <div className="col-xs-6">
-                  <Label htmlFor="firstName">First Name:</Label>
-                  <TextInput
-                    value={ form.firstName }
-                    onChange={ this.handleValueChange.bind(this, 'firstName') }
-                  />
-                </div>
-                <div className="col-xs-6">
-                  <Label htmlFor="lastName">Last Name:</Label>
-                  <TextInput
-                    value={ form.lastName }
-                    onChange={ this.handleValueChange.bind(this, 'lastName') }
-                  />
-                </div>
-              </div>
+              { daysArray.map(day =>
+                <TimeChooser
+                  key={ day }
+                  day={ day }
+                  data={ this.state.days[day] }
+                  onClick={ this.handleHourClick.bind(this, day) }
+                />
+              ) }
               <div className={ style['button-container'] }>
                 <Button
                   size="big"
@@ -90,4 +97,4 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps)(SettingsView);
+export default connect(mapStateToProps)(WorkScheduleView);

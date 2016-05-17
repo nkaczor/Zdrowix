@@ -1,0 +1,37 @@
+.time-chooser{
+  margin-top: 20px;
+  text-align: center;
+  .day-name{
+    text-transform: uppercase;
+    text-align: left;
+    margin-left: 15px;
+    font-weight: bold;
+  }
+  .label{
+    text-align: right;
+    height: 16px;
+    font-size: 12px;
+    margin-right: 18px;
+    color: #555;
+  }
+  .hour-block{
+    width: 24px;
+    display: inline-block;
+    height: 24px;
+    border: 2px solid white;
+  }
+
+  @for $i from -12 through 11 {
+
+    .hour-block:nth-of-type(#{$i+13}){
+      background-color: lighten(#ccc,abs($i));
+      &:hover{
+        background-color: lighten(lighten(#ccc,abs($i)),5);
+      }
+    }
+    .hour-block-true:nth-of-type(#{$i+13}) {
+      background-color: lighten(#2D9641,abs($i));
+
+    }
+  }
+}

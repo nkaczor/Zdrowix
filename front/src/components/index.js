@@ -7,3 +7,4 @@ export * from './Select';
 export * from './Header';
 export * from './Paper';
 export * from './Calendar';
+export * from './TimeChooser';

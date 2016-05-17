@@ -11,7 +11,8 @@ import {
   MyPageView,
   HomeView,
   WelcomeView,
-  SettingsView } from '../views';
+  SettingsView,
+  WorkScheduleView } from '../views';
 
 let redirectIfUserIsNotLogged = (nextState, replace) => {
   if (!localStorage.user) {
@@ -39,7 +40,9 @@ let makeRoutes = () => {
         <Route path="settings"
           component={ SettingsView }
         />
-
+        <Route path="work-schedule"
+          component={ WorkScheduleView }
+        />
       </Route>
 
       <Route component={ LoginLayout }>
