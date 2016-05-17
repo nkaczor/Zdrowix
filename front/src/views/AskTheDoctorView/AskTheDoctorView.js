@@ -13,6 +13,22 @@ import {
   TextInput, TextArea,
   SimpleImageInput, Button } from '../../components';
 
+const smallAvatarSize = '60px';
+const bigAvatarSize = '80px';
+
+const bigFontStyle = {
+  fontSize: '21px'
+};
+const smallFontStyle = {
+  fontSize: '14px'
+};
+const bigAvatarStyle = {
+  opacity: 1.0
+};
+const smallAvatarStyle = {
+  opacity: 0.2
+};
+
 export class AskTheDoctorView extends Component {
   static propTypes = {
     userInfo: PropTypes.object,
@@ -24,13 +40,39 @@ export class AskTheDoctorView extends Component {
     let { userInfo } = this.props;
 
     this.state = {
-      form: {
-      }
+      leftAvatarSize: bigAvatarSize,
+      rightAvatarSize: smallAvatarSize,
+      leftTextStyle: bigFontStyle,
+      rightTextStyle: smallFontStyle,
+      leftAvatarStyle: bigAvatarStyle,
+      rightAvatarStyle: smallAvatarStyle
+
     };
   }
 
+  handleAnonymousClick() {
+    this.setState({
+      leftAvatarSize: smallAvatarSize,
+      rightAvatarSize: bigAvatarSize,
+      leftAvatarStyle: smallAvatarStyle,
+      rightAvatarStyle: bigAvatarStyle,
+      leftTextStyle: smallFontStyle,
+      rightTextStyle: bigFontStyle
+    });
+  }
+
+  handleUserClick() {
+    this.setState({
+      leftAvatarSize: bigAvatarSize,
+      rightAvatarSize: smallAvatarSize,
+      leftAvatarStyle: bigAvatarStyle,
+      rightAvatarStyle: smallAvatarStyle,
+      leftTextStyle: bigFontStyle,
+      rightTextStyle: smallFontStyle
+    });
+  }
+
   render() {
-    let { form } = this.state;
     let { userInfo } = this.props;
 
     console.log(this.props.params.id);
@@ -42,31 +84,43 @@ export class AskTheDoctorView extends Component {
             <div className={ style['paper-content'] }>
               <div className="row">
                 <div className={ "col-xs-4" }>
-                  <div className={ style['as-me-text'] }>
+                  <div className={ style['as-me-text'] }
+                    style={ this.state.leftTextStyle }
+                    onClick={ this.handleUserClick.bind(this) }
+                  >
                     as { userInfo.firstName }
                   </div>
                 </div>
                 <div className={ classnames('col-xs-2', style['left-avatar-container']) }>
-                  <div className={ style['avatar-container'] }>
+                  <div className={ style['avatar-container'] }
+                    style={ this.state.leftAvatarStyle }
+                  >
                     <Avatar
                       className={ style['center'] }
                       src={ userInfo.avatar || defaultPhoto }
-                      size="80px"
+                      size={ this.state.leftAvatarSize }
+                      onClick={ this.handleUserClick.bind(this) }
                     />
                   </div>
                 </div>
 
                 <div className={ classnames('col-xs-2') }>
-                  <div className={ style['avatar-container'] }>
+                  <div className={ style['avatar-container'] }
+                    style={ this.state.rightAvatarStyle }
+                  >
                     <Avatar
                       className={ style['center'] }
                       src={ defaultPhoto }
-                      size="50px"
+                      size={ this.state.rightAvatarSize }
+                      onClick={ this.handleAnonymousClick.bind(this) }
                     />
                   </div>
                 </div>
                 <div className={ "col-xs-4" }>
-                  <div className={ style['as-anonymous-text'] }>
+                  <div className={ style['as-anonymous-text'] }
+                    style={ this.state.rightTextStyle }
+                    onClick={ this.handleAnonymousClick.bind(this) }
+                  >
                     as Anonymous
                   </div>
                 </div>
