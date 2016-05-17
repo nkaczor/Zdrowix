@@ -3,6 +3,7 @@ import { Route, IndexRoute } from 'react-router';
 
 import { LoginLayout, CoreLayout } from '../layouts';
 import {
+  AskTheDoctorView,
   SignUpConfirmationView,
   PatientSignUpView,
   DoctorSignUpView,
@@ -42,6 +43,9 @@ let makeRoutes = () => {
         />
         <Route path="work-schedule"
           component={ WorkScheduleView }
+        />
+        <Route path="doctor/:id/ask-the-doctor"
+          component={ AskTheDoctorView }
         />
       </Route>
 

@@ -1,0 +1,50 @@
+.ask-the-doctor-view{
+  .ask-content {
+    margin: 20px 90px;
+
+    .paper-content{
+      max-width: 600px;
+      margin: 0 auto;
+      padding-top: 30px;
+    }
+
+      .avatar-container{
+        width: 80px;
+        height: 80px;
+        border: solid 2px red;
+      }
+
+      .center{
+        position: relative;
+        top: 50%;
+        transform: translateY(-50%);
+      }
+
+      .text{
+        font-weight: bold;
+        font-size: 16px;
+        padding: 28px 10px;
+      }
+
+      .as-me-text{
+        @extend .text;
+        text-align: right;
+      }
+
+      .as-anonymous-text{
+        @extend .text;
+      }
+
+      .left-avatar-container{
+        text-align: right;
+      }
+
+      .button-container{
+        padding: 20px;
+        text-align: center;
+        position: relative;
+      }
+
+  }
+}
+

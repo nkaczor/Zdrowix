@@ -8,3 +8,4 @@ export * from './FindDoctorView';
 export * from './SignUpConfirmationView';
 export * from './SettingsView';
 export * from './WorkScheduleView';
+export * from './AskTheDoctorView';
