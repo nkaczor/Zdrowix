@@ -12,6 +12,10 @@ export class FindDoctorView extends Component {
     dispatch: PropTypes.func,
     doctors: PropTypes.array
   };
+  static contextTypes= {
+    router: PropTypes.object.isRequired
+  }
+
 
   constructor(props) {
     super(props);
@@ -23,6 +27,10 @@ export class FindDoctorView extends Component {
   componentDidMount() {
     this.props.dispatch(doctorActions.fetchDoctors());
     this.props.dispatch(specialtyActions.fetchSpecialities());
+  }
+
+  goTo(url) {
+    this.context.router.push(url);
   }
 
   handleSelectChange(e) {
@@ -57,6 +65,7 @@ export class FindDoctorView extends Component {
               <Button
                 label="Ask the doctor"
                 color="blue"
+                onClick={ this.goTo.bind(this, `/panel/doctor/${ doctor._id }/ask-the-doctor`) }
               />
             </div>
             <div className={ style['action'] }>
