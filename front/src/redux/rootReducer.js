@@ -3,9 +3,11 @@ import counter from './modules/counter';
 import user from './modules/user';
 import specialty from './modules/specialty';
 import doctor from './modules/doctor';
+import workingTime from './modules/workingTime'
 export default combineReducers({
   counter,
   user,
   specialty,
-  doctor
+  doctor,
+  workingTime
 });

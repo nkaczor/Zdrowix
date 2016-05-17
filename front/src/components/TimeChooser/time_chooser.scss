@@ -31,7 +31,9 @@
     }
     .hour-block-true:nth-of-type(#{$i+13}) {
       background-color: lighten(#2D9641,abs($i));
-
+      &:hover{
+        background-color: lighten(lighten(#2D9641,abs($i)),5);
+      }
     }
   }
 }

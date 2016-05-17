@@ -31,7 +31,6 @@ workingTimeRouter.post('/', passport.authenticate('jwt', {
                     msg: 'Authentication failed. User not found.'
                 });
             } else {
-
                 var newWorkingTime = new WorkingTime({
                     doctor: user._id,
                     workingHours: req.body

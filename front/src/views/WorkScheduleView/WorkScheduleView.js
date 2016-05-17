@@ -2,35 +2,40 @@ import React, { PropTypes, Component } from 'react';
 import { connect } from 'react-redux';
 import classnames from 'classnames';
 import moment from 'moment';
+import * as workingTimeActions from '../../redux/modules/workingTime';
 
 import style from './work_schedule_view.scss';
 import {
-  Header,
-  Paper, Label,
-  TextInput, Button, TimeChooser } from '../../components';
+  Header, Paper,
+  Button, TimeChooser } from '../../components';
 
 export class WorkScheduleView extends Component {
   static propTypes = {
     dispatch: PropTypes.func,
     userInfo: PropTypes.object,
-    token: PropTypes.string
+    token: PropTypes.string,
+    workingHours: PropTypes.object
   };
   constructor(props) {
     super(props);
 
     this.state = {
-      days: {
-        monday: this.createDayArray(),
-        tuesday: this.createDayArray(),
-        wednesday: this.createDayArray(),
-        thursday: this.createDayArray(),
-        friday: this.createDayArray(),
-        saturday: this.createDayArray(),
-        sunday: this.createDayArray(),
-      }
+      message: '',
+      workingHours: props.workingHours
     };
   }
 
+  componentWillUpdate(nextProps) {
+    let { dispatch, workingHours, userInfo, token } = this.props;
+
+    if (nextProps.workingHours !== workingHours) {
+      this.setState({ workingHours: nextProps.workingHours });
+    }
+    if (nextProps.token && nextProps.userInfo &&
+      (nextProps.token !== token || nextProps.userInfo !== userInfo)) {
+      dispatch(workingTimeActions.fetchWorkingTime(nextProps.userInfo._id, nextProps.token));
+    }
+  }
   handleValueChange(field, e) {
     let form = Object.assign({}, this.state.form);
 
@@ -40,20 +45,23 @@ export class WorkScheduleView extends Component {
     });
   }
   handleHourClick(day, hour) {
-    let days = Object.assign({}, this.state.days);
+    let workingHours = Object.assign({}, this.state.workingHours);
 
-    days[day][hour] = !days[day][hour];
+    workingHours[day][hour] = !workingHours[day][hour];
     this.setState({
-      days
+      workingHours
     });
   }
 
   handleSave() {
+    let { workingHours } = this.state;
+    let { token } = this.props;
+    let data = Object.assign({}, workingHours);
 
+    this.props.dispatch(workingTimeActions.fetchSaveWorkingTime(token, data))
+    .then(() => this.setState({ message: 'Successful saved!' }));
   }
-  createDayArray() {
-    return new Array(24).fill(false);
-  }
+
   render() {
     let daysArray = [ 'monday',
     'tuesday', 'wednesday',
@@ -70,10 +78,13 @@ export class WorkScheduleView extends Component {
                 <TimeChooser
                   key={ day }
                   day={ day }
-                  data={ this.state.days[day] }
+                  data={ this.state.workingHours[day] }
                   onClick={ this.handleHourClick.bind(this, day) }
                 />
               ) }
+              <div className={ style['message-container'] }>
+                { this.state.message }
+              </div>
               <div className={ style['button-container'] }>
                 <Button
                   size="big"
@@ -94,6 +105,8 @@ export class WorkScheduleView extends Component {
 const mapStateToProps = state => {
   return {
     token: state.user.token,
+    userInfo: state.user.userInfo || {},
+    workingHours: state.workingTime
   };
 };
 
