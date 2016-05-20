@@ -4,7 +4,8 @@ import { connect } from 'react-redux';
 import style from './home_view.scss';
 import { Button, TextInput,
          PasswordInput, ImageInput,
-         Label, Checkbox } from '../../components';
+         Label, Checkbox,
+         Paper, Calendar } from '../../components';
 
 export class HomeView extends Component {
   static propTypes = {
@@ -14,10 +15,162 @@ export class HomeView extends Component {
     super(props);
     this.state = { checkboxStatus: true };
   }
+
   handleCheckboxChange() {
     this.setState({
       checkboxStatus: !this.state.checkboxStatus
     });
+  }
+
+  renderCalendar() {
+    let data = {
+      range: {
+        start: 7,
+        end: 17
+      },
+      calendar: [
+        {
+          name: 'monday',
+          date: Date.now(),
+          hours: [
+            {
+              hour: 7,
+              state: 'free'
+            },
+            {
+              hour: 8,
+              state: 'free'
+            },
+            {
+              hour: 9,
+              state: 'visit'
+            },
+            {
+              hour: 10,
+              state: 'free'
+            },
+            {
+              hour: 11,
+              state: 'free'
+            },
+          ]
+        },
+        {
+          name: 'tuesday',
+          date: Date.now(),
+          hours: [
+            {
+              hour: 15,
+              state: 'free'
+            },
+            {
+              hour: 16,
+              state: 'free'
+            },
+            {
+              hour: 9,
+              state: 'visit'
+            }
+          ]
+        },
+        {
+          name: 'wednesday',
+          date: Date.now(),
+          hours: [
+            {
+              hour: 7,
+              state: 'free'
+            },
+            {
+              hour: 8,
+              state: 'free'
+            },
+            {
+              hour: 10,
+              state: 'visit'
+            }
+          ]
+        },
+        {
+          name: 'thursday',
+          date: Date.now(),
+          hours: [
+            {
+              hour: 7,
+              state: 'free'
+            },
+            {
+              hour: 14,
+              state: 'free'
+            },
+            {
+              hour: 11,
+              state: 'visit'
+            }
+          ]
+        },
+        {
+          name: 'friday',
+          date: Date.now(),
+          hours: [
+            {
+              hour: 10,
+              state: 'free'
+            },
+            {
+              hour: 8,
+              state: 'free'
+            },
+            {
+              hour: 9,
+              state: 'visit'
+            }
+          ]
+        },
+        {
+          name: 'saturday',
+          date: Date.now(),
+          hours: [
+            {
+              hour: 7,
+              state: 'free'
+            },
+            {
+              hour: 8,
+              state: 'free'
+            },
+            {
+              hour: 9,
+              state: 'visit'
+            }
+          ]
+        },
+        {
+          name: 'sunday',
+          date: Date.now(),
+          hours: [
+            {
+              hour: 7,
+              state: 'free'
+            },
+            {
+              hour: 8,
+              state: 'free'
+            },
+            {
+              hour: 9,
+              state: 'visit'
+            }
+          ]
+        },
+      ]
+    };
+
+    return (
+      <Paper>
+        <Calendar data={ data } />
+      </Paper>
+    )
   }
   render() {
     return (
@@ -73,6 +226,8 @@ export class HomeView extends Component {
           checked={ this.state.checkboxStatus }
           onChange={ this.handleCheckboxChange.bind(this) }
         />
+        { this.renderCalendar() }
+
       </div>
     );
   }

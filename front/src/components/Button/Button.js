@@ -4,7 +4,7 @@ import style from './button.scss';
 
 class Button extends Component {
   static propTypes = {
-    color: PropTypes.oneOf([ 'red', 'blue', 'green', 'dark-cyan' ]),
+    color: PropTypes.oneOf([ 'red', 'blue', 'green', 'dark-cyan', 'gray' ]),
     size: PropTypes.oneOf([ 'small', 'big', 'inherit' ]),
     onClick: PropTypes.func,
     label: PropTypes.string,

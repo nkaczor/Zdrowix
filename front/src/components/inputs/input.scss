@@ -1,27 +1,35 @@
-.input-container{
-
-  input{
+.input-container {
+  input,
+  textarea {
     background-color: #f2f2f2;
     display: block;
     width: 100%;
     padding: 10px;
+    border: 0 solid #ddd;
 
-    border: 0px solid #ddd;
+    &:focus {
+      outline-color: #348899;
+    }
+  }
+
+  textarea{
+    resize: none;
   }
 
   &.error {
-    input{
+
+    input {
       border: 1px solid #BD2634;
     }
-    .error-message{
+
+    .error-message {
       visibility: visible;
       color: #BD2634;
-
     }
   }
 }
 
-.error-message{
+.error-message {
   visibility: hidden;
   font-size: 11px;
   padding: 3px;

@@ -4,3 +4,7 @@ export * from './inputs';
 export * from './Label';
 export * from './Checkbox';
 export * from './Select';
+export * from './Header';
+export * from './Paper';
+export * from './Calendar';
+export * from './TimeChooser';

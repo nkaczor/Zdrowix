@@ -11,9 +11,10 @@ var port        = process.env.PORT || 8080;
 var jwt         = require('jwt-simple');
 var fs = require('fs');
 
-var specialtyRouter = require('./app/routes/specialtyRouter')
-var userRouter = require('./app/routes/userRouter')
-
+var specialtyRouter = require('./app/routes/specialtyRouter');
+var userRouter = require('./app/routes/userRouter');
+var doctorRouter = require('./app/routes/doctorRouter');
+var workingTimeRouter = require('./app/routes/workingTimeRouter');
 var host = 'http://localhost:8080';
 
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -27,6 +28,7 @@ app.use(passport.initialize());
 app.use(function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization");
+  res.header("Access-Control-Allow-Methods", "POST, GET, PUT, DELETE, OPTIONS");
   next();
 });
 app.use(express.static('public'));
@@ -46,7 +48,7 @@ apiRoutes.post('/sign-up', function(req, res) {
     var fullFileName = __dirname+ '/public'+ filename;
     fs.writeFile(fullFileName, req.files.avatar.data, function (err) {
       if (err) return console.log(err);
-      var user = Object.assign({}, req.body, {avatar: host + filename});
+      var user = Object.assign({}, req.body, {bio: "", avatar: host + filename});
       var newUser = new User(user);
       // save the user
       newUser.save(function(err) {
@@ -85,6 +87,8 @@ apiRoutes.post('/authenticate', function(req, res) {
 
 apiRoutes.use('/specialty', specialtyRouter);
 apiRoutes.use('/user', userRouter);
+apiRoutes.use('/doctor', doctorRouter);
+apiRoutes.use('/working-time', workingTimeRouter);
 app.use('/api', apiRoutes);
 
 

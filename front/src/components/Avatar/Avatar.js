@@ -7,6 +7,7 @@ class Avatar extends Component {
     src: PropTypes.string,
     size: PropTypes.string,
     className: PropTypes.string,
+    onClick: PropTypes.func
   };
 
   render() {
@@ -23,6 +24,7 @@ class Avatar extends Component {
           src={ this.props.src }
           className={ style['avatar-img'] }
           style={ circleStyle }
+          onClick={ this.props.onClick }
         />
       </div>
     );

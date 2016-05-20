@@ -3,7 +3,7 @@ import { singleFetch, singleFetchWithError } from './singleFetch';
 function getInitFetch(method, body, token, contentType) {
   const headers = new Headers();
 
-  if(contentType !== 'multipart/form-data'){
+  if (contentType !== 'multipart/form-data') {
     headers.append('Content-Type', contentType || 'application/json');
   }
   headers.append('Authorization', token);
@@ -14,7 +14,7 @@ function getInitFetch(method, body, token, contentType) {
     mode: 'cors',
   };
 
-  if (method === 'POST' || method === 'PATCH') {
+  if (method === 'POST' || method === 'PUT') {
     initFetch.body = body;
   }
 
