@@ -65,12 +65,18 @@
       }
 
       .doctor-info{
+
         float: left;
 
         .name{
+          cursor: pointer;
           color: black;
           font-weight: bolder;
           font-size: 20px;
+
+          &:hover {
+            color: #962D3E;
+          }
         }
 
         p{

@@ -12,6 +12,9 @@ export class FindDoctorView extends Component {
     dispatch: PropTypes.func,
     doctors: PropTypes.array
   };
+  static contextTypes= {
+    router: React.PropTypes.object
+  }
 
   constructor(props) {
     super(props);
@@ -36,7 +39,10 @@ export class FindDoctorView extends Component {
       <div className={ style['doctor-wrapper'] }>
         <div className={ style['doctor-container'] }>
           <div className={ style['box-top'] }>
-            <div className={ style['doctor-info'] }>
+            <div
+              className={ style['doctor-info'] }
+              onClick={ this.context.router.push.bind(this, `/panel/doctor/${ doctor._id }`) }
+            >
               <p className={ style['name'] }>{ `${ doctor.firstName } ${ doctor.lastName }` }</p>
               <p><label>Email: </label>{ doctor.email }</p>
               <p><label>Specialty: </label> { doctor.specialty.name }</p>

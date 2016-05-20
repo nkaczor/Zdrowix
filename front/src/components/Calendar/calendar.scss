@@ -1,7 +1,24 @@
 .calendar {
   width: 90%;
   margin: 20px auto;
+  .nav{
+    padding: 0px 10px 30px 5px;
+    font-size: 14px;
+    .prev, .next{
+      cursor: pointer;
+      display: inline-block;
+      padding: 10px;
+      background-color: rgba(0,0,0,0.05);
+      border: 1px solid rgba(0,0,0,0.1);
+      &:hover{
+        background-color: rgba(0,0,0,0.1);
+      }
+    }
+    .next{
+      float: right;
 
+    }
+  }
   .labels {
     width: 5%;
     display: inline-block;
@@ -30,17 +47,17 @@
       .block {
 
         margin: 10px 5px;
-        padding: 10px;
+        padding: 6px 2px 3px 2px;
         border: 1px solid rgba(0,0,0,0.3);
         background-color: rgba(0,0,0,0.1);
         border-radius: 2px;
         text-align: center;
 
 
-        span {
-          color: white;
-          font-size: 10px;
-          font-weight: bold;
+        svg {
+          fill: white !important;
+          height: 22px;
+          width: 22px;
           visibility: hidden;
         }
 
@@ -51,8 +68,12 @@
       .free{
         background-color: #2D9641;
         cursor: pointer;
-        &:hover span {
-          visibility: visible;
+        &:hover
+        {
+          background-color: lighten(#2D9641, 10%);
+          svg {
+            visibility: visible;
+          }
         }
 
       }

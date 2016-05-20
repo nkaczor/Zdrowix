@@ -1,0 +1,1 @@
+export DoctorView from './DoctorView';

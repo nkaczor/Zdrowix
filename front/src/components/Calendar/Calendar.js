@@ -1,6 +1,8 @@
 import React, { PropTypes, Component } from 'react';
 import classnames from 'classnames';
 import style from './calendar.scss';
+import Svg from 'svg-inline-react';
+import makeAppointmentSVG from '../../../assets/icons/make-appointment.svg';
 
 class Calendar extends Component {
   static propTypes = {
@@ -37,9 +39,7 @@ class Calendar extends Component {
 
     return (
       <div className={ blockStyle }>
-        <span>
-          MAKE AN APPOINTMENT
-        </span>
+        <Svg src={ makeAppointmentSVG } />
       </div>
     );
   }
@@ -86,6 +86,14 @@ class Calendar extends Component {
 
     return (
       <div className={ calendarStyle }>
+        <div className={ style['nav'] }>
+          <div className={ style['prev'] }>
+            { '< Prev Week' }
+          </div>
+          <div className={ style['next'] }>
+            { 'Next Week >' }
+          </div>
+        </div>
         { this.renderLabels(range) }
         <div className={ style['days-container'] }>
           {
