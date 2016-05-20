@@ -1,0 +1,1 @@
+export DoctorLayout from './DoctorLayout';

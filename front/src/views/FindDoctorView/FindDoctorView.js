@@ -124,7 +124,7 @@ export class FindDoctorView extends Component {
 
 const mapStateToProps = state => {
   return {
-    doctors: state.doctor || [],
+    doctors: state.doctor.doctors || [],
     specialties: state.specialty || []
   };
 };

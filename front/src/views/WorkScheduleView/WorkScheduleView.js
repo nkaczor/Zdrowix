@@ -25,6 +25,14 @@ export class WorkScheduleView extends Component {
     };
   }
 
+  componentDidMount() {
+    let { token, userInfo, dispatch } = this.props;
+
+    if (token && userInfo) {
+      dispatch(workingTimeActions.fetchWorkingTime(userInfo._id, token));
+    }
+  }
+
   componentWillUpdate(nextProps) {
     let { dispatch, workingHours, userInfo, token } = this.props;
 

@@ -8,4 +8,4 @@ export * from './FindDoctorView';
 export * from './SignUpConfirmationView';
 export * from './SettingsView';
 export * from './WorkScheduleView';
-export * from './DoctorView';
+export * from './CalendarView'

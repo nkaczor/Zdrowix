@@ -2,17 +2,26 @@ import React, { PropTypes, Component } from 'react';
 import classnames from 'classnames';
 import { connect } from 'react-redux';
 import Svg from 'svg-inline-react';
+import * as doctorActions from '../../redux/modules/doctor';
 import { Avatar, Calendar, Header, Paper } from '../../components';
-import style from './doctor_view.scss';
+import style from './doctor_layout.scss';
 import calendarSVG from '../../../assets/icons/calendar.svg';
 import questionsSVG from '../../../assets/icons/questions.svg';
 import askSVG from '../../../assets/icons/ask.svg';
 
 
-export class DoctorView extends Component {
+export class DoctorLayout extends Component {
   static propTypes = {
-    userInfo: PropTypes.object
+    userInfo: PropTypes.object,
+    dispatch: PropTypes.func,
+    params: PropTypes.object,
+    doctor: PropTypes.object
   };
+
+  componentDidMount() {
+    this.props.dispatch(doctorActions.fetchDoctor(this.props.params.id));
+  }
+
   renderNavItem(item) {
     return (
       <div className="col-xs-4">
@@ -23,6 +32,7 @@ export class DoctorView extends Component {
       </div>
     );
   }
+
   renderCalendar() {
     let data = {
       range: {
@@ -172,7 +182,7 @@ export class DoctorView extends Component {
     )
   }
   render() {
-    let { userInfo } = this.props;
+    let { userInfo, doctor } = this.props;
     let navItems = [
       {
         label: 'Calendar',
@@ -189,24 +199,24 @@ export class DoctorView extends Component {
     ];
 
     return (
-      <div className={ style['doctor-view'] }>
+      <div className={ style['doctor-layout'] }>
         <Header>My Profile</Header>
         <div className={ classnames('row') }>
           <div className="col-xs-3">
             <Paper className={ style['doctor-info'] }>
               <div className={ style['header'] }>
                 <Avatar
-                  src={ userInfo.avatar }
+                  src={ doctor.avatar }
                   size="100px"
                 />
                 <p className={ style['name'] }>
-                  { userInfo.firstName } { userInfo.lastName }
+                  { doctor.firstName } { doctor.lastName }
                 </p>
-                <p>Doctor { userInfo.specialty ? userInfo.specialty.name : '' }</p>
+                <p>Doctor { doctor.specialty ? doctor.specialty.name : '' }</p>
               </div>
               <div className={ style['body'] }>
-                <p><strong>Bio: </strong>{ userInfo.bio }</p>
-                <p><strong>Email: </strong>{ userInfo.email }</p>
+                <p><strong>Bio: </strong>{ doctor.bio }</p>
+                <p><strong>Email: </strong>{ doctor.email }</p>
               </div>
             </Paper>
           </div>
@@ -215,7 +225,7 @@ export class DoctorView extends Component {
               { navItems.map(item => this.renderNavItem(item)) }
             </nav>
             <Paper className={ style['content'] }>
-              { this.renderCalendar() }
+              { this.props.children }
             </Paper>
           </div>
         </div>
@@ -226,8 +236,9 @@ export class DoctorView extends Component {
 
 const mapStateToProps = state => {
   return {
+    doctor: state.doctor.doctor || {},
     userInfo: state.user.userInfo || {}
   };
 };
 
-export default connect(mapStateToProps)(DoctorView);
+export default connect(mapStateToProps)(DoctorLayout);

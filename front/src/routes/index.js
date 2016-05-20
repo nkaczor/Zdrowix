@@ -1,7 +1,7 @@
 import React from 'react';
 import { Route, IndexRoute } from 'react-router';
 
-import { LoginLayout, CoreLayout } from '../layouts';
+import { LoginLayout, CoreLayout, DoctorLayout } from '../layouts';
 import {
   SignUpConfirmationView,
   PatientSignUpView,
@@ -13,7 +13,7 @@ import {
   WelcomeView,
   SettingsView,
   WorkScheduleView,
-  DoctorView } from '../views';
+  CalendarView } from '../views';
 
 let redirectIfUserIsNotLogged = (nextState, replace) => {
   if (!localStorage.user) {
@@ -29,6 +29,13 @@ let makeRoutes = () => {
         component={ CoreLayout }
         onEnter={ redirectIfUserIsNotLogged }
       >
+        <Route path="doctor/:id"
+          component={ DoctorLayout }
+        >
+          <IndexRoute
+            component={ CalendarView }
+          />
+        </Route>
         <Route path="home"
           component={ HomeView }
         />
@@ -37,9 +44,6 @@ let makeRoutes = () => {
         />
         <Route path="find-doctor"
           component={ FindDoctorView }
-        />
-        <Route path="doctor/:id"
-          component={ DoctorView }
         />
         <Route path="settings"
           component={ SettingsView }

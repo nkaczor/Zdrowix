@@ -17,7 +17,7 @@ doctorRouter.route('/')
 
 doctorRouter.route('/:id')
 .get(function (req, res, next) {
-    User.findOne({type: 'doctor', _id: req.params._id}, function (err, doctor) {
+    User.findOne({type: 'doctor', _id: req.params.id}, function (err, doctor) {
         if (err) throw err;
         res.json(doctor);
     }).populate("specialty");
