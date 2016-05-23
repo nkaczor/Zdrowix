@@ -53,7 +53,7 @@ export class SideBar extends Component {
         icon: require('../../../assets/icons/home.svg')
       }, {
         label: 'My Page',
-        path: '/panel/my-page',
+        path: `/panel/doctor/${ this.props.userInfo._id }`,
         icon: require('../../../assets/icons/profile.svg')
       } ]
     }, {

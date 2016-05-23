@@ -5,17 +5,17 @@ var passport = require('passport');
 var jwt = require('jwt-simple');
 
 var config = require('../../config/database');
-var WorkingTime = require('../models/workingTime.js');
+var Question = require('../models/question.js');
 var User = require('../models/user.js');
 
-var workingTimeRouter = express.Router();
-workingTimeRouter.use(bodyParser.urlencoded({
+var questionRouter = express.Router();
+questionRouter.use(bodyParser.urlencoded({
     extended: true
 }));
-workingTimeRouter.use(bodyParser.json());
+questionRouter.use(bodyParser.json());
 
 
-workingTimeRouter.post('/', passport.authenticate('jwt', {
+questionRouter.post('/', passport.authenticate('jwt', {
     session: false
 }), function(req, res) {
     var token = getToken(req.headers);
@@ -31,35 +31,23 @@ workingTimeRouter.post('/', passport.authenticate('jwt', {
                     msg: 'Authentication failed. User not found.'
                 });
             } else {
-                var newWorkingTime = new WorkingTime({
-                    doctor: user._id,
-                    workingHours: req.body
-                });
+                var question = {
+                    doctor: req.body.doctorId,
+                    question: req.body.question,
+                    title: req.body.title,
+                }
+                if (!req.body.asAnonymous)
+                  question.author = user._id;
+
+                var newQuestion = new Question(question);
                 // save the user
-                newWorkingTime.save(function(err) {
+                newQuestion.save(function(err) {
                     if (err) {
-                        WorkingTime.findOneAndUpdate({
-                                doctor: user._id
-                            }, {
-                                $set: {
-                                    doctor: user._id,
-                                    workingHours: req.body
-                                }
-                            }, {
-                                overwrite: true,
-                                new: true
-                            },
-                            function(err, updatedItem) {
-                                if (err) throw err;
-                                res.json({
-                                    success: true,
-                                    msg: 'Successful updated working time.'
-                                });
-                            });
+                        throw err;
                     } else {
                         res.json({
                             success: true,
-                            msg: 'Successful created new working time.'
+                            msg: 'Successful created new question'
                         });
                     }
                 });
@@ -76,7 +64,7 @@ workingTimeRouter.post('/', passport.authenticate('jwt', {
 
 
 
-workingTimeRouter.get('/:id', passport.authenticate('jwt', {
+questionRouter.get('/:doctorId', passport.authenticate('jwt', {
     session: false
 }), function(req, res) {
     var token = getToken(req.headers);
@@ -92,19 +80,19 @@ workingTimeRouter.get('/:id', passport.authenticate('jwt', {
                     msg: 'Authentication failed. User not found.'
                 });
             } else {
-                WorkingTime.findOne({
-                    doctor: req.params.id
-                }, function(err, workingTime) {
+                Question.find({
+                  doctor: req.params.doctorId
+                }, function(err, visits) {
                     if (err) throw err;
-                    if (!workingTime) {
+                    if (!visits) {
                       res.json({
                           success: false,
-                          workingTime: {}
+                          visits: {}
                       });
                     } else {
                         res.json({
                             success: true,
-                            workingTime: workingTime
+                            visits: visits
                         });
                     };
                 });
@@ -117,6 +105,9 @@ workingTimeRouter.get('/:id', passport.authenticate('jwt', {
         });
     }
 });
+
+
+
 
 
 getToken = function(headers) {
@@ -133,4 +124,4 @@ getToken = function(headers) {
 };
 
 
-module.exports = workingTimeRouter;
+module.exports = questionRouter;

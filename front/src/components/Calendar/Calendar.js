@@ -9,15 +9,18 @@ class Calendar extends Component {
     src: PropTypes.string,
     size: PropTypes.string,
     className: PropTypes.string,
-    data: PropTypes.object
+    data: PropTypes.array,
+    onPrev: PropTypes.func,
+    onNext: PropTypes.func,
+    onSelect: PropTypes.func
   };
 
   getRange() {
-    let { calendar } = this.props.data;
+    let { data } = this.props;
     let min = 24;
     let max = 0;
 
-    calendar.forEach(day =>
+    data.forEach(day =>
       day.hours.forEach(item => {
         if (item.hour > max) {
           max = item.hour;
@@ -34,11 +37,16 @@ class Calendar extends Component {
     };
   }
 
-  renderBlock(hour, state) {
+  renderBlock(day, hour, state) {
     let blockStyle = classnames(style['block'], style[state]);
+    let onSelect = state === 'free' ? this.props.onSelect.bind(this, day, hour) : () => {};
 
     return (
-      <div className={ blockStyle }>
+      <div
+        key={ hour }
+        className={ blockStyle }
+        onClick={ onSelect }
+      >
         <Svg src={ makeAppointmentSVG } />
       </div>
     );
@@ -47,7 +55,14 @@ class Calendar extends Component {
     let labels = [];
 
     for (let i = range.start; i <= range.end; i++) {
-      labels.push(<div className={ style['hour-label'] }>{ i }:00</div>);
+      labels.push(
+        <div
+          className={ style['hour-label'] }
+          key={ i }
+        >
+          { i }:00
+        </div>
+      );
     }
     return (
       <div className={ style['labels'] }>
@@ -60,18 +75,22 @@ class Calendar extends Component {
 
     for (let i = range.start; i <= range.end; i++) {
       if (day.hours.filter(x => x.hour === i && x.state === 'visit').length) {
-        blocks.push(this.renderBlock(i, 'visit'));
+        blocks.push(this.renderBlock(day.date, i, 'visit'));
       }
       else if (day.hours.filter(x => x.hour === i && x.state === 'free').length) {
-        blocks.push(this.renderBlock(i, 'free'));
+        blocks.push(this.renderBlock(day.date, i, 'free'));
       }
       else {
-        blocks.push(this.renderBlock(i));
+        blocks.push(this.renderBlock(day.date, i));
       }
     }
     return (
-      <div className={ style['day-container'] }>
-        <div className={ style['day-label'] }> { day.name } </div>
+      <div
+        className={ style['day-container'] }
+        key={ day.date }
+      >
+        <div className={ style['day-label'] }> { day.date.format('dd') } </div>
+        <div className={ style['day-label'] }> { day.date.format('DD.MM') } </div>
         <div className={ style['block-container'] }>
           { blocks }
         </div>
@@ -80,26 +99,36 @@ class Calendar extends Component {
   }
 
   render() {
-    let { data, className } = this.props;
+    let { data, className, onNext, onPrev } = this.props;
     let range = this.getRange();
+
     let calendarStyle = classnames(style['calendar'], className);
 
     return (
       <div className={ calendarStyle }>
         <div className={ style['nav'] }>
-          <div className={ style['prev'] }>
+          <div
+            className={ style['prev'] }
+            onClick={ onPrev }
+          >
             { '< Prev Week' }
           </div>
-          <div className={ style['next'] }>
+          <div
+            className={ style['next'] }
+            onClick={ onNext }
+          >
             { 'Next Week >' }
           </div>
         </div>
         { this.renderLabels(range) }
         <div className={ style['days-container'] }>
           {
-            data.calendar.map(day => this.renderDay(day, range))
+            data.map(day => this.renderDay(day, range))
           }
         </div>
+        {
+          range.start === 24 ? <div className={ style['no-openings-label'] }>No openings</div> : ''
+        }
       </div>
     );
   }

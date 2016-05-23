@@ -15,6 +15,9 @@ var specialtyRouter = require('./app/routes/specialtyRouter');
 var userRouter = require('./app/routes/userRouter');
 var doctorRouter = require('./app/routes/doctorRouter');
 var workingTimeRouter = require('./app/routes/workingTimeRouter');
+var visitRouter = require('./app/routes/visitRouter');
+var questionRouter = require('./app/routes/questionRouter');
+
 var host = 'http://localhost:8080';
 
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -89,6 +92,8 @@ apiRoutes.use('/specialty', specialtyRouter);
 apiRoutes.use('/user', userRouter);
 apiRoutes.use('/doctor', doctorRouter);
 apiRoutes.use('/working-time', workingTimeRouter);
+apiRoutes.use('/visit', visitRouter);
+apiRoutes.use('/question', questionRouter);
 app.use('/api', apiRoutes);
 
 

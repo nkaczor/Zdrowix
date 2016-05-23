@@ -1,167 +1,157 @@
 import React, { PropTypes, Component } from 'react';
 import { connect } from 'react-redux';
+import moment from 'moment';
+import * as workingTimeActions from '../../redux/modules/workingTime';
+import * as visitActions from '../../redux/modules/visit';
 
 import style from './calendar_view.scss';
-import { Button, TextInput,
-         PasswordInput, ImageInput,
-         Label, Checkbox,
-         Paper, Calendar } from '../../components';
+import { Calendar } from '../../components';
 
 export class CalendarView extends Component {
   static propTypes = {
-
+    dispatch: PropTypes.func,
+    params: PropTypes.object,
+    token: PropTypes.string,
+    workingHours: PropTypes.object,
+    visits: PropTypes.array
   };
+
+  static contextTypes = {
+    router: React.PropTypes.object.isRequired
+  }
+
   constructor(props) {
     super(props);
+    this.state = {
+      week: 0,
+      days: this.getWeek(0)
+    };
+  }
+
+  componentDidMount() {
+    let { token, params, dispatch } = this.props;
+    let { days } = this.state;
+
+    if (token) {
+      dispatch(visitActions.fetchVisits(
+        params.id,
+        days[0].format('YYYY-MM-DD'),
+        days[6].format('YYYY-MM-DD'),
+        token));
+      dispatch(workingTimeActions.fetchWorkingTime(params.id, token));
+    }
+  }
+
+  componentWillUpdate(nextProps) {
+    let { dispatch, params, token } = this.props;
+    let { days } = this.state;
+
+    if (nextProps.token && (nextProps.token !== token)) {
+      dispatch(visitActions.fetchVisits(
+        params.id,
+        days[0].format('YYYY-MM-DD'),
+        days[6].format('YYYY-MM-DD'),
+        nextProps.token));
+      dispatch(workingTimeActions.fetchWorkingTime(params.id, nextProps.token));
+    }
+  }
+
+  handleVisitSelect(day, hour) {
+    let { params } = this.props;
+
+    this.context.router.push(
+      `/panel/doctor/${ params.id }/confirm/${ day.format('YYYY-MM-DD') }/${ hour }`
+    );
+  }
+
+  setWeek(weeksToAdd) {
+    let { token, params, dispatch } = this.props;
+
+    let week = this.state.week + weeksToAdd;
+    let days = this.getWeek(week);
+
+    dispatch(visitActions.fetchVisits(
+      params.id,
+      days[0].format('YYYY-MM-DD'),
+      days[6].format('YYYY-MM-DD'),
+      token));
+    this.setState({
+      week,
+      days
+    });
+  }
+
+  getWeek(week) {
+    let weekStart = moment().startOf('week').format('dddd') === 'Sunday' ?
+      moment().startOf('week').add('d', 1) :
+      moment().startOf('week');
+
+    if (week) {
+      weekStart = weekStart.add('d', 7 * week);
+    }
+
+    let days = [];
+
+    for (let i = 0; i <= 6; i++) {
+      days.push(moment(weekStart).add(i, 'days'));
+    }
+    return days;
+  }
+
+  getOpenings(day) {
+    let { workingHours } = this.props;
+    let dayOfWeek = day.format('dddd').toLowerCase();
+    let hours = [];
+
+    if (day.isAfter(moment())) {
+      workingHours[dayOfWeek].forEach((item, hour) => {
+        if (item) {
+          hours.push({ state: 'free', hour });
+        }
+      });
+    }
+    return hours;
+  }
+
+  addVisits(hours, day) {
+    let { visits } = this.props;
+    let visitHours = visits.filter(visit => day.isSame(visit.date, 'day'));
+
+    visitHours.forEach(visitHour => {
+      let toReplace = hours.find(item => item.hour === visitHour.hour);
+
+      if (toReplace) {
+        toReplace.state = 'visit';
+      }
+      else {
+        hours.push({ state: 'visit', hour: visitHour.hour });
+      }
+    });
   }
 
   render() {
-    let data = {
-      range: {
-        start: 7,
-        end: 17
-      },
-      calendar: [
-        {
-          name: 'monday',
-          date: Date.now(),
-          hours: [
-            {
-              hour: 7,
-              state: 'free'
-            },
-            {
-              hour: 8,
-              state: 'free'
-            },
-            {
-              hour: 9,
-              state: 'visit'
-            },
-            {
-              hour: 10,
-              state: 'free'
-            },
-            {
-              hour: 11,
-              state: 'free'
-            },
-          ]
-        },
-        {
-          name: 'tuesday',
-          date: Date.now(),
-          hours: [
-            {
-              hour: 15,
-              state: 'free'
-            },
-            {
-              hour: 16,
-              state: 'free'
-            },
-            {
-              hour: 9,
-              state: 'visit'
-            }
-          ]
-        },
-        {
-          name: 'wednesday',
-          date: Date.now(),
-          hours: [
-            {
-              hour: 7,
-              state: 'free'
-            },
-            {
-              hour: 8,
-              state: 'free'
-            },
-            {
-              hour: 10,
-              state: 'visit'
-            }
-          ]
-        },
-        {
-          name: 'thursday',
-          date: Date.now(),
-          hours: [
-            {
-              hour: 7,
-              state: 'free'
-            },
-            {
-              hour: 14,
-              state: 'free'
-            },
-            {
-              hour: 11,
-              state: 'visit'
-            }
-          ]
-        },
-        {
-          name: 'friday',
-          date: Date.now(),
-          hours: [
-            {
-              hour: 10,
-              state: 'free'
-            },
-            {
-              hour: 8,
-              state: 'free'
-            },
-            {
-              hour: 9,
-              state: 'visit'
-            }
-          ]
-        },
-        {
-          name: 'saturday',
-          date: Date.now(),
-          hours: [
-            {
-              hour: 7,
-              state: 'free'
-            },
-            {
-              hour: 8,
-              state: 'free'
-            },
-            {
-              hour: 9,
-              state: 'visit'
-            }
-          ]
-        },
-        {
-          name: 'sunday',
-          date: Date.now(),
-          hours: [
-            {
-              hour: 7,
-              state: 'free'
-            },
-            {
-              hour: 8,
-              state: 'free'
-            },
-            {
-              hour: 9,
-              state: 'visit'
-            }
-          ]
-        },
-      ]
-    };
+    let { workingHours, visits } = this.props;
+    let { days } = this.state;
+
+    let calendar = days.map(day => {
+      let hours = this.getOpenings(day);
+      this.addVisits(hours, day);
+
+      return {
+        date: day,
+        hours
+      };
+    }
+   );
 
     return (
       <div>
-        <Calendar data={ data } />
+        <Calendar
+          data={ calendar }
+          onNext={ this.setWeek.bind(this, 1) }
+          onPrev={ this.setWeek.bind(this, -1) }
+          onSelect={ this.handleVisitSelect.bind(this) }
+        />
       </div>
     );
   }
@@ -170,7 +160,9 @@ export class CalendarView extends Component {
 
 const mapStateToProps = state => {
   return {
-    counter: state.counter
+    token: state.user.token,
+    workingHours: state.workingTime,
+    visits: state.visit
   };
 };
 

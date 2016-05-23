@@ -28,6 +28,10 @@ export class FindDoctorView extends Component {
     this.props.dispatch(specialtyActions.fetchSpecialities());
   }
 
+  goTo(url) {
+    this.context.router.push(url);
+  }
+
   handleSelectChange(e) {
     this.setState({
       selectedSpecialty: e.target.value
@@ -63,6 +67,7 @@ export class FindDoctorView extends Component {
               <Button
                 label="Ask the doctor"
                 color="blue"
+                onClick={ this.goTo.bind(this, `/panel/doctor/${ doctor._id }/ask-the-doctor`) }
               />
             </div>
             <div className={ style['action'] }>
@@ -71,6 +76,7 @@ export class FindDoctorView extends Component {
               <Button
                 label="Arrange appointment"
                 color="red"
+                onClick={ this.goTo.bind(this, `/panel/doctor/${ doctor._id }`) }
               />
             </div>
             <div className={ style['clear'] } />

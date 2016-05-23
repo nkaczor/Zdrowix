@@ -5,17 +5,17 @@ var passport = require('passport');
 var jwt = require('jwt-simple');
 
 var config = require('../../config/database');
-var WorkingTime = require('../models/workingTime.js');
+var Visit = require('../models/visit.js');
 var User = require('../models/user.js');
 
-var workingTimeRouter = express.Router();
-workingTimeRouter.use(bodyParser.urlencoded({
+var visitRouter = express.Router();
+visitRouter.use(bodyParser.urlencoded({
     extended: true
 }));
-workingTimeRouter.use(bodyParser.json());
+visitRouter.use(bodyParser.json());
 
 
-workingTimeRouter.post('/', passport.authenticate('jwt', {
+visitRouter.post('/', passport.authenticate('jwt', {
     session: false
 }), function(req, res) {
     var token = getToken(req.headers);
@@ -31,35 +31,20 @@ workingTimeRouter.post('/', passport.authenticate('jwt', {
                     msg: 'Authentication failed. User not found.'
                 });
             } else {
-                var newWorkingTime = new WorkingTime({
-                    doctor: user._id,
-                    workingHours: req.body
+                var newVisit = new Visit({
+                    doctor: req.body.doctorId,
+                    patient: user._id,
+                    date: req.body.date,
+                    hour: req.body.hour
                 });
                 // save the user
-                newWorkingTime.save(function(err) {
+                newVisit.save(function(err) {
                     if (err) {
-                        WorkingTime.findOneAndUpdate({
-                                doctor: user._id
-                            }, {
-                                $set: {
-                                    doctor: user._id,
-                                    workingHours: req.body
-                                }
-                            }, {
-                                overwrite: true,
-                                new: true
-                            },
-                            function(err, updatedItem) {
-                                if (err) throw err;
-                                res.json({
-                                    success: true,
-                                    msg: 'Successful updated working time.'
-                                });
-                            });
+                        throw err;
                     } else {
                         res.json({
                             success: true,
-                            msg: 'Successful created new working time.'
+                            msg: 'Successful created new visit.'
                         });
                     }
                 });
@@ -76,7 +61,7 @@ workingTimeRouter.post('/', passport.authenticate('jwt', {
 
 
 
-workingTimeRouter.get('/:id', passport.authenticate('jwt', {
+visitRouter.get('/:doctorId/:from/:to', passport.authenticate('jwt', {
     session: false
 }), function(req, res) {
     var token = getToken(req.headers);
@@ -92,19 +77,20 @@ workingTimeRouter.get('/:id', passport.authenticate('jwt', {
                     msg: 'Authentication failed. User not found.'
                 });
             } else {
-                WorkingTime.findOne({
-                    doctor: req.params.id
-                }, function(err, workingTime) {
+                Visit.find({
+                  date: { $gte: req.params.from, $lte: req.params.to },
+                  doctor: req.params.doctorId
+                }, function(err, visits) {
                     if (err) throw err;
-                    if (!workingTime) {
+                    if (!visits) {
                       res.json({
                           success: false,
-                          workingTime: {}
+                          visits: {}
                       });
                     } else {
                         res.json({
                             success: true,
-                            workingTime: workingTime
+                            visits: visits
                         });
                     };
                 });
@@ -117,6 +103,7 @@ workingTimeRouter.get('/:id', passport.authenticate('jwt', {
         });
     }
 });
+
 
 
 getToken = function(headers) {
@@ -133,4 +120,4 @@ getToken = function(headers) {
 };
 
 
-module.exports = workingTimeRouter;
+module.exports = visitRouter;

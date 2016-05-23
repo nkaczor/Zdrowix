@@ -1,6 +1,11 @@
 .calendar {
   width: 90%;
   margin: 20px auto;
+  .no-openings-label {
+    text-align: center;
+    margin-top: 40px;
+    font-size: 25px;
+  }
   .nav{
     padding: 0px 10px 30px 5px;
     font-size: 14px;

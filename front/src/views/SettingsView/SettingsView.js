@@ -4,7 +4,6 @@ import classnames from 'classnames';
 import DatePicker from 'react-datepicker';
 import moment from 'moment';
 import * as userActions from '../../redux/modules/user';
-
 import defaultPhoto from '../../../assets/noImage.gif';
 import style from './settings_view.scss';
 import {

@@ -19,6 +19,9 @@ export default function workingTimeReducer(state = emptyArrays, action = {}) {
     case RECEIVE_WORKING_TIME:
       state = action.workingTime.workingHours;
       return state;
+    case CLEAR_WORKING_TIME:
+      state = emptyArrays;
+      return state;
     default:
       return state;
   }
@@ -39,8 +42,16 @@ function receiveWorkingTime(json) {
   };
 }
 
+export const CLEAR_WORKING_TIME = 'CLEAR_WORKING_TIME';
+function clearWorkingTime() {
+  return {
+    type: CLEAR_WORKING_TIME
+  };
+}
+
 export function fetchSaveWorkingTime(token, days) {
   let body = JSON.stringify(days);
+
   return function(dispatch) {
     return fetchData('/api/working-time', 'POST', body, token)
       .then(data => {
@@ -58,8 +69,11 @@ export function fetchWorkingTime(id, token) {
     dispatch(requestWorkingTime());
     return fetchData(url, 'GET', null, token)
       .then(data => {
-        if (data) {
+        if (data.success) {
           dispatch(receiveWorkingTime(data));
+        }
+        else {
+          dispatch(clearWorkingTime());
         }
       });
   };

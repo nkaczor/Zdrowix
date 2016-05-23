@@ -6,7 +6,7 @@ class Label extends Component {
   static propTypes= {
     htmlFor: PropTypes.string,
     className: PropTypes.string,
-    children: PropTypes.required,
+    children: PropTypes.any,
   }
   render() {
     let { className, htmlFor, children } = this.props;

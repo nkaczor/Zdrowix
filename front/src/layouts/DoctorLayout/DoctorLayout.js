@@ -9,7 +9,6 @@ import calendarSVG from '../../../assets/icons/calendar.svg';
 import questionsSVG from '../../../assets/icons/questions.svg';
 import askSVG from '../../../assets/icons/ask.svg';
 
-
 export class DoctorLayout extends Component {
   static propTypes = {
     userInfo: PropTypes.object,
@@ -18,14 +17,23 @@ export class DoctorLayout extends Component {
     doctor: PropTypes.object
   };
 
+  static contextTypes = {
+    router: React.PropTypes.object.isRequired
+  }
+
   componentDidMount() {
     this.props.dispatch(doctorActions.fetchDoctor(this.props.params.id));
   }
 
   renderNavItem(item) {
     return (
-      <div className="col-xs-4">
-        <div className={ classnames(style['nav-box']) }>
+      <div className="col-xs-4"
+        key={ item.label }
+      >
+        <div
+          className={ classnames(style['nav-box']) }
+          onClick={ this.goTo.bind(this, item.url) }
+        >
           <Svg src={ item.icon } />
           { item.label }
         </div>
@@ -33,168 +41,27 @@ export class DoctorLayout extends Component {
     );
   }
 
-  renderCalendar() {
-    let data = {
-      range: {
-        start: 7,
-        end: 17
-      },
-      calendar: [
-        {
-          name: 'monday',
-          date: Date.now(),
-          hours: [
-            {
-              hour: 7,
-              state: 'free'
-            },
-            {
-              hour: 8,
-              state: 'free'
-            },
-            {
-              hour: 9,
-              state: 'visit'
-            },
-            {
-              hour: 10,
-              state: 'free'
-            },
-            {
-              hour: 11,
-              state: 'free'
-            },
-          ]
-        },
-        {
-          name: 'tuesday',
-          date: Date.now(),
-          hours: [
-            {
-              hour: 15,
-              state: 'free'
-            },
-            {
-              hour: 16,
-              state: 'free'
-            },
-            {
-              hour: 9,
-              state: 'visit'
-            }
-          ]
-        },
-        {
-          name: 'wednesday',
-          date: Date.now(),
-          hours: [
-            {
-              hour: 7,
-              state: 'free'
-            },
-            {
-              hour: 8,
-              state: 'free'
-            },
-            {
-              hour: 10,
-              state: 'visit'
-            }
-          ]
-        },
-        {
-          name: 'thursday',
-          date: Date.now(),
-          hours: [
-            {
-              hour: 7,
-              state: 'free'
-            },
-            {
-              hour: 14,
-              state: 'free'
-            },
-            {
-              hour: 11,
-              state: 'visit'
-            }
-          ]
-        },
-        {
-          name: 'friday',
-          date: Date.now(),
-          hours: [
-            {
-              hour: 10,
-              state: 'free'
-            },
-            {
-              hour: 8,
-              state: 'free'
-            },
-            {
-              hour: 9,
-              state: 'visit'
-            }
-          ]
-        },
-        {
-          name: 'saturday',
-          date: Date.now(),
-          hours: [
-            {
-              hour: 7,
-              state: 'free'
-            },
-            {
-              hour: 8,
-              state: 'free'
-            },
-            {
-              hour: 9,
-              state: 'visit'
-            }
-          ]
-        },
-        {
-          name: 'sunday',
-          date: Date.now(),
-          hours: [
-            {
-              hour: 7,
-              state: 'free'
-            },
-            {
-              hour: 8,
-              state: 'free'
-            },
-            {
-              hour: 9,
-              state: 'visit'
-            }
-          ]
-        },
-      ]
-    };
-
-    return (
-      <Calendar data={ data } />
-    )
+  goTo(url) {
+    this.context.router.push(url);
   }
+
   render() {
-    let { userInfo, doctor } = this.props;
+    let { doctor, params } = this.props;
     let navItems = [
       {
         label: 'Calendar',
-        icon: calendarSVG
+        icon: calendarSVG,
+        url: `/panel/doctor/${ params.id }`
       },
       {
         label: 'Questions',
-        icon: questionsSVG
+        icon: questionsSVG,
+        url: `/panel/doctor/${ params.id }/questions`
       },
       {
         label: 'Ask the doctor',
-        icon: askSVG
+        icon: askSVG,
+        url: `/panel/doctor/${ params.id }/ask-the-doctor`
       }
     ];
 
@@ -221,7 +88,7 @@ export class DoctorLayout extends Component {
             </Paper>
           </div>
           <div className="col-xs-9">
-            <nav className={ classnames("row") }>
+            <nav className={ classnames('row') }>
               { navItems.map(item => this.renderNavItem(item)) }
             </nav>
             <Paper className={ style['content'] }>
