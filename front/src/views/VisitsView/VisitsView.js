@@ -22,23 +22,33 @@ export class VisitsView extends Component {
         <div className={ classnames('col-xs-12', style['no-padding']) } >
           <div className={ style['visit-container'] }>
 
-              <div className={ classnames(style['avatar-container']), 'col-xs-3', style['no-padding']}>
-                <Avatar
-                  src={ defaultPhoto }
-                  size="40px"
-                />
-              </div>
+            <div className={ classnames(style['avatar-container']),
+            'col-xs-3', style['no-padding'] }
+            >
+              <Avatar
+                src={ defaultPhoto }
+                size="40px"
+              />
+            </div>
 
               <div className={ classnames(style['info-container'], 'col-xs-5') }>
-                <p>Imię</p>
-                <p>Nazwisko</p>
-                <p>basdasdsad</p>
+
+                <div className={ style['user-info-text'] }>
+                Imię Nazwisko
+                </div>
+                <div className={ style['doctor-info-text'] }>
+                Doktor
+                </div>
+
+
               </div>
 
-              <div className={ classnames(style['info-container'], 'col-xs-4') }>
+              <div className={ classnames(style['date-container'], 'col-xs-4',
+              style['no-padding']) }>
                 data godzina
               </div>
             </div>
+
         </div>
       </div>
     );
