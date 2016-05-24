@@ -15,4 +15,12 @@ doctorRouter.route('/')
     }).populate("specialty");
 });
 
+doctorRouter.route('/:id')
+.get(function (req, res, next) {
+    User.findOne({type: 'doctor', _id: req.params.id}, function (err, doctor) {
+        if (err) throw err;
+        res.json(doctor);
+    }).populate("specialty");
+});
+
 module.exports = doctorRouter;

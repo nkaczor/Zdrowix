@@ -1,0 +1,1 @@
+export NewVisitConfirmView from './NewVisitConfirmView';

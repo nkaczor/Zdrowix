@@ -6,7 +6,6 @@ class TimeChooser extends Component {
   static propTypes= {
     htmlFor: PropTypes.string,
     className: PropTypes.string,
-    children: PropTypes.required,
     data: PropTypes.array,
     day: PropTypes.string,
     onClick: PropTypes.func
@@ -15,11 +14,11 @@ class TimeChooser extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      label: 'Check hours'
+      label: '',
     };
   }
   handleMouseOut() {
-    this.setState({ label: 'Check hours' });
+    this.setState({ label: '' });
   }
   handleMouseOver(hour) {
     this.setState({ label: `${ hour }:00` });
@@ -30,6 +29,7 @@ class TimeChooser extends Component {
 
     return (
       <div
+        key={ hour }
         className={ blockStyle }
         onMouseOver={ this.handleMouseOver.bind(this, hour) }
         onMouseOut={ this.handleMouseOut.bind(this) }
@@ -44,10 +44,13 @@ class TimeChooser extends Component {
     let { className, data } = this.props;
     let timeChooserStyle = classnames(style['time-chooser'], className);
     let blocks = [];
+    let sum = 0;
 
     for (let i = 0; i <= 23; i++) {
       blocks.push(this.renderBlock(i, data[i]));
+      sum += data[i];
     }
+    sum += ' hours';
 
     return (
       <div
@@ -57,7 +60,7 @@ class TimeChooser extends Component {
           { this.props.day }
         </div>
         <div className={ style['label'] }>
-          { this.state.label }
+          { this.state.label || sum }
         </div>
         <div>
           { blocks }

@@ -13,9 +13,8 @@ export class FindDoctorView extends Component {
     doctors: PropTypes.array
   };
   static contextTypes= {
-    router: PropTypes.object.isRequired
+    router: React.PropTypes.object
   }
-
 
   constructor(props) {
     super(props);
@@ -44,7 +43,10 @@ export class FindDoctorView extends Component {
       <div className={ style['doctor-wrapper'] }>
         <div className={ style['doctor-container'] }>
           <div className={ style['box-top'] }>
-            <div className={ style['doctor-info'] }>
+            <div
+              className={ style['doctor-info'] }
+              onClick={ this.context.router.push.bind(this, `/panel/doctor/${ doctor._id }`) }
+            >
               <p className={ style['name'] }>{ `${ doctor.firstName } ${ doctor.lastName }` }</p>
               <p><label>Email: </label>{ doctor.email }</p>
               <p><label>Specialty: </label> { doctor.specialty.name }</p>
@@ -74,6 +76,7 @@ export class FindDoctorView extends Component {
               <Button
                 label="Arrange appointment"
                 color="red"
+                onClick={ this.goTo.bind(this, `/panel/doctor/${ doctor._id }`) }
               />
             </div>
             <div className={ style['clear'] } />
@@ -127,7 +130,7 @@ export class FindDoctorView extends Component {
 
 const mapStateToProps = state => {
   return {
-    doctors: state.doctor || [],
+    doctors: state.doctor.doctors || [],
     specialties: state.specialty || []
   };
 };

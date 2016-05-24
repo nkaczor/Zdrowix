@@ -53,7 +53,7 @@ export class SideBar extends Component {
         icon: require('../../../assets/icons/home.svg')
       }, {
         label: 'My Page',
-        path: '/panel/my-page',
+        path: `/panel/doctor/${ this.props.userInfo._id }`,
         icon: require('../../../assets/icons/profile.svg')
       } ]
     }, {
@@ -73,12 +73,16 @@ export class SideBar extends Component {
         label: 'Work Schedule',
         path: '/panel/work-schedule',
         icon: require('../../../assets/icons/work-schedule.svg')
+      }, {
+        label: 'Account Settings',
+        path: '/panel/settings',
+        icon: require('../../../assets/icons/cogwheel.svg')
       } ]
     } ];
 
     return (
       <div className={ style['navigation'] }>
-        { nav.map((section) => {
+        { nav.map(section  => {
           return (
             <div key={ section.header }>
               <header>{ section.header }</header>
