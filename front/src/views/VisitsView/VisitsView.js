@@ -38,17 +38,11 @@ export class VisitsView extends Component {
             <div className={ classnames(style['info-container'], 'col-xs-4') }>
               data godzina
             </div>
-
-
-
-
-
           </div>
         </Paper>
       </div>
     );
   }
-
 
   render() {
     return (
