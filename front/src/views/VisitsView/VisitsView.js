@@ -1,6 +1,7 @@
 import React, { PropTypes, Component } from 'react';
 import { connect } from 'react-redux';
 
+import classnames from 'classnames';
 import style from './visits_view.scss';
 import { Button, TextInput,
          PasswordInput, ImageInput,
@@ -17,24 +18,24 @@ export class VisitsView extends Component {
 
   renderSingleAppointment() {
     return (
-      <div className="col-xs-4">
+      <div className="col-xs-5">
         <Paper>
           <div className={ style['visit-container'] }>
 
-            <div className={ style['avatar-container'] }>
+            <div className={ classnames(style['avatar-container']), 'col-xs-2' }>
               <Avatar
                 src={ defaultPhoto }
                 size="80px"
               />
             </div>
 
-            <div className={ style['info-container'] }>
-              <p>blue blue</p>
-              <p>basdasdsad</p>
+            <div className={ classnames(style['info-container'], 'col-xs-6') }>
+              <p>Imię</p>
+              <p>Nazwisko</p>
               <p>basdasdsad</p>
             </div>
 
-            <div className={ style['info-container'] }>
+            <div className={ classnames(style['info-container'], 'col-xs-4') }>
               data godzina
             </div>
 
@@ -53,6 +54,8 @@ export class VisitsView extends Component {
     return (
       <div className={ style['visits-view'] }>
 
+        { this.renderSingleAppointment() }
+        { this.renderSingleAppointment() }
         { this.renderSingleAppointment() }
 
       </div>

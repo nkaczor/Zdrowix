@@ -15,10 +15,9 @@
   .info-container{
     flex-wrap: wrap;
     display: flex;
-    //justify-content: center;
-    /* align horizontal */
+    justify-content: center;
     align-items: center;
-    border: 5px solid green;
+    //border: 5px solid green;
     & > p{
      flex: 1 0 50%;
      text-align: center;
