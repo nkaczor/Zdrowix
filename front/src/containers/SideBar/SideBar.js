@@ -64,7 +64,7 @@ export class SideBar extends Component {
         icon: require('../../../assets/icons/find.svg')
       }, {
         label: 'Visits',
-        path: '/visits',
+        path: '/panel/visits',
         icon: require('../../../assets/icons/enroll.svg')
       } ]
     }, {
