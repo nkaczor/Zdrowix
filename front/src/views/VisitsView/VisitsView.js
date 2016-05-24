@@ -22,16 +22,18 @@ export class VisitsView extends Component {
         <div className={ classnames('col-xs-12', style['no-padding']) } >
           <div className={ style['visit-container'] }>
 
-            <div className={ classnames(style['avatar-container']),
-            'col-xs-3', style['no-padding'] }
-            >
-              <Avatar
-                src={ defaultPhoto }
-                size="40px"
-              />
+
+
+
+            <div className={ classnames(style['avatar-container'], 'col-xs-2', style['no-padding'])}>
+                <Avatar
+                  src={ defaultPhoto }
+                  size="40px"
+                />
             </div>
 
-              <div className={ classnames(style['info-container'], 'col-xs-5') }>
+
+              <div className={ classnames(style['info-container'], 'col-xs-6',style['no-padding']) }>
 
                 <div className={ style['user-info-text'] }>
                 Imię Nazwisko

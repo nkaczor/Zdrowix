@@ -64,6 +64,7 @@ div.no-padding {
   .date-container{
     @extend .info-container;
     text-align: right;
+    justify-content: flex-end;
   }
 
 }
