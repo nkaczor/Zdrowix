@@ -5,11 +5,32 @@
 //    }
 // }
 
+div.no-padding {
+
+   padding: 0 !important;
+   margin: 0 !important;
+}
+
 .visits-view{
 
+
+  .header-info{
+    font-size: 18px;
+    //font-weight: 300;
+    font-family: sans-serif;
+    //border:solid 2px black;
+    padding-bottom: 30px;
+    //color: red;
+  }
+
+
+
+
   .visit-container{
+    //position: relative;
     display: flex;
-    //border: 2px solid red;
+    border: 2px solid red;
+    margin: 5px;
   }
 
   .info-container{

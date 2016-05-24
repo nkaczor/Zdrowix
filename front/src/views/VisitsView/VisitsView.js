@@ -18,30 +18,28 @@ export class VisitsView extends Component {
 
   renderSingleAppointment() {
     return (
-      <div className="col-xs-12">
-        <Paper
-          className={ style['no-padding'] }
-        >
+      <div className="row">
+        <div className={ classnames('col-xs-12', style['no-padding']) } >
           <div className={ style['visit-container'] }>
 
-            <div className={ classnames(style['avatar-container']), 'col-xs-3' }>
-              <Avatar
-                src={ defaultPhoto }
-                size="80px"
-              />
-            </div>
+              <div className={ classnames(style['avatar-container']), 'col-xs-3', style['no-padding']}>
+                <Avatar
+                  src={ defaultPhoto }
+                  size="40px"
+                />
+              </div>
 
-            <div className={ classnames(style['info-container'], 'col-xs-5') }>
-              <p>Imię</p>
-              <p>Nazwisko</p>
-              <p>basdasdsad</p>
-            </div>
+              <div className={ classnames(style['info-container'], 'col-xs-5') }>
+                <p>Imię</p>
+                <p>Nazwisko</p>
+                <p>basdasdsad</p>
+              </div>
 
-            <div className={ classnames(style['info-container'], 'col-xs-4') }>
-              data godzina
+              <div className={ classnames(style['info-container'], 'col-xs-4') }>
+                data godzina
+              </div>
             </div>
-          </div>
-        </Paper>
+        </div>
       </div>
     );
   }
@@ -50,9 +48,31 @@ export class VisitsView extends Component {
     return (
       <div className={ style['visits-view'] }>
 
-        { this.renderSingleAppointment() }
-        { this.renderSingleAppointment() }
-        { this.renderSingleAppointment() }
+        <div className="col-xs-6">
+          <Paper>
+            <div className={ style['header-info'] }>
+              Past visits
+            </div>
+
+            { this.renderSingleAppointment() }
+            { this.renderSingleAppointment() }
+
+          </Paper>
+
+        </div>
+
+        <div className="col-xs-6">
+          <Paper>
+            <div className={ style['header-info'] }>
+              Upcoming visits
+            </div>
+
+          </Paper>
+
+        </div>
+
+
+
 
       </div>
     );
