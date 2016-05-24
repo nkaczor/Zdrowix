@@ -94,6 +94,7 @@ getNewData = function(body, files){
   if(body.lastName) newData.lastName = body.lastName;
   if(body.birthDate) newData.birthDate = body.birthDate;
   if(body.bio) newData.bio = body.bio;
+  if(body.phoneNumber) newData.phoneNumber = body.phoneNumber;
 
   if(files.avatar){
     var filename =  '/images/' + Date.now() + files.avatar.name;

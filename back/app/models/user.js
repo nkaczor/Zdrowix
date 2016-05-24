@@ -41,6 +41,10 @@ var UserSchema = new Schema({
   },
   bio: {
     type: String
+  },
+  phoneNumber: {
+    type: Number,
+    required: true
   }
 });
 
