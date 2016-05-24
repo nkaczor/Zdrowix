@@ -29,7 +29,8 @@ export class DoctorSignUpView extends Component {
         firstName: '',
         lastName: '',
         specialty: '',
-        birthDate: ''
+        birthDate: '',
+        phoneNumber: ''
       },
     };
   }
@@ -91,6 +92,7 @@ export class DoctorSignUpView extends Component {
     data.append('specialty', form.specialty);
     data.append('birthDate', form.birthDate.toDate());
     data.append('type', 'doctor');
+    data.append('phoneNumber', form.phoneNumber);
 
     this.props.dispatch(userActions.fetchSignUp(data))
     .then(() =>
@@ -127,6 +129,11 @@ export class DoctorSignUpView extends Component {
             placeholder="Your last name"
             value={ form.lastName }
             onChange={ this.handleValueChange.bind(this, 'lastName') }
+          />
+          <TextInput
+            placeholder="Your phone numer"
+            value={ form.phoneNumber }
+            onChange={ this.handleValueChange.bind(this, 'phoneNumber') }
           />
           <DatePicker
             selected={ form.birthDate }

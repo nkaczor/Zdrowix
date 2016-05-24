@@ -30,7 +30,8 @@ export class PatientSignUpView extends Component {
         repeatPassword: '',
         firstName: '',
         lastName: '',
-        birthDate: ''
+        birthDate: '',
+        phoneNumber: ''
       },
     };
   }
@@ -91,6 +92,7 @@ export class PatientSignUpView extends Component {
     data.append('password', form.password);
     data.append('birthDate', form.birthDate.toDate());
     data.append('type', 'patient');
+    data.append('phoneNumber', form.phoneNumber);
 
     this.props.dispatch(userActions.fetchSignUp(data))
     .then(() =>
@@ -121,6 +123,11 @@ export class PatientSignUpView extends Component {
             placeholder="Your last name"
             value={ form.lastName }
             onChange={ this.handleValueChange.bind(this, 'lastName') }
+          />
+          <TextInput
+            placeholder="Your phone numer"
+            value={ form.phoneNumber }
+            onChange={ this.handleValueChange.bind(this, 'phoneNumber') }
           />
           <DatePicker
             selected={ form.birthDate }
