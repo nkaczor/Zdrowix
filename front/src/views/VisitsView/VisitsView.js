@@ -18,18 +18,20 @@ export class VisitsView extends Component {
 
   renderSingleAppointment() {
     return (
-      <div className="col-xs-5">
-        <Paper>
+      <div className="col-xs-12">
+        <Paper
+          className={ style['no-padding'] }
+        >
           <div className={ style['visit-container'] }>
 
-            <div className={ classnames(style['avatar-container']), 'col-xs-2' }>
+            <div className={ classnames(style['avatar-container']), 'col-xs-3' }>
               <Avatar
                 src={ defaultPhoto }
                 size="80px"
               />
             </div>
 
-            <div className={ classnames(style['info-container'], 'col-xs-6') }>
+            <div className={ classnames(style['info-container'], 'col-xs-5') }>
               <p>Imię</p>
               <p>Nazwisko</p>
               <p>basdasdsad</p>

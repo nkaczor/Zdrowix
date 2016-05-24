@@ -1,32 +1,28 @@
+// div.no-padding {
+//    & > div{
+//      padding: 3px !important;
+//      border: 3px !important;
+//    }
+// }
+
 .visits-view{
-
-
-  .avatar-container{
-
-  }
 
   .visit-container{
     display: flex;
-    border: 2px solid black;
-
+    //border: 2px solid red;
   }
-
 
   .info-container{
     flex-wrap: wrap;
     display: flex;
     justify-content: center;
     align-items: center;
-    //border: 5px solid green;
     & > p{
      flex: 1 0 50%;
      text-align: center;
      margin:0;
     }
   }
-
-
-
 
 }
 
