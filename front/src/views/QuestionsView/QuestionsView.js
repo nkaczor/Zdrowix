@@ -1,22 +1,17 @@
 import React, { PropTypes, Component } from 'react';
 import { connect } from 'react-redux';
-import classnames from 'classnames';
-
 import * as questionActions from '../../redux/modules/question';
 
-import defaultPhoto from '../../../assets/noImage.gif';
 import style from './questions_view.scss';
-import {
-  Avatar, Label,
-  TextInput, TextArea,
-  Button } from '../../components';
+import { Question } from '../../containers';
 
 export class QuestionsView extends Component {
   static propTypes = {
     userInfo: PropTypes.object,
     params: PropTypes.object,
     dispatch: PropTypes.func,
-    token: PropTypes.string
+    token: PropTypes.string,
+    questions: PropTypes.array
   };
 
   static contextTypes = {
@@ -30,15 +25,35 @@ export class QuestionsView extends Component {
     };
   }
 
+  componentDidMount() {
+    let { token, params, dispatch } = this.props;
+
+    if (token) {
+      dispatch(questionActions.fetchQuestions(params.id, token));
+    }
+  }
+
+  componentWillUpdate(nextProps) {
+    let { dispatch, params, token } = this.props;
+
+    if (nextProps.token && (nextProps.token !== token)) {
+      dispatch(questionActions.fetchQuestions(params.id, nextProps.token));
+    }
+  }
 
   render() {
-    let { userInfo } = this.props;
-
+    let { questions, params, userInfo } = this.props;
 
     return (
       <div className={ style['ask-the-doctor-view'] }>
         <div className={ style['paper-content'] }>
-
+          { questions.map(question =>
+            <Question
+              key={ question._id }
+              question={ question }
+              showButton={ userInfo._id === params.id }
+            />
+          ) }
         </div>
       </div>
     );
@@ -48,7 +63,8 @@ export class QuestionsView extends Component {
 const mapStateToProps = state => {
   return {
     token: state.user.token,
-    userInfo: state.user.userInfo || {}
+    userInfo: state.user.userInfo || {},
+    questions: state.question
   };
 };
 

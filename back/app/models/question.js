@@ -12,14 +12,17 @@ var QuestionSchema = new Schema({
   },
   author: {
     type: Schema.ObjectId,
+    ref: 'User'
   },
   doctor: {
     type: Schema.ObjectId,
-    required: true
+    required: true,
+    ref: 'User'
   },
   answer: {
     type: String
   },
+
 
 },{
     timestamps: true

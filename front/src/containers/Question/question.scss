@@ -1,0 +1,49 @@
+
+  .question-container {
+    padding: 20px;
+    .question-box {
+      border-radius: 3px;
+      border: 1px solid #ddd;
+      padding: 15px;
+      position: relative;
+      .arrow {
+        position: absolute;
+        width: 0;
+        height: 0;
+        border-style: solid;
+        border-width: 10px 0 10px 10px;
+        border-color: transparent transparent transparent #ddd;
+        right: -10px;
+        top: 12px;
+
+      }
+
+      header{
+        color: #858598;
+        margin-bottom: 5px;
+        font-size: 16px;
+        font-weight: bold;
+      }
+      article{
+        margin-bottom: 10px;
+      }
+      time {
+        color: #858598;
+        font-size: 12px;
+        font-style: italic;
+      }
+      hr{
+        background-color: #ddd;
+        height: 1px;
+        border-style:none;
+
+      }
+      .answer{
+        text-align: right;
+        margin-top: 15px;
+      }
+    }
+    .question-avatar{
+      padding: 0 20px;
+    }
+  }

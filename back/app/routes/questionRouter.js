@@ -82,20 +82,20 @@ questionRouter.get('/:doctorId', passport.authenticate('jwt', {
             } else {
                 Question.find({
                   doctor: req.params.doctorId
-                }, function(err, visits) {
+                }, function(err, questions) {
                     if (err) throw err;
-                    if (!visits) {
+                    if (!questions) {
                       res.json({
                           success: false,
-                          visits: {}
+                          questions: {}
                       });
                     } else {
                         res.json({
                             success: true,
-                            visits: visits
+                            questions: questions
                         });
                     };
-                });
+                }).sort([['createdAt', 'descending']]).populate('doctor').populate('author');
             }
         })
     } else {
@@ -107,7 +107,49 @@ questionRouter.get('/:doctorId', passport.authenticate('jwt', {
 });
 
 
+questionRouter.put('/:id', passport.authenticate('jwt', {
+    session: false
+}), function(req, res) {
+    var token = getToken(req.headers);
+    if (token) {
+        var decoded = jwt.decode(token, config.secret);
+        User.findOne({
+            email: decoded
+        }, function(err, user) {
+            if (err) throw err;
+            if (!user) {
+                return res.status(403).send({
+                    success: false,
+                    msg: 'Authentication failed. User not found.'
+                });
+            } else {
 
+              Question.findOneAndUpdate({
+                doctor: user._id
+              },{
+                $set: { answer: req.body.answer }
+              },{
+                new: true
+              }, function(err, question) {
+                  if (err) throw err;
+                  if (!question) {
+                    return res.status(403).send({success: false, msg: ' Question not found.'});
+                  } else {
+                    res.json({success: true, question: question})
+                  }
+                });
+
+              }
+
+            }
+        );
+    } else {
+        return res.status(403).send({
+            success: false,
+            msg: 'No token provided.'
+        });
+    }
+});
 
 
 getToken = function(headers) {
