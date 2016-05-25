@@ -34,6 +34,11 @@ var UserSchema = new Schema({
     type: Schema.ObjectId,
     ref: 'Specialty'
   },
+  voivodeship: {
+    type: Schema.ObjectId,
+    ref: 'Voivodeship',
+    required: true,
+  },
   password: {
     select: false,
     type: String,
