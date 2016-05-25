@@ -41,6 +41,15 @@ export class QuestionsView extends Component {
     }
   }
 
+  handleSendClick(question) {
+    let { dispatch, token } = this.props;
+    let data = {
+      doctor: question.doctor._id,
+      answer: question.answer
+    };
+    dispatch(questionActions.fetchAddAnswer(token, question._id, data));
+  }
+
   render() {
     let { questions, params, userInfo } = this.props;
 
@@ -52,6 +61,7 @@ export class QuestionsView extends Component {
               key={ question._id }
               question={ question }
               showButton={ userInfo._id === params.id }
+              onSend={ this.handleSendClick.bind(this) }
             />
           ) }
         </div>

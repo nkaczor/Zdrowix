@@ -125,7 +125,8 @@ questionRouter.put('/:id', passport.authenticate('jwt', {
             } else {
 
               Question.findOneAndUpdate({
-                doctor: user._id
+                doctor: user._id,
+                _id: req.params.id
               },{
                 $set: { answer: req.body.answer }
               },{

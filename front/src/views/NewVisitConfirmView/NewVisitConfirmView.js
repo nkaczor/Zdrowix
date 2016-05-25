@@ -1,17 +1,16 @@
 import React, { PropTypes, Component } from 'react';
 import { connect } from 'react-redux';
-import moment from 'moment';
 import * as visitActions from '../../redux/modules/visit';
 
 import style from './new_visit_confirm_view.scss';
-import { Calendar, Button } from '../../components';
+import { Button } from '../../components';
 
 export class NewVisitConfirmView extends Component {
   static propTypes = {
     dispatch: PropTypes.func,
     params: PropTypes.object,
     token: PropTypes.string,
-
+    userInfo: PropTypes.object
   };
 
   static contextTypes = {
@@ -43,28 +42,37 @@ export class NewVisitConfirmView extends Component {
   }
 
   render() {
-    let { params } = this.props;
+    let { params, userInfo } = this.props;
 
-    return (
-      <div className={ style['new-visit-confirm-view'] }>
-        Are you sure to make an appointment
-        at <strong>{ params.hour }:00</strong> on <strong>{ params.date } </strong>?
-        <div>
-          <Button
-            label="YES"
-            color="green"
-            size="big"
-            onClick={ this.handleYesClick.bind(this) }
-          />
-          <Button
-            label="NO"
-            color="red"
-            size="big"
-            onClick={ this.handleNoClick.bind(this) }
-          />
+    if (userInfo.type !== 'patient') {
+      return (
+        <div className={ style['new-visit-confirm-view'] }>
+          Sorry, you are not patient. You can not make an appointment.
         </div>
-      </div>
-    );
+      );
+    }
+    else {
+      return (
+        <div className={ style['new-visit-confirm-view'] }>
+          Are you sure to make an appointment
+          at <strong>{ params.hour }:00</strong> on <strong>{ params.date } </strong>?
+          <div>
+            <Button
+              label="YES"
+              color="green"
+              size="big"
+              onClick={ this.handleYesClick.bind(this) }
+            />
+            <Button
+              label="NO"
+              color="red"
+              size="big"
+              onClick={ this.handleNoClick.bind(this) }
+            />
+          </div>
+        </div>
+      );
+    }
   }
 
 }
@@ -72,6 +80,7 @@ export class NewVisitConfirmView extends Component {
 const mapStateToProps = state => {
   return {
     token: state.user.token,
+    userInfo: state.user.userInfo
   };
 };
 

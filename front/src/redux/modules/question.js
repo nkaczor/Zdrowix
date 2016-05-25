@@ -36,7 +36,6 @@ export function fetchSaveQuestion(token, data) {
   };
 }
 
-
 export function fetchQuestions(id, token) {
   let url = `/api/question/${ id }`;
 
@@ -50,3 +49,14 @@ export function fetchQuestions(id, token) {
       });
   };
 }
+
+export function fetchAddAnswer(token, id, answerData) {
+  let body = JSON.stringify(answerData);
+  return function(dispatch) {
+    return fetchData(`/api/question/${ id }`, 'PUT', body, token)
+      .then(() => {
+        dispatch(fetchQuestions(answerData.doctor, token));
+      });
+  };
+}
+
