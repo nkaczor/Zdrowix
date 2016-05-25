@@ -12,6 +12,7 @@ var jwt         = require('jwt-simple');
 var fs = require('fs');
 
 var specialtyRouter = require('./app/routes/specialtyRouter');
+var voivodeshipRouter = require('./app/routes/voivodeshipRouter');
 var userRouter = require('./app/routes/userRouter');
 var doctorRouter = require('./app/routes/doctorRouter');
 var workingTimeRouter = require('./app/routes/workingTimeRouter');
@@ -89,6 +90,7 @@ apiRoutes.post('/authenticate', function(req, res) {
 });
 
 apiRoutes.use('/specialty', specialtyRouter);
+apiRoutes.use('/voivodeship', voivodeshipRouter);
 apiRoutes.use('/user', userRouter);
 apiRoutes.use('/doctor', doctorRouter);
 apiRoutes.use('/working-time', workingTimeRouter);
