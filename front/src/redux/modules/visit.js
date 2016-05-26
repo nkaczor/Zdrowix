@@ -36,6 +36,20 @@ export function fetchSaveVisit(token, data) {
   };
 }
 
+export function fetchAllVisits(type, token) {
+  let url = `/api/visit/${ type }`;
+
+  return function(dispatch) {
+    dispatch(requestVisits());
+    return fetchData(url, 'GET', null, token)
+      .then(data => {
+        if (data.success) {
+          dispatch(receiveVisits(data.visits));
+        }
+      });
+  };
+}
+
 export function fetchVisits(id, from, to, token) {
   let url = `/api/visit/${ id }/${ from }/${ to }`;
 

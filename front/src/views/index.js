@@ -12,3 +12,4 @@ export * from './CalendarView';
 export * from './AskTheDoctorView';
 export * from './NewVisitConfirmView';
 export * from './QuestionsView';
+export * from './VisitsView';

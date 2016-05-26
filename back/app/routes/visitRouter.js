@@ -59,6 +59,89 @@ visitRouter.post('/', passport.authenticate('jwt', {
     }
 });
 
+visitRouter.get('/doctor', passport.authenticate('jwt', {
+    session: false
+}), function(req, res) {
+    var token = getToken(req.headers);
+    if (token) {
+        var decoded = jwt.decode(token, config.secret);
+        User.findOne({
+            email: decoded
+        }, function(err, user) {
+            if (err) throw err;
+            if (!user) {
+                return res.status(403).send({
+                    success: false,
+                    msg: 'Authentication failed. User not found.'
+                });
+            } else {
+                Visit.find({
+                  doctor: user._id
+                }, function(err, visits) {
+                    if (err) throw err;
+                    if (!visits) {
+                      res.json({
+                          success: false,
+                          visits: {}
+                      });
+                    } else {
+                        res.json({
+                            success: true,
+                            visits: visits
+                        });
+                    };
+                }).sort([['date', 'ascending']]).populate('patient');
+            }
+        })
+    } else {
+        return res.status(403).send({
+            success: false,
+            msg: 'No token provided.'
+        });
+    }
+});
+
+visitRouter.get('/patient', passport.authenticate('jwt', {
+    session: false
+}), function(req, res) {
+    var token = getToken(req.headers);
+    if (token) {
+        var decoded = jwt.decode(token, config.secret);
+        User.findOne({
+            email: decoded
+        }, function(err, user) {
+            if (err) throw err;
+            if (!user) {
+                return res.status(403).send({
+                    success: false,
+                    msg: 'Authentication failed. User not found.'
+                });
+            } else {
+                Visit.find({
+                  patient: user._id
+                }, function(err, visits) {
+                    if (err) throw err;
+                    if (!visits) {
+                      res.json({
+                          success: false,
+                          visits: {}
+                      });
+                    } else {
+                        res.json({
+                            success: true,
+                            visits: visits
+                        });
+                    };
+                }).sort([['date', 'ascending']]).populate('doctor');
+            }
+        })
+    } else {
+        return res.status(403).send({
+            success: false,
+            msg: 'No token provided.'
+        });
+    }
+});
 
 
 visitRouter.get('/:doctorId/:from/:to', passport.authenticate('jwt', {

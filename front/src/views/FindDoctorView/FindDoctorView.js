@@ -89,14 +89,14 @@ export class FindDoctorView extends Component {
   render() {
     let { doctors, specialties } = this.props;
     let { selectedSpecialty } = this.state;
-    let items = specialties.map(x => {
+    let specialtyItems = specialties.map(x => {
       return {
         label: x.name,
         value: x._id
       };
     });
 
-    items.unshift({
+    specialtyItems.unshift({
       label: 'All',
       value: ''
     });
@@ -109,7 +109,7 @@ export class FindDoctorView extends Component {
         <Header>Find Doctor</Header>
         <div className={ style['filters'] }>
           <Select
-            items={ items }
+            items={ specialtyItems }
             placeholder="Specialty"
             size="inherit"
             onChange={ this.handleSelectChange.bind(this) }

@@ -24,6 +24,7 @@ export class SettingsView extends Component {
     let { userInfo } = this.props;
 
     this.state = {
+      message: '',
       newPhoto: '',
       form: {
         bio: userInfo.bio || '',
@@ -31,7 +32,8 @@ export class SettingsView extends Component {
         email: userInfo.email,
         firstName: userInfo.firstName,
         lastName: userInfo.lastName,
-        birthDate: moment(userInfo.birthDate)
+        birthDate: moment(userInfo.birthDate),
+        phoneNumber: userInfo.phoneNumber
       }
     };
   }
@@ -46,7 +48,8 @@ export class SettingsView extends Component {
         email: userInfo.email,
         firstName: userInfo.firstName,
         lastName: userInfo.lastName,
-        birthDate: moment(userInfo.birthDate)
+        birthDate: moment(userInfo.birthDate),
+        phoneNumber: userInfo.phoneNumber
       };
 
       this.setState({ form });
@@ -80,6 +83,7 @@ export class SettingsView extends Component {
     data.append('lastName', form.lastName);
     data.append('birthDate', form.birthDate.toDate());
     data.append('bio', form.bio);
+    data.append('phoneNumber', form.phoneNumber);
     if (this.state.newPhoto) {
       data.append('avatar', this.state.newPhoto);
     }
@@ -87,7 +91,8 @@ export class SettingsView extends Component {
     if (!form.avatar) {
       this.props.dispatch(userActions.fetchDeleteUserPhoto(this.props.token));
     }
-    this.props.dispatch(userActions.fetchUpdateUserData(this.props.token, data));
+    this.props.dispatch(userActions.fetchUpdateUserData(this.props.token, data))
+      .then(() => this.setState({ message: 'Successful saved!' }));
   }
 
   handleUploadPhoto(photo) {
@@ -167,18 +172,34 @@ export class SettingsView extends Component {
                   />
                 </div>
               </div>
-              <Label htmlFor="birthDate">Birth Day:</Label>
-              <DatePicker
-                className={ style['datepicker'] }
-                selected={ form.birthDate }
-                onChange={ this.handleDateChange.bind(this) }
-              />
+
+              <div className={ classnames('row', style['two-inputs']) }>
+                <div className="col-xs-6">
+                  <Label htmlFor="birthDate">Birth Day:</Label>
+                  <DatePicker
+                    className={ style['datepicker'] }
+                    selected={ form.birthDate }
+                    onChange={ this.handleDateChange.bind(this) }
+                  />
+                </div>
+                <div className="col-xs-6">
+                  <Label htmlFor="phoneNumber">Phone numer:</Label>
+                  <TextInput
+                    value={ form.phoneNumber }
+                    onChange={ this.handleValueChange.bind(this, 'phoneNumber') }
+                  />
+                </div>
+              </div>
+
               <Label htmlFor="bio" >Bio:</Label>
               <TextArea
                 rows="8"
                 value={ form.bio }
                 onChange={ this.handleValueChange.bind(this, 'bio') }
               />
+              <div className={ style['message-container'] }>
+                { this.state.message }
+              </div>
               <div className={ style['button-container'] }>
                 <Button
                   size="big"

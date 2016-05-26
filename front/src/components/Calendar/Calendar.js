@@ -17,6 +17,7 @@ class Calendar extends Component {
 
   getRange() {
     let { data } = this.props;
+
     let min = 24;
     let max = 0;
 

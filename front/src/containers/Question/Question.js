@@ -47,7 +47,7 @@ class Question extends Component {
     let { onSend, question } = this.props;
     let { answer } = this.state;
     let data = Object.assign({ answer: answer }, question);
-    console.log(data);
+
     onSend(data);
   }
 
@@ -120,7 +120,7 @@ class Question extends Component {
             <div className={ style['right-arrow'] } />
             <header>{ question.title }</header>
             <article>{ question.question }</article>
-            <time>{ moment(question.createdAt).fromNow() }</time>
+            <time>{ moment(question.createdAt).fromNow() } by {question.author ? question.author.firstName : 'Gal Anonim' }</time>
 
             { this.renderReply() }
 

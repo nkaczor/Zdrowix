@@ -69,7 +69,7 @@ export class DoctorLayout extends Component {
       <div className={ style['doctor-layout'] }>
         <Header>My Profile</Header>
         <div className={ classnames('row') }>
-          <div className="col-xs-3">
+          <div className="col-xs-4">
             <Paper className={ style['doctor-info'] }>
               <div className={ style['header'] }>
                 <Avatar
@@ -84,10 +84,11 @@ export class DoctorLayout extends Component {
               <div className={ style['body'] }>
                 <p><strong>Bio: </strong>{ doctor.bio }</p>
                 <p><strong>Email: </strong>{ doctor.email }</p>
+                <p><strong>Phone Number: </strong>{ doctor.phoneNumber }</p>
               </div>
             </Paper>
           </div>
-          <div className="col-xs-9">
+          <div className="col-xs-8">
             <nav className={ classnames('row') }>
               { navItems.map(item => this.renderNavItem(item)) }
             </nav>

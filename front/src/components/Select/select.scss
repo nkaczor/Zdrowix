@@ -3,10 +3,13 @@ margin: 10px 0;
 //padding-bottom: 8px;
 
 select{
-  padding: 10px;
+  border-radius: 0;
+  -webkit-appearance: none;
+  -webkit-border-radius: 0px;
+  padding: 10px 15px;
   border: 0px solid #ddd;
+  color: #aaa;
   background-color: #f2f2f2;
-  color: #A9A9A9;
 
   &:focus{
     outline-color: #348899;

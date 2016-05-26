@@ -48,8 +48,8 @@ export class HeaderBar extends Component {
     return (
       <div className={ style['dropdown-menu'] }>
         <ul>
-          <li><Link to="/">Option 1</Link></li>
-          <li><Link to="/">Option 2</Link></li>
+          <li><Link to="/panel/home">Home</Link></li>
+          <li><Link to="/panel/visits">My visits</Link></li>
           <li onClick={ this.handleSignOut.bind(this) }>
             Log out
           </li>

@@ -6,6 +6,7 @@ import doctor from './modules/doctor';
 import workingTime from './modules/workingTime';
 import visit from './modules/visit';
 import question from './modules/question';
+import voivodeship from './modules/voivodeship';
 
 export default combineReducers({
   counter,
@@ -14,5 +15,6 @@ export default combineReducers({
   doctor,
   workingTime,
   visit,
-  question
+  question,
+  voivodeship
 });

@@ -12,11 +12,13 @@ var VisitSchema = new Schema({
   },
   doctor: {
     required: true,
-    type: Schema.ObjectId
+    type: Schema.ObjectId,
+    ref: 'User'
   },
   patient: {
     required: true,
-    type: Schema.ObjectId
+    type: Schema.ObjectId,
+    ref: 'User'
   }
 },{
     timestamps: true

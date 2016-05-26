@@ -3,7 +3,7 @@ import { Link } from 'react-router';
 import { connect } from 'react-redux';
 import Svg from 'svg-inline-react';
 import style from './side_bar.scss';
-
+import NavConstants from '../../constants/NavContants';
 import { Avatar } from '../../components';
 import defaultPhoto from '../../../assets/noImage.gif';
 import settingsIcon from '../../../assets/icons/cogwheel.svg';
@@ -45,40 +45,8 @@ export class SideBar extends Component {
     );
   }
   renderNav() {
-    let nav = [ {
-      header: 'Main',
-      elements: [ {
-        label: 'Home',
-        path: '/panel/home',
-        icon: require('../../../assets/icons/home.svg')
-      }, {
-        label: 'My Page',
-        path: `/panel/doctor/${ this.props.userInfo._id }`,
-        icon: require('../../../assets/icons/profile.svg')
-      } ]
-    }, {
-      header: 'Tools',
-      elements: [ {
-        label: 'Find Doctor',
-        path: '/panel/find-doctor',
-        icon: require('../../../assets/icons/find.svg')
-      }, {
-        label: 'Visits',
-        path: '/visits',
-        icon: require('../../../assets/icons/enroll.svg')
-      } ]
-    }, {
-      header: 'Configuration',
-      elements: [ {
-        label: 'Work Schedule',
-        path: '/panel/work-schedule',
-        icon: require('../../../assets/icons/work-schedule.svg')
-      }, {
-        label: 'Account Settings',
-        path: '/panel/settings',
-        icon: require('../../../assets/icons/cogwheel.svg')
-      } ]
-    } ];
+    let { userInfo } = this.props;
+    let nav = NavConstants(userInfo._id)[userInfo.type] || [];
 
     return (
       <div className={ style['navigation'] }>

@@ -2,13 +2,13 @@ import React, { Component, PropTypes } from 'react';
 import DatePicker from 'react-datepicker';
 
 import style from './patient_sign_up_view.scss';
-import { Button, TextInput, PasswordInput, ImageInput } from '../../../components';
+import { Select, Button, TextInput, PasswordInput, ImageInput } from '../../../components';
 import { connect } from 'react-redux';
 import Svg from 'svg-inline-react';
 import registrationIcon from '../../../../assets/icons/user-tie.svg';
 
 import * as userActions from '../../../redux/modules/user';
-import * as specialtyActions from '../../../redux/modules/specialty';
+import * as voivodeshipActions from '../../../redux/modules/voivodeship';
 
 export class PatientSignUpView extends Component {
 
@@ -18,6 +18,7 @@ export class PatientSignUpView extends Component {
 
   static propTypes = {
     dispatch: PropTypes.func,
+    voivodeships: PropTypes.array
   }
 
   constructor(props) {
@@ -30,13 +31,15 @@ export class PatientSignUpView extends Component {
         repeatPassword: '',
         firstName: '',
         lastName: '',
-        birthDate: ''
+        birthDate: '',
+        phoneNumber: '',
+        voivodeship: ''
       },
     };
   }
 
   componentDidMount() {
-    this.props.dispatch(specialtyActions.fetchSpecialities());
+    this.props.dispatch(voivodeshipActions.fetchVoivodeships());
   }
 
   handleValueChange(field, e) {
@@ -60,7 +63,7 @@ export class PatientSignUpView extends Component {
   handleSelectChange(e) {
     let form = Object.assign({}, this.state.form);
 
-    form.specialty = e.target.value;
+    form.voivodeship = e.target.value;
     this.setState({
       form
     });
@@ -91,6 +94,8 @@ export class PatientSignUpView extends Component {
     data.append('password', form.password);
     data.append('birthDate', form.birthDate.toDate());
     data.append('type', 'patient');
+    data.append('phoneNumber', form.phoneNumber);
+    data.append('voivodeship', form.voivodeship);
 
     this.props.dispatch(userActions.fetchSignUp(data))
     .then(() =>
@@ -100,6 +105,12 @@ export class PatientSignUpView extends Component {
 
   render() {
     let { form } = this.state;
+    let items = this.props.voivodeships.map(x => {
+      return {
+        label: x.name,
+        value: x._id
+      };
+    });
 
     return (
       <div id="name"
@@ -121,6 +132,17 @@ export class PatientSignUpView extends Component {
             placeholder="Your last name"
             value={ form.lastName }
             onChange={ this.handleValueChange.bind(this, 'lastName') }
+          />
+          <TextInput
+            placeholder="Your phone numer"
+            value={ form.phoneNumber }
+            onChange={ this.handleValueChange.bind(this, 'phoneNumber') }
+          />
+          <Select
+            placeholder="Your voivodeship"
+            size="inherit"
+            items={ items }
+            onChange={ this.handleSelectChange.bind(this) }
           />
           <DatePicker
             selected={ form.birthDate }
@@ -154,7 +176,7 @@ export class PatientSignUpView extends Component {
 
 const mapStateToProps = state => {
   return {
-    specialties: state.specialty || [],
+    voivodeships: state.voivodeship || [],
     counter: state.counter
   };
 };

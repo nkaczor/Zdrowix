@@ -74,7 +74,7 @@ export class AskTheDoctorView extends Component {
 
   handleUserClick() {
     this.setState({
-      asAnonymous: true,
+      asAnonymous: false,
       leftAvatarSize: bigAvatarSize,
       rightAvatarSize: smallAvatarSize,
       leftAvatarStyle: bigAvatarStyle,

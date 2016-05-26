@@ -16,7 +16,8 @@ import {
   WorkScheduleView,
   CalendarView,
   NewVisitConfirmView,
-  QuestionsView } from '../views';
+  QuestionsView,
+  VisitsView } from '../views';
 
 let redirectIfUserIsNotLogged = (nextState, replace) => {
   if (!localStorage.user) {
@@ -56,6 +57,9 @@ let makeRoutes = () => {
         />
         <Route path="find-doctor"
           component={ FindDoctorView }
+        />
+        <Route path="visits"
+          component={ VisitsView }
         />
         <Route path="settings"
           component={ SettingsView }

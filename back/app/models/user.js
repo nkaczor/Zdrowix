@@ -34,6 +34,10 @@ var UserSchema = new Schema({
     type: Schema.ObjectId,
     ref: 'Specialty'
   },
+  voivodeship: {
+    type: Schema.ObjectId,
+    ref: 'Voivodeship',
+  },
   password: {
     select: false,
     type: String,
@@ -41,6 +45,9 @@ var UserSchema = new Schema({
   },
   bio: {
     type: String
+  },
+  phoneNumber: {
+    type: String,
   }
 });
 

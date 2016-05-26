@@ -47,7 +47,7 @@ export class NewVisitConfirmView extends Component {
     if (userInfo.type !== 'patient') {
       return (
         <div className={ style['new-visit-confirm-view'] }>
-          Sorry, you are not patient. You can not make an appointment.
+          Sorry, you are not a patient. You can not make an appointment.
         </div>
       );
     }

@@ -5,11 +5,11 @@ import style from './home_view.scss';
 import { Button, TextInput,
          PasswordInput, ImageInput,
          Label, Checkbox,
-         Paper, Calendar } from '../../components';
+         Paper, Calendar, Header } from '../../components';
 
 export class HomeView extends Component {
   static propTypes = {
-
+    userInfo: PropTypes.object
   };
   constructor(props) {
     super(props);
@@ -22,61 +22,13 @@ export class HomeView extends Component {
     });
   }
 
-
   render() {
+    let { userInfo } = this.props;
+
     return (
       <div className={ style.home }>
-        <div className={ style['button-container'] }>
-          <Button
-            label="Click me"
-            color="red"
-            size="small"
-            handleClick={ (x) => {
-              console.log(x);
-            }
-            }
-          />
-          <Button
-            label="Click me"
-            color="blue"
-          />
-          <Button
-            label="Click me"
-            color="green"
-          />
-          <Button
-            label="Click me"
-            size="big"
-          />
-        </div>
-        <div className="row">
-          <Label
-            className="col-xs-2"
-            htmlFor="text"
-          >
-            Two inputs
-          </Label>
-          <TextInput
-            className="col-xs-5"
-            error="Invalid message."
-          />
-          <PasswordInput className="col-xs-5" />
-        </div>
-        <br />
-        <div className="row">
-          <Label
-            className="col-xs-2"
-            htmlFor="upload"
-          >
-            Upload your photo
-          </Label>
-          <ImageInput className="col-xs-5" />
-        </div>
-        <Checkbox
-          label="Male"
-          checked={ this.state.checkboxStatus }
-          onChange={ this.handleCheckboxChange.bind(this) }
-        />
+        <Header>Home</Header>
+        <Paper>Hello world, { userInfo.firstName } { userInfo.lastName }!</Paper>
 
       </div>
     );
@@ -85,7 +37,7 @@ export class HomeView extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    counter: state.counter
+    userInfo: state.user.userInfo || {}
   };
 };
 
