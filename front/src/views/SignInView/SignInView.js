@@ -11,6 +11,12 @@ import {
   PasswordInput
 } from '../../components';
 
+import validate, * as validators from '../../helpers/Validators.js';
+const validatorsMap = {
+  email: [ validators.required(), validators.isEmail() ],
+  password: [ validators.required() ],
+};
+
 export class HomeView extends Component {
   static contextTypes= {
     router: PropTypes.object.isRequired
@@ -26,7 +32,8 @@ export class HomeView extends Component {
       form: {
         email: '',
         password: ''
-      }
+      },
+      errors: {}
     };
   }
 
@@ -41,15 +48,19 @@ export class HomeView extends Component {
 
   handleSignIn() {
     let { email, password } = this.state.form;
+    let { errors, status } = validate(this.state.form, validatorsMap);
 
-    this.props.dispatch(userActions.fetchToken(email, password))
-    .then(() =>
-        this.context.router.push('/panel/home')
-    );
+    if (status) {
+      this.props.dispatch(userActions.fetchToken(email, password))
+      .then(() =>
+          this.context.router.push('/panel/home')
+      );
+    }
+    this.setState({ errors });
   }
 
   render() {
-    let { form } = this.state;
+    let { form, errors } = this.state;
 
     return (
       <div className={ style['sign-in-view'] }>
@@ -59,11 +70,13 @@ export class HomeView extends Component {
             placeholder="Your email"
             value={ form.email }
             onChange={ this.handleValueChange.bind(this, 'email') }
+            error={ errors.email }
           />
           <PasswordInput
             placeholder="Your password"
             value={ form.password }
             onChange={ this.handleValueChange.bind(this, 'password') }
+            error={ errors.password }
           />
           <Button
             label="LOGIN"

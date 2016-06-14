@@ -51,7 +51,7 @@ export function fetchDoctors() {
   return function(dispatch) {
     dispatch(requestDoctors());
 
-    return fetchData(url)
+    fetchData(url)
       .then(data => {
         if (data) {
           dispatch(receiveDoctors(data));
@@ -69,7 +69,6 @@ export function fetchDoctor(id) {
     return fetchData(url)
       .then(data => {
         if (data) {
-          console.log(data);
           dispatch(receiveDoctor(data));
         }
       });

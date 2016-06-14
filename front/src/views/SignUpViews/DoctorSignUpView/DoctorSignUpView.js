@@ -8,6 +8,17 @@ import * as specialtyActions from '../../../redux/modules/specialty';
 import * as voivodeshipActions from '../../../redux/modules/voivodeship';
 import DatePicker from 'react-datepicker';
 
+import validate, * as validators from '../../../helpers/Validators.js';
+const validatorsMap = {
+  email: [ validators.required(), validators.isEmail() ],
+  firstName: [ validators.required(), validators.maxLength(15), validators.minLength(3) ],
+  lastName: [ validators.required(), validators.maxLength(15), validators.minLength(3) ],
+  phoneNumber: [ validators.required(), validators.maxLength(10), validators.minLength(6) ],
+  password: [ validators.required(), validators.maxLength(20), validators.minLength(5) ],
+  repeatPassword: [ validators.required(), validators.theSameAs('password') ],
+  specialty: [ validators.required() ]
+};
+
 export class DoctorSignUpView extends Component {
 
   static contextTypes= {
@@ -35,6 +46,7 @@ export class DoctorSignUpView extends Component {
         phoneNumber: '',
         voivodeship: ''
       },
+      errors: {}
     };
   }
 
@@ -63,8 +75,10 @@ export class DoctorSignUpView extends Component {
 
   handleSpecialtyChange(e) {
     let form = Object.assign({}, this.state.form);
+    let errors = Object.assign({}, this.state.errors);
 
     form.specialty = e.target.value;
+    errors.specialty = '';
     this.setState({
       form
     });
@@ -91,31 +105,32 @@ export class DoctorSignUpView extends Component {
   handleSignUp() {
     let { form } = this.state;
 
-    if (form.password !== form.repeatPassword) {
-      return;
+    let { errors, status } = validate(form, validatorsMap);
+
+    if (status) {
+      let data = new FormData();
+
+      data.append('avatar', form.avatar);
+      data.append('firstName', form.firstName);
+      data.append('lastName', form.lastName);
+      data.append('email', form.email);
+      data.append('password', form.password);
+      data.append('specialty', form.specialty);
+      data.append('birthDate', form.birthDate.toDate());
+      data.append('type', 'doctor');
+      data.append('phoneNumber', form.phoneNumber);
+      data.append('voivodeship', form.voivodeship);
+
+      this.props.dispatch(userActions.fetchSignUp(data))
+      .then(() =>
+          this.context.router.push('/sign-up-confirmation')
+      );
     }
-
-    let data = new FormData();
-
-    data.append('avatar', form.avatar);
-    data.append('firstName', form.firstName);
-    data.append('lastName', form.lastName);
-    data.append('email', form.email);
-    data.append('password', form.password);
-    data.append('specialty', form.specialty);
-    data.append('birthDate', form.birthDate.toDate());
-    data.append('type', 'doctor');
-    data.append('phoneNumber', form.phoneNumber);
-    data.append('voivodeship', form.voivodeship);
-
-    this.props.dispatch(userActions.fetchSignUp(data))
-    .then(() =>
-        this.context.router.push('/sign-up-confirmation')
-    );
+    this.setState({ errors });
   }
 
   render() {
-    let { form } = this.state;
+    let { form, errors } = this.state;
     let items = this.props.specialties.map(x => {
       return {
         label: x.name,
@@ -139,16 +154,19 @@ export class DoctorSignUpView extends Component {
             placeholder="Your email"
             value={ form.email }
             onChange={ this.handleValueChange.bind(this, 'email') }
+            error={ errors.email }
           />
           <TextInput
             placeholder="Your first name"
             value={ form.firstName }
             onChange={ this.handleValueChange.bind(this, 'firstName') }
+            error={ errors.firstName }
           />
           <TextInput
             placeholder="Your last name"
             value={ form.lastName }
             onChange={ this.handleValueChange.bind(this, 'lastName') }
+            error={ errors.lastName }
           />
           <TextInput
             placeholder="Your phone numer"
@@ -173,17 +191,20 @@ export class DoctorSignUpView extends Component {
             placeholder="Your specialization"
             size="inherit"
             items={ items }
+            error={ errors.specialty }
             onChange={ this.handleSpecialtyChange.bind(this) }
           />
           <PasswordInput
             placeholder="Your password"
             value={ form.password }
             onChange={ this.handleValueChange.bind(this, 'password') }
+            error={ errors.password }
           />
           <PasswordInput
             placeholder="Repeat password"
             value={ form.repeatPassword }
             onChange={ this.handleValueChange.bind(this, 'repeatPassword') }
+            error={ errors.repeatPassword }
           />
           <Button
             label="SIGN UP"

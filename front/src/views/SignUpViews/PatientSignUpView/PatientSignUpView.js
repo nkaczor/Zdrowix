@@ -10,6 +10,16 @@ import registrationIcon from '../../../../assets/icons/user-tie.svg';
 import * as userActions from '../../../redux/modules/user';
 import * as voivodeshipActions from '../../../redux/modules/voivodeship';
 
+import validate, * as validators from '../../../helpers/Validators.js';
+const validatorsMap = {
+  email: [ validators.required(), validators.isEmail() ],
+  firstName: [ validators.required(), validators.maxLength(15), validators.minLength(3) ],
+  lastName: [ validators.required(), validators.maxLength(15), validators.minLength(3) ],
+  phoneNumber: [ validators.required(), validators.maxLength(10), validators.minLength(6) ],
+  password: [ validators.required(), validators.maxLength(20), validators.minLength(5) ],
+  repeatPassword: [ validators.required(), validators.theSameAs('password') ],
+};
+
 export class PatientSignUpView extends Component {
 
   static contextTypes= {
@@ -35,6 +45,7 @@ export class PatientSignUpView extends Component {
         phoneNumber: '',
         voivodeship: ''
       },
+      errors: {}
     };
   }
 
@@ -81,30 +92,31 @@ export class PatientSignUpView extends Component {
   handleSignUp() {
     let { form } = this.state;
 
-    if (form.password !== form.repeatPassword) {
-      return;
+    let { errors, status } = validate(form, validatorsMap);
+
+    if (status) {
+      let data = new FormData();
+
+      data.append('avatar', form.avatar);
+      data.append('firstName', form.firstName);
+      data.append('lastName', form.lastName);
+      data.append('email', form.email);
+      data.append('password', form.password);
+      data.append('birthDate', form.birthDate.toDate());
+      data.append('type', 'patient');
+      data.append('phoneNumber', form.phoneNumber);
+      data.append('voivodeship', form.voivodeship);
+
+      this.props.dispatch(userActions.fetchSignUp(data))
+      .then(() =>
+          this.context.router.push('/sign-up-confirmation')
+      );
     }
-
-    let data = new FormData();
-
-    data.append('avatar', form.avatar);
-    data.append('firstName', form.firstName);
-    data.append('lastName', form.lastName);
-    data.append('email', form.email);
-    data.append('password', form.password);
-    data.append('birthDate', form.birthDate.toDate());
-    data.append('type', 'patient');
-    data.append('phoneNumber', form.phoneNumber);
-    data.append('voivodeship', form.voivodeship);
-
-    this.props.dispatch(userActions.fetchSignUp(data))
-    .then(() =>
-        this.context.router.push('/sign-up-confirmation')
-    );
+    this.setState({ errors });
   }
 
   render() {
-    let { form } = this.state;
+    let { form, errors } = this.state;
     let items = this.props.voivodeships.map(x => {
       return {
         label: x.name,
@@ -122,21 +134,25 @@ export class PatientSignUpView extends Component {
             placeholder="Your email"
             value={ form.email }
             onChange={ this.handleValueChange.bind(this, 'email') }
+            error={ errors.email }
           />
           <TextInput
             placeholder="Your first name"
             value={ form.firstName }
             onChange={ this.handleValueChange.bind(this, 'firstName') }
+            error={ errors.firstName }
           />
           <TextInput
             placeholder="Your last name"
             value={ form.lastName }
             onChange={ this.handleValueChange.bind(this, 'lastName') }
+            error={ errors.lastName }
           />
           <TextInput
             placeholder="Your phone numer"
             value={ form.phoneNumber }
             onChange={ this.handleValueChange.bind(this, 'phoneNumber') }
+            error={ errors.phoneNumber }
           />
           <Select
             placeholder="Your voivodeship"
@@ -156,11 +172,13 @@ export class PatientSignUpView extends Component {
             placeholder="Your password"
             value={ form.password }
             onChange={ this.handleValueChange.bind(this, 'password') }
+            error={ errors.password }
           />
           <PasswordInput
             placeholder="Repeat password"
             value={ form.repeatPassword }
             onChange={ this.handleValueChange.bind(this, 'repeatPassword') }
+            error={ errors.repeatPassword }
           />
           <Button
             label="SIGN UP"
